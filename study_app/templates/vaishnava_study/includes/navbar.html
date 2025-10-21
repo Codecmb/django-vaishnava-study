@@ -1,0 +1,50 @@
+{% load i18n %}
+<nav class="navbar">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 70px;">
+        <div style="display: flex; align-items: center;">
+            <a href="{% url 'vaishnava_study:index' %}" class="nav-link" style="font-size: 1.5em; font-weight: bold;">
+                🕉️ {% trans "Vaishnava Study" %}
+            </a>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <a href="{% url 'vaishnava_study:index' %}" class="nav-link">{% trans "Home" %}</a>
+            
+            <div class="dropdown">
+                <a href="#" class="nav-link">{% trans "Courses" %} ▼</a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'vaishnava_study:index' %}#courses" class="nav-link" style="display: block; margin: 5px 0;">
+                        {% trans "All Courses" %}
+                    </a>
+                    <div style="border-top: 1px solid var(--neon-blue); margin: 5px 0;"></div>
+                    <a href="#" class="nav-link" style="display: block; margin: 5px 0;">
+                        {% trans "Bhakti Shastri" %}
+                    </a>
+                    <a href="#" class="nav-link" style="display: block; margin: 5px 0;">
+                        {% trans "Bhakti Vaibhava" %}
+                    </a>
+                    <a href="#" class="nav-link" style="display: block; margin: 5px 0;">
+                        {% trans "Bhakti Vedanta" %}
+                    </a>
+                    <a href="#" class="nav-link" style="display: block; margin: 5px 0;">
+                        {% trans "Bhakti Sarvabhauma" %}
+                    </a>
+                </div>
+            </div>
+            
+            <form action="{% url 'set_language' %}" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ redirect_to }}">
+                <select name="language" onchange="this.form.submit()" class="language-switcher">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ lang.1 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+</nav>

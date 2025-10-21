@@ -1,0 +1,58 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2023-11-20 22:04+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: es <LL@li.org>\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+msgid "Vaishnava Study Guide"
+msgstr "Guía de Estudio Vaishnava"
+
+msgid "Study Bhakti Shastri"
+msgstr "Estudiar Bhakti Shastri"
+
+msgid "Study Bhakti Vaibhava"
+msgstr "Estudiar Bhakti Vaibhava"
+
+msgid "Study Bhakti Vedanta"
+msgstr "Estudiar Bhakti Vedanta"
+
+msgid "Study Bhakti Sarvabhauma"
+msgstr "Estudiar Bhakti Sarvabhauma"
+
+msgid "Study Questions & Answers"
+msgstr "Preguntas y Respuestas de Estudio"
+
+msgid "Study Prabhupada's commentaries with interactive Q&A for each verse"
+msgstr "Estudia los comentarios de Prabhupada con PyR interactivas para cada verso"
+
+msgid "Bhakti Shastri Books Q&A"
+msgstr "Libros de Bhakti Shastri PyR"
+
+msgid "Study Q&A"
+msgstr "Estudio PyR"
+
+msgid "Srimad Bhagavatam Cantos Q&A"
+msgstr "Cantos del Srimad Bhagavatam PyR"
+
+msgid "Canto"
+msgstr "Canto"
+
+msgid "Online Resources"
+msgstr "Recursos en Línea"
+
+msgid "Explore these essential Vaishnava resources"
+msgstr "Explora estos recursos Vaishnavas esenciales"
+
+msgid "English & Spanish available"
+msgstr "Versión en inglés y español"
+
+msgid "English version only"
+msgstr "Solo versión en inglés"

@@ -1,0 +1,53 @@
+{% extends 'vaishnava_study/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <a href="{% url 'vaishnava_study:index' %}" style="color: var(--neon-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+        ← {% trans "Back to Home" %}
+    </a>
+    
+    <h1 style="color: var(--neon-pink); margin: 20px 0; text-shadow: 0 0 15px var(--neon-pink);">
+        {{ course.get_level_display }}
+    </h1>
+    
+    <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin: 20px 0;">
+        <p style="font-size: 1.1em;">
+            {% if request.LANGUAGE_CODE == 'es' %}
+                {{ course.description_es }}
+            {% else %}
+                {{ course.description_en }}
+            {% endif %}
+        </p>
+    </div>
+    
+    <h2 style="color: var(--neon-green); margin: 30px 0 20px 0;">
+        {% trans "Books in this Course" %}
+    </h2>
+    
+    {% for book in books %}
+    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid var(--neon-blue);">
+        <h3 style="color: var(--neon-blue); margin-bottom: 15px;">{{ book.title }}</h3>
+        
+        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+            <a href="{{ book.english_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
+                📖 {% trans "Read in English" %}
+            </a>
+            
+            <a href="{{ book.spanish_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));">
+                📖 {% trans "Read in Spanish" %}
+            </a>
+            
+            <a href="{% url 'vaishnava_study:qa_section' book.id %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));">
+                ❓ {% trans "Q&A Section" %}
+            </a>
+        </div>
+    </div>
+    {% empty %}
+    <div style="text-align: center; padding: 40px; color: var(--neon-pink);">
+        <h3>{% trans "No books available for this course yet." %}</h3>
+        <p>{% trans "Please check back later or contact the course coordinator." %}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

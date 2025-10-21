@@ -1,0 +1,43 @@
+{% load i18n %}
+<nav class="navbar">
+    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 70px;">
+        <div style="display: flex; align-items: center;">
+            <a href="{% url 'study_app:index' %}" class="nav-link" style="font-size: 1.5em; font-weight: bold;">
+                🕉️ {% trans "Vaishnava Study" %}
+            </a>
+        </div>
+        
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <a href="{% url 'study_app:index' %}" class="nav-link">{% trans "Home" %}</a>
+            
+            <div class="dropdown">
+                <a href="#" class="nav-link">{% trans "Courses" %} ▼</a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'study_app:index' %}#courses" class="nav-link" style="display: block; margin: 5px 0;">
+                        {% trans "All Courses" %}
+                    </a>
+                    <div style="border-top: 1px solid var(--neon-blue); margin: 5px 0;"></div>
+                    {% for course in courses %}
+                    <a href="{% url 'study_app:course_detail' course.id %}" class="nav-link" style="display: block; margin: 5px 0;">
+                        {{ course.get_level_display }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+            
+            <form action="/i18n/setlang/" method="post" style="display: inline;">
+                {% csrf_token %}
+                <input name="next" type="hidden" value="{{ request.path }}">
+                <select name="language" onchange="this.form.submit()" class="language-switcher">
+                    {% get_current_language as LANGUAGE_CODE %}
+                    {% get_available_languages as LANGUAGES %}
+                    {% for lang in LANGUAGES %}
+                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ lang.1 }}
+                        </option>
+                    {% endfor %}
+                </select>
+            </form>
+        </div>
+    </div>
+</nav>

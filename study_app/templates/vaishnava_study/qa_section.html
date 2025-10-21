@@ -1,0 +1,46 @@
+{% extends 'vaishnava_study/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <a href="{% url 'vaishnava_study:course_detail' book.course.id %}" style="color: var(--neon-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+        ← {% trans "Back to Course" %}
+    </a>
+    
+    <h1 style="color: var(--neon-green); margin: 20px 0;">
+        {% trans "Q&A for" %} {{ book.title }}
+    </h1>
+    
+    {% for qa in qas %}
+    <div class="qa-item">
+        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+            <h3 style="color: var(--neon-blue); margin: 0;">
+                {% if request.LANGUAGE_CODE == 'es' %}
+                    {{ qa.question_es }}
+                {% else %}
+                    {{ qa.question_en }}
+                {% endif %}
+            </h3>
+            <span style="background: var(--neon-purple); color: black; padding: 5px 10px; border-radius: 15px; font-size: 0.9em; font-weight: bold;">
+                {{ qa.verse_reference }}
+            </span>
+        </div>
+        
+        <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 8px; margin-top: 10px;">
+            <p style="margin: 0; line-height: 1.6;">
+                {% if request.LANGUAGE_CODE == 'es' %}
+                    {{ qa.answer_es|linebreaks }}
+                {% else %}
+                    {{ qa.answer_en|linebreaks }}
+                {% endif %}
+            </p>
+        </div>
+    </div>
+    {% empty %}
+    <div style="text-align: center; padding: 40px; color: var(--neon-pink);">
+        <h3>{% trans "No questions and answers available yet for this book." %}</h3>
+        <p>{% trans "Please check back later or contact the course coordinator." %}</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
