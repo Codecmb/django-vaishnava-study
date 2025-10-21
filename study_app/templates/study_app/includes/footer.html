@@ -6,27 +6,29 @@
             <p>{% trans "Comprehensive spiritual education platform" %}</p>
         </div>
         
-        <div style="display: flex; justify-content: center; gap: 30px; flex-wrap: wrap; margin-bottom: 20px;">
-            <div>
-                <h4 style="color: var(--neon-green); margin-bottom: 10px;">{% trans "Courses" %}</h4>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Bhakti Shastri" %}</a>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Bhakti Vaibhava" %}</a>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Bhakti Vedanta" %}</a>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Bhakti Sarvabhauma" %}</a>
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: var(--neon-green); margin-bottom: 15px;">{% trans "Courses" %}</h4>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+                {% for course in all_courses %}
+                <a href="{% url 'study_app:course_detail' course.id %}" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-blue); border-radius: 5px; transition: all 0.3s ease;">
+                    {{ course.get_level_display }}
+                </a>
+                {% endfor %}
             </div>
-            
-            <div>
-                <h4 style="color: var(--neon-green); margin-bottom: 10px;">{% trans "Resources" %}</h4>
-                <a href="https://vedabase.io" target="_blank" style="color: var(--text-light); display: block; margin: 5px 0;">Vedabase</a>
-                <a href="https://prabhupadabooks.com" target="_blank" style="color: var(--text-light); display: block; margin: 5px 0;">Prabhupada Books</a>
-                <a href="https://iskcondesiretree.com" target="_blank" style="color: var(--text-light); display: block; margin: 5px 0;">ISKCON Desire Tree</a>
-            </div>
-            
-            <div>
-                <h4 style="color: var(--neon-green); margin-bottom: 10px;">{% trans "Support" %}</h4>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Help Center" %}</a>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Contact Us" %}</a>
-                <a href="#" style="color: var(--text-light); display: block; margin: 5px 0;">{% trans "Feedback" %}</a>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: var(--neon-green); margin-bottom: 15px;">{% trans "Reference Websites" %}</h4>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+                <a href="https://vedabase.io" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    Vedabase.io
+                </a>
+                <a href="https://prabhupadabooks.com" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    PrabhupadaBooks.com
+                </a>
+                <a href="https://iskcondesiretree.com" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    ISKCON Desire Tree
+                </a>
             </div>
         </div>
         

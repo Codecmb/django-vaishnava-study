@@ -57,16 +57,16 @@ def add_initial_data(apps, schema_editor):
     Book.objects.create(
         course=bhakti_shastri,
         title="Nectar of Devotion",
-        english_url="https://vedabase.io/en/library/noi/",
-        spanish_url="https://vedabase.io/es/library/noi/",
+        english_url="https://vedabase.io/en/library/nod/",  # Fixed link
+        spanish_url="https://vedabase.io/es/library/nod/",  # Fixed link
         order=3
     )
     
     Book.objects.create(
         course=bhakti_shastri,
         title="Nectar of Instruction",
-        english_url="https://vedabase.io/en/library/upi/",
-        spanish_url="https://vedabase.io/es/library/upi/",
+        english_url="https://vedabase.io/en/library/noi/",  # Fixed link
+        spanish_url="https://vedabase.io/es/library/noi/",  # Fixed link
         order=4
     )
     

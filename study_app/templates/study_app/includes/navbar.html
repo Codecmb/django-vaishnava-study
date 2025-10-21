@@ -17,7 +17,7 @@
                         {% trans "All Courses" %}
                     </a>
                     <div style="border-top: 1px solid var(--neon-blue); margin: 5px 0;"></div>
-                    {% for course in courses %}
+                    {% for course in all_courses %}
                     <a href="{% url 'study_app:course_detail' course.id %}" class="nav-link" style="display: block; margin: 5px 0;">
                         {{ course.get_level_display }}
                     </a>
@@ -25,15 +25,28 @@
                 </div>
             </div>
             
-            <form action="/i18n/setlang/" method="post" style="display: inline;">
+            <div class="dropdown">
+                <a href="#" class="nav-link">{% trans "Upload" %} ▼</a>
+                <div class="dropdown-menu">
+                    <a href="{% url 'study_app:upload_qa' %}" class="nav-link" style="display: block; margin: 5px 0;">
+                        📝 {% trans "Upload Q&A" %}
+                    </a>
+                    <a href="{% url 'study_app:upload_study_material' %}" class="nav-link" style="display: block; margin: 5px 0;">
+                        📚 {% trans "Upload Study Materials" %}
+                    </a>
+                </div>
+            </div>
+            
+            <form action="{% url 'set_language' %}" method="post" style="display: inline;">
                 {% csrf_token %}
-                <input name="next" type="hidden" value="{{ request.path }}">
+                <input name="next" type="hidden" value="{{ redirect_to }}">
                 <select name="language" onchange="this.form.submit()" class="language-switcher">
                     {% get_current_language as LANGUAGE_CODE %}
                     {% get_available_languages as LANGUAGES %}
-                    {% for lang in LANGUAGES %}
-                        <option value="{{ lang.0 }}" {% if lang.0 == LANGUAGE_CODE %}selected{% endif %}>
-                            {{ lang.1 }}
+                    {% get_language_info_list for LANGUAGES as languages %}
+                    {% for language in languages %}
+                        <option value="{{ language.code }}" {% if language.code == LANGUAGE_CODE %}selected{% endif %}>
+                            {{ language.name_local }}
                         </option>
                     {% endfor %}
                 </select>

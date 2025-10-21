@@ -1,0 +1,68 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+    <h1 style="color: var(--neon-blue); text-align: center; margin-bottom: 30px;">
+        {% trans "Upload Questions & Answers" %}
+    </h1>
+    
+    <div style="background: rgba(255, 255, 255, 0.1); padding: 30px; border-radius: 15px; border: 1px solid var(--neon-green);">
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div style="margin-bottom: 20px;">
+                <label style="color: var(--neon-green); display: block; margin-bottom: 8px; font-weight: bold;">
+                    {% trans "Select Book" %}
+                </label>
+                {{ form.book }}
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="color: var(--neon-green); display: block; margin-bottom: 8px; font-weight: bold;">
+                    {% trans "CSV File" %}
+                </label>
+                {{ form.csv_file }}
+                <small style="color: var(--neon-pink); display: block; margin-top: 5px;">
+                    {{ form.csv_file.help_text }}
+                </small>
+            </div>
+            
+            <div style="margin-bottom: 20px;">
+                <label style="color: var(--neon-green); display: block; margin-bottom: 8px; font-weight: bold;">
+                    {% trans "Notes (Optional)" %}
+                </label>
+                {{ form.notes }}
+            </div>
+            
+            <button type="submit" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue)); color: black; border: none; padding: 12px 30px; border-radius: 8px; font-weight: bold; cursor: pointer; transition: all 0.3s ease;">
+                {% trans "Upload Q&A" %}
+            </button>
+        </form>
+    </div>
+    
+    <div style="margin-top: 40px; background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; border: 1px solid var(--neon-blue);">
+        <h3 style="color: var(--neon-pink); margin-bottom: 15px;">{% trans "CSV Format Instructions" %}</h3>
+        <p style="color: var(--text-light); margin-bottom: 10px;">
+            {% trans "Your CSV file should have these columns in the first row:" %}
+        </p>
+        <ul style="color: var(--text-light); margin-left: 20px;">
+            <li><code>question_en</code> - {% trans "Question in English" %}</li>
+            <li><code>question_es</code> - {% trans "Question in Spanish" %}</li>
+            <li><code>answer_en</code> - {% trans "Answer in English" %}</li>
+            <li><code>answer_es</code> - {% trans "Answer in Spanish" %}</li>
+            <li><code>verse_reference</code> - {% trans "Verse reference (e.g., Bg 1.1)" %}</li>
+            <li><code>order</code> - {% trans "Display order number" %}</li>
+        </ul>
+        
+        <div style="margin-top: 20px;">
+            <h4 style="color: var(--neon-green); margin-bottom: 10px;">{% trans "Example CSV:" %}</h4>
+            <pre style="background: rgba(0, 0, 0, 0.5); padding: 15px; border-radius: 5px; color: var(--neon-blue); overflow-x: auto;">
+question_en,question_es,answer_en,answer_es,verse_reference,order
+"Why did Dhrtarastra ask...","¿Por qué Dhrtarastra le preguntó...","Dhrtarastra was blind...","Dhrtarastra era ciego...","Bg 1.1",1
+"What is the significance...","¿Cuál es la importancia...","Kuruksetra is a sacred...","Kuruksetra es un lugar...","Bg 1.1",2
+            </pre>
+        </div>
+    </div>
+</div>
+{% endblock %}

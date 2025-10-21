@@ -1,0 +1,32 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="text-align: center; padding: 60px 20px;">
+    <div style="color: var(--neon-green); font-size: 4em; margin-bottom: 20px;">
+        ✓
+    </div>
+    
+    <h1 style="color: var(--neon-green); margin-bottom: 20px;">
+        {% trans "Upload Successful!" %}
+    </h1>
+    
+    <p style="font-size: 1.2em; margin-bottom: 30px; color: var(--text-light);">
+        {% trans "Your questions and answers have been successfully uploaded to the system." %}
+    </p>
+    
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+        <a href="{% url 'study_app:upload_qa' %}" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-purple)); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+            {% trans "Upload More Q&A" %}
+        </a>
+        
+        <a href="{% url 'study_app:upload_study_material' %}" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple)); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+            {% trans "Upload Study Materials" %}
+        </a>
+        
+        <a href="{% url 'study_app:index' %}" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue)); color: white; padding: 12px 25px; border-radius: 8px; text-decoration: none; font-weight: bold;">
+            {% trans "Back to Home" %}
+        </a>
+    </div>
+</div>
+{% endblock %}

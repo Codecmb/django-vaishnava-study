@@ -1,0 +1,128 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <a href="{% url 'study_app:course_detail' book.course.id %}" style="color: var(--neon-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+        ← {% trans "Back to Course" %}
+    </a>
+    
+    <h1 style="color: var(--neon-green); margin: 20px 0;">
+        {% trans "Study Materials for" %} {{ book.title }}
+    </h1>
+
+    <!-- Upload Buttons -->
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
+        <a href="{% url 'study_app:upload_qa' %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
+            📝 {% trans "Upload Q&A CSV" %}
+        </a>
+        <a href="{% url 'study_app:upload_study_material' %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));">
+            📚 {% trans "Upload Study Materials" %}
+        </a>
+    </div>
+
+    <!-- Study Materials by Type -->
+    {% for material_type, materials in materials_by_type.items %}
+    <div style="margin: 40px 0;">
+        <h2 style="color: var(--neon-pink); margin-bottom: 20px; border-bottom: 2px solid var(--neon-pink); padding-bottom: 10px;">
+            {{ materials.0.get_material_type_display }}
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+            {% for material in materials %}
+            <div style="background: rgba(255, 255, 255, 0.1); border: 1px solid var(--neon-blue); border-radius: 10px; padding: 20px; transition: all 0.3s ease; position: relative;">
+                <!-- Delete Button -->
+                <a href="{% url 'study_app:delete_study_material' material.id %}" 
+                   style="position: absolute; top: 10px; right: 10px; color: var(--neon-pink); text-decoration: none; font-size: 1.2em;"
+                   title="{% trans 'Delete this material' %}">
+                    🗑️
+                </a>
+                
+                <h3 style="color: var(--neon-blue); margin-bottom: 10px; padding-right: 30px;">{{ material.title }}</h3>
+                
+                {% if material.description %}
+                <p style="color: var(--text-light); margin-bottom: 15px; font-size: 0.9em;">{{ material.description }}</p>
+                {% endif %}
+                
+                <div style="display: flex; flex-wrap: wrap; gap: 10px; margin-bottom: 15px;">
+                    <span style="background: var(--neon-purple); color: black; padding: 3px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold;">
+                        {{ material.get_language_display }}
+                    </span>
+                    {% if material.verse_reference %}
+                    <span style="background: var(--neon-green); color: black; padding: 3px 8px; border-radius: 12px; font-size: 0.8em; font-weight: bold;">
+                        {{ material.verse_reference }}
+                    </span>
+                    {% endif %}
+                </div>
+                
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    {% if material.english_file %}
+                    <a href="{{ material.english_file.url }}" target="_blank" style="color: var(--neon-blue); text-decoration: none; padding: 8px 12px; border: 1px solid var(--neon-blue); border-radius: 5px; font-size: 0.9em;">
+                        📄 {% trans "English" %}
+                    </a>
+                    {% endif %}
+                    
+                    {% if material.spanish_file %}
+                    <a href="{{ material.spanish_file.url }}" target="_blank" style="color: var(--neon-pink); text-decoration: none; padding: 8px 12px; border: 1px solid var(--neon-pink); border-radius: 5px; font-size: 0.9em;">
+                        📄 {% trans "Spanish" %}
+                    </a>
+                    {% endif %}
+                    
+                    {% if material.bilingual_file %}
+                    <a href="{{ material.bilingual_file.url }}" target="_blank" style="color: var(--neon-green); text-decoration: none; padding: 8px 12px; border: 1px solid var(--neon-green); border-radius: 5px; font-size: 0.9em;">
+                        📄 {% trans "Both Languages" %}
+                    </a>
+                    {% endif %}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endfor %}
+
+    <!-- Traditional Q&A Section -->
+    {% if qas %}
+    <div style="margin: 40px 0;">
+        <h2 style="color: var(--neon-green); margin-bottom: 20px; border-bottom: 2px solid var(--neon-green); padding-bottom: 10px;">
+            {% trans "Questions & Answers" %}
+        </h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr; gap: 15px;">
+            {% for qa in qas %}
+            <div class="qa-item">
+                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                    <h3 style="color: var(--neon-blue); margin: 0;">
+                        {% if request.LANGUAGE_CODE == 'es' %}
+                            {{ qa.question_es }}
+                        {% else %}
+                            {{ qa.question_en }}
+                        {% endif %}
+                    </h3>
+                    <span style="background: var(--neon-purple); color: black; padding: 5px 10px; border-radius: 15px; font-size: 0.9em; font-weight: bold;">
+                        {{ qa.verse_reference }}
+                    </span>
+                </div>
+                
+                <div style="background: rgba(0, 255, 255, 0.1); padding: 15px; border-radius: 8px; margin-top: 10px;">
+                    <p style="margin: 0; line-height: 1.6;">
+                        {% if request.LANGUAGE_CODE == 'es' %}
+                            {{ qa.answer_es|linebreaks }}
+                        {% else %}
+                            {{ qa.answer_en|linebreaks }}
+                        {% endif %}
+                    </p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    {% endif %}
+
+    {% if not study_materials and not qas %}
+    <div style="text-align: center; padding: 60px 20px; color: var(--neon-pink);">
+        <h3>{% trans "No study materials available yet for this book." %}</h3>
+        <p>{% trans "Use the upload buttons above to add study materials." %}</p>
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

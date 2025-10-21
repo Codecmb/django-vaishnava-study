@@ -1,0 +1,37 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="padding: 20px;">
+    <a href="{% url 'study_app:course_detail' book.course.id %}" style="color: var(--neon-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+        ← {% trans "Back to Course" %}
+    </a>
+    
+    <h1 style="color: var(--neon-green); margin: 20px 0;">
+        {{ book.title }}
+    </h1>
+    
+    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
+        <a href="{{ book.english_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
+            📖 {% trans "Read in English" %}
+        </a>
+        
+        <a href="{{ book.spanish_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));">
+            📖 {% trans "Read in Spanish" %}
+        </a>
+        
+        <a href="{% url 'study_app:qa_section' book.id %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));">
+            ❓ {% trans "Q&A Section" %}
+        </a>
+    </div>
+    
+    <div style="margin-top: 30px;">
+        <h2 style="color: var(--neon-pink); margin-bottom: 20px;">
+            {% trans "About This Book" %}
+        </h2>
+        <p style="color: var(--text-light); line-height: 1.6;">
+            {% trans "This book is part of the" %} {{ book.course.get_level_display }} {% trans "course. Use the links above to read the book online or access the Q&A section for study questions." %}
+        </p>
+    </div>
+</div>
+{% endblock %}
