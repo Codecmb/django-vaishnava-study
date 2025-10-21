@@ -103,3 +103,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+
+# Locale paths for translations
+LOCALE_PATHS = [
+    os.path.join(BASE_DIR, 'locale'),
+]

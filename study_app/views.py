@@ -1,5 +1,5 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.utils.translation import get_language
+from django.utils.translation import get_language, activate, gettext as _
 from django.contrib import messages
 import csv
 import io
@@ -9,6 +9,11 @@ from .forms import QAUploadForm, StudyMaterialForm
 
 def index(request):
     courses = Course.objects.all().prefetch_related('books')
+    
+    # Debug: Print current language
+    print(f"Current language: {get_language()}")
+    print(f"Request LANGUAGE_CODE: {request.LANGUAGE_CODE}")
+    
     context = {
         'courses': courses,
     }
@@ -111,6 +116,33 @@ def upload_study_material(request):
         'form': form,
     }
     return render(request, 'study_app/upload_study_material.html', context)
+
+def delete_study_material(request, material_id):
+    material = get_object_or_404(StudyMaterial, id=material_id)
+    
+    if request.method == 'POST':
+        # Delete the actual files from storage
+        if material.english_file:
+            if os.path.isfile(material.english_file.path):
+                os.remove(material.english_file.path)
+        if material.spanish_file:
+            if os.path.isfile(material.spanish_file.path):
+                os.remove(material.spanish_file.path)
+        if material.bilingual_file:
+            if os.path.isfile(material.bilingual_file.path):
+                os.remove(material.bilingual_file.path)
+        
+        book_id = material.book.id
+        material_name = material.title
+        material.delete()
+        
+        messages.success(request, f'Successfully deleted "{material_name}"')
+        return redirect('study_app:qa_section', book_id=book_id)
+    
+    context = {
+        'material': material,
+    }
+    return render(request, 'study_app/delete_study_material.html', context)
 
 def upload_success(request):
     return render(request, 'study_app/upload_success.html')

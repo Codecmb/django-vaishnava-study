@@ -1,58 +1,117 @@
 msgid ""
 msgstr ""
-"Project-Id-Version: PACKAGE VERSION\n"
+"Project-Id-Version: Vaishnava Study App\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2023-11-20 22:04+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: es <LL@li.org>\n"
+"POT-Creation-Date: 2024-10-21 19:00+0000\n"
+"PO-Revision-Date: 2024-10-21 19:00+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-msgid "Vaishnava Study Guide"
-msgstr "Guía de Estudio Vaishnava"
+msgid "Vaishnava Study App"
+msgstr "Aplicación de Estudio Vaishnava"
 
-msgid "Study Bhakti Shastri"
-msgstr "Estudiar Bhakti Shastri"
+msgid "Home"
+msgstr "Inicio"
 
-msgid "Study Bhakti Vaibhava"
-msgstr "Estudiar Bhakti Vaibhava"
+msgid "Courses"
+msgstr "Cursos"
 
-msgid "Study Bhakti Vedanta"
-msgstr "Estudiar Bhakti Vedanta"
+msgid "All Courses"
+msgstr "Todos los Cursos"
 
-msgid "Study Bhakti Sarvabhauma"
-msgstr "Estudiar Bhakti Sarvabhauma"
+msgid "Upload"
+msgstr "Subir"
 
-msgid "Study Questions & Answers"
-msgstr "Preguntas y Respuestas de Estudio"
+msgid "Upload Q&A"
+msgstr "Subir P&R"
 
-msgid "Study Prabhupada's commentaries with interactive Q&A for each verse"
-msgstr "Estudia los comentarios de Prabhupada con PyR interactivas para cada verso"
+msgid "Upload Study Materials"
+msgstr "Subir Materiales de Estudio"
 
-msgid "Bhakti Shastri Books Q&A"
-msgstr "Libros de Bhakti Shastri PyR"
+msgid "Read in English"
+msgstr "Leer en Inglés"
 
-msgid "Study Q&A"
-msgstr "Estudio PyR"
+msgid "Read in Spanish"
+msgstr "Leer en Español"
 
-msgid "Srimad Bhagavatam Cantos Q&A"
-msgstr "Cantos del Srimad Bhagavatam PyR"
+msgid "Q&A Section"
+msgstr "Sección de P&R"
 
-msgid "Canto"
-msgstr "Canto"
+msgid "Back to Home"
+msgstr "Volver al Inicio"
 
-msgid "Online Resources"
-msgstr "Recursos en Línea"
+msgid "Back to Course"
+msgstr "Volver al Curso"
 
-msgid "Explore these essential Vaishnava resources"
-msgstr "Explora estos recursos Vaishnavas esenciales"
+msgid "Books in this Course"
+msgstr "Libros en este Curso"
 
-msgid "English & Spanish available"
-msgstr "Versión en inglés y español"
+msgid "No books available for this course yet."
+msgstr "Aún no hay libros disponibles para este curso."
 
-msgid "English version only"
-msgstr "Solo versión en inglés"
+msgid "Please check back later or contact the course coordinator."
+msgstr "Por favor, vuelva más tarde o contacte al coordinador del curso."
+
+msgid "About This Book"
+msgstr "Acerca de este Libro"
+
+msgid "This book is part of the"
+msgstr "Este libro es parte del"
+
+msgid "course. Use the links above to read the book online or access the Q&A section for study questions."
+msgstr "curso. Use los enlaces de arriba para leer el libro en línea o acceder a la sección de P&R para preguntas de estudio."
+
+msgid "Study Materials for"
+msgstr "Materiales de Estudio para"
+
+msgid "Upload Q&A CSV"
+msgstr "Subir CSV de P&R"
+
+msgid "English"
+msgstr "Inglés"
+
+msgid "Spanish"
+msgstr "Español"
+
+msgid "Both Languages"
+msgstr "Ambos Idiomas"
+
+msgid "Questions & Answers"
+msgstr "Preguntas y Respuestas"
+
+msgid "No study materials available yet for this book."
+msgstr "Aún no hay materiales de estudio disponibles para este libro."
+
+msgid "Use the upload buttons above to add study materials."
+msgstr "Use los botones de subir arriba para agregar materiales de estudio."
+
+msgid "Delete this material"
+msgstr "Eliminar este material"
+
+msgid "Comprehensive spiritual education platform"
+msgstr "Plataforma integral de educación espiritual"
+
+msgid "Available Courses"
+msgstr "Cursos Disponibles"
+
+msgid "Explore Course"
+msgstr "Explorar Curso"
+
+msgid "No courses available yet."
+msgstr "Aún no hay cursos disponibles."
+
+msgid "Please check back later or contact the administrator."
+msgstr "Por favor, vuelva más tarde o contacte al administrador."
+
+msgid "Reference Websites"
+msgstr "Sitios Web de Referencia"
+
+msgid "All reference websites available in both English and Spanish"
+msgstr "Todos los sitios web de referencia disponibles en inglés y español"
+
+msgid "© 2024 Vaishnava Study App. All rights reserved."
+msgstr "© 2024 Aplicación de Estudio Vaishnava. Todos los derechos reservados."
