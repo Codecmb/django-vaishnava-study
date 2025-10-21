@@ -2,16 +2,16 @@
 {% load i18n %}
 
 {% block content %}
-<div style="padding: 20px;">
-    <a href="{% url 'study_app:index' %}" style="color: var(--neon-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+<div class="p-20">
+    <a href="{% url 'study_app:index' %}" class="text-primary" style="text-decoration: none; margin-bottom: 20px; display: inline-block;">
         ← {% trans "Back to Home" %}
     </a>
     
-    <h1 style="color: var(--neon-pink); margin: 20px 0; text-shadow: 0 0 15px var(--neon-pink);">
+    <h1 class="text-gold mb-20" style="text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);">
         {{ course.get_level_display }}
     </h1>
     
-    <div style="background: rgba(255, 255, 255, 0.05); padding: 20px; border-radius: 10px; margin: 20px 0;">
+    <div class="card mb-30">
         <p style="font-size: 1.1em;">
             {% if request.LANGUAGE_CODE == 'es' %}
                 {{ course.description_es }}
@@ -21,30 +21,30 @@
         </p>
     </div>
     
-    <h2 style="color: var(--neon-green); margin: 30px 0 20px 0;">
+    <h2 class="text-green mb-20">
         {% trans "Books in this Course" %}
     </h2>
     
     {% for book in books %}
-    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid var(--neon-blue);">
-        <h3 style="color: var(--neon-blue); margin-bottom: 15px;">{{ book.title }}</h3>
+    <div class="material-card mb-20">
+        <h3 class="text-primary mb-15">{{ book.title }}</h3>
         
-        <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <a href="{{ book.english_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
+        <div class="flex flex-wrap gap-15">
+            <a href="{{ book.english_url }}" target="_blank" class="book-link">
                 📖 {% trans "Read in English" %}
             </a>
             
-            <a href="{{ book.spanish_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));">
+            <a href="{{ book.spanish_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--accent-purple), var(--warm-red));">
                 📖 {% trans "Read in Spanish" %}
             </a>
             
-            <a href="{% url 'study_app:qa_section' book.id %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));">
+            <a href="{% url 'study_app:qa_section' book.id %}" class="book-link" style="background: linear-gradient(45deg, var(--accent-green), var(--primary-blue));">
                 ❓ {% trans "Q&A Section" %}
             </a>
         </div>
     </div>
     {% empty %}
-    <div style="text-align: center; padding: 40px; color: var(--neon-pink);">
+    <div class="text-center p-30 text-red">
         <h3>{% trans "No books available for this course yet." %}</h3>
         <p>{% trans "Please check back later or contact the course coordinator." %}</p>
     </div>

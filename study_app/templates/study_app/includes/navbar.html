@@ -1,6 +1,6 @@
 {% load i18n %}
 <nav class="navbar">
-    <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 70px;">
+    <div class="container" style="display: flex; justify-content: space-between; align-items: center; height: 70px;">
         <div style="display: flex; align-items: center;">
             <a href="{% url 'study_app:index' %}" class="nav-link" style="font-size: 1.5em; font-weight: bold;">
                 🕉️ {% trans "Vaishnava Study" %}
@@ -13,12 +13,12 @@
             <div class="dropdown">
                 <a href="#" class="nav-link">{% trans "Courses" %} ▼</a>
                 <div class="dropdown-menu">
-                    <a href="{% url 'study_app:index' %}#courses" class="nav-link" style="display: block; margin: 5px 0;">
+                    <a href="{% url 'study_app:index' %}#courses" class="nav-link">
                         {% trans "All Courses" %}
                     </a>
-                    <div style="border-top: 1px solid var(--neon-blue); margin: 5px 0;"></div>
+                    <div style="border-top: 1px solid var(--light-border); margin: 5px 0;"></div>
                     {% for course in all_courses %}
-                    <a href="{% url 'study_app:course_detail' course.id %}" class="nav-link" style="display: block; margin: 5px 0;">
+                    <a href="{% url 'study_app:course_detail' course.id %}" class="nav-link">
                         {{ course.get_level_display }}
                     </a>
                     {% endfor %}
@@ -28,10 +28,10 @@
             <div class="dropdown">
                 <a href="#" class="nav-link">{% trans "Upload" %} ▼</a>
                 <div class="dropdown-menu">
-                    <a href="{% url 'study_app:upload_qa' %}" class="nav-link" style="display: block; margin: 5px 0;">
+                    <a href="{% url 'study_app:upload_qa' %}" class="nav-link">
                         📝 {% trans "Upload Q&A" %}
                     </a>
-                    <a href="{% url 'study_app:upload_study_material' %}" class="nav-link" style="display: block; margin: 5px 0;">
+                    <a href="{% url 'study_app:upload_study_material' %}" class="nav-link">
                         📚 {% trans "Upload Study Materials" %}
                     </a>
                 </div>

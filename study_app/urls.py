@@ -10,5 +10,7 @@ urlpatterns = [
     path('book/<int:book_id>/qa/', views.qa_section, name='qa_section'),
     path('upload-qa/', views.upload_qa, name='upload_qa'),
     path('upload-study-material/', views.upload_study_material, name='upload_study_material'),
+    path('delete-study-material/<int:material_id>/', views.delete_study_material, name='delete_study_material'),
     path('upload-success/', views.upload_success, name='upload_success'),
+    path('test-static/', views.test_static, name='test_static'),  # Add this line
 ]

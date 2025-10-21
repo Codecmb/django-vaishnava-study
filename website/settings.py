@@ -108,3 +108,28 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 LOCALE_PATHS = [
     os.path.join(BASE_DIR, 'locale'),
 ]
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'study_app/static'),
+]
+
+
+# Static files (CSS, JavaScript, Images)
+STATIC_URL = '/static/'
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'study_app/static'),
+]
+
+
+# Static files configuration
+STATIC_URL = '/static/'
+
+# During development, serve static files from these directories
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'study_app/static'),
+]
+
+# For production, where collected static files will be stored
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')

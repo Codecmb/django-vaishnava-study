@@ -10,7 +10,8 @@ from .forms import QAUploadForm, StudyMaterialForm
 def index(request):
     courses = Course.objects.all().prefetch_related('books')
     
-    # Debug: Print current language
+    # Debug info
+    print("=== STATIC FILES DEBUG ===")
     print(f"Current language: {get_language()}")
     print(f"Request LANGUAGE_CODE: {request.LANGUAGE_CODE}")
     
@@ -146,3 +147,7 @@ def delete_study_material(request, material_id):
 
 def upload_success(request):
     return render(request, 'study_app/upload_success.html')
+
+# Test view for static files
+def test_static(request):
+    return render(request, 'study_app/test_static.html')
