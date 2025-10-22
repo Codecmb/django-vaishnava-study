@@ -2,8 +2,8 @@
 {% load i18n %}
 
 {% block content %}
-<div style="text-align: center; padding: 40px 20px;">
-    <h1 style="color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue); margin-bottom: 20px;">
+<div class="bg-primary-subtle" style="text-align: center; padding: 40px 20px; border-radius: 10px; margin: 20px 0;">
+    <h1 class="text-primary" style="margin-bottom: 20px;">
         {% trans "Vaishnava Study App" %}
     </h1>
     
@@ -14,13 +14,13 @@
 
 <!-- Courses Section -->
 <div style="margin: 40px 0;" id="courses">
-    <h2 style="color: var(--neon-green); text-align: center; margin-bottom: 30px;">
+    <h2 class="text-primary" style="text-align: center; margin-bottom: 30px;">
         {% trans "Available Courses" %}
     </h2>
     
     {% for course in courses %}
-    <div class="course-card">
-        <h3 style="color: var(--neon-pink); margin-bottom: 15px;">{{ course.get_level_display }}</h3>
+    <div class="course-card bg-card">
+        <h3 class="text-primary" style="margin-bottom: 15px;">{{ course.get_level_display }}</h3>
         <p>
             {% if request.LANGUAGE_CODE == 'es' %}
                 {{ course.description_es }}
@@ -28,13 +28,13 @@
                 {{ course.description_en }}
             {% endif %}
         </p>
-        <a href="{% url 'vaishnava_study:course_detail' course.id %}" class="book-link">
+        <a href="{% url 'vaishnava_study:course_detail' course.id %}" class="book-link btn-primary">
             {% trans "Explore Course" %}
         </a>
     </div>
     {% empty %}
-    <div style="text-align: center; padding: 40px; color: var(--neon-pink);">
-        <h3>{% trans "No courses available yet." %}</h3>
+    <div class="bg-warning-subtle" style="text-align: center; padding: 40px; border-radius: 10px;">
+        <h3 class="text-warning">{% trans "No courses available yet." %}</h3>
         <p>{% trans "Please check back later or contact the administrator." %}</p>
     </div>
     {% endfor %}
@@ -42,44 +42,81 @@
 
 <!-- Reference Websites -->
 <div style="margin: 60px 0;">
-    <h2 style="color: var(--neon-blue); text-align: center; margin-bottom: 30px;">
+    <h2 class="text-primary" style="text-align: center; margin-bottom: 30px;">
         {% trans "Reference Websites" %}
     </h2>
     
-    <div class="reference-links">
-        <div class="ref-link">
-            <a href="https://vedabase.io" target="_blank" style="color: var(--neon-green); text-decoration: none; font-weight: bold;">
-                Vedabase.io
-            </a>
-            <div class="spanish-note">{% trans "Available in English and Spanish" %}</div>
+    <div class="reference-links" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+        <!-- ISKCON Education - Different color -->
+        <div class="ref-link bg-success-subtle" style="border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <a href="https://iskconeducation.org/" target="_blank" class="text-success" style="text-decoration: none; font-weight: bold; font-size: 1.2em;">
+                    ISKCON Education ↗
+                </a>
+                <div style="color: #059669; font-size: 0.9em; margin-top: 10px;">
+                    {% trans "Official ISKCON Education" %}
+                </div>
+            </div>
         </div>
         
-        <div class="ref-link">
-            <a href="https://prabhupadabooks.com" target="_blank" style="color: var(--neon-green); text-decoration: none; font-weight: bold;">
-                PrabhupadaBooks.com
-            </a>
-            <div class="spanish-note">{% trans "Available in English and Spanish" %}</div>
+        <!-- Vedabase - Different color -->
+        <div class="ref-link bg-info-subtle" style="border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <a href="https://vedabase.io" target="_blank" class="text-primary" style="text-decoration: none; font-weight: bold; font-size: 1.2em;">
+                    Vedabase.io
+                </a>
+                <div style="color: #1e40af; font-size: 0.9em; margin-top: 10px;">
+                    {% trans "Available in English and Spanish" %}
+                </div>
+            </div>
         </div>
         
-        <div class="ref-link">
-            <a href="https://iskcondesiretree.com" target="_blank" style="color: var(--neon-green); text-decoration: none; font-weight: bold;">
-                ISKCON Desire Tree
-            </a>
-            <div class="spanish-note">{% trans "Primarily in English" %}</div>
+        <!-- Prabhupada Books - Different color -->
+        <div class="ref-link bg-warning-subtle" style="border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <a href="https://prabhupadabooks.com" target="_blank" class="text-warning" style="text-decoration: none; font-weight: bold; font-size: 1.2em;">
+                    PrabhupadaBooks.com
+                </a>
+                <div style="color: #d97706; font-size: 0.9em; margin-top: 10px;">
+                    {% trans "Available in English and Spanish" %}
+                </div>
+            </div>
         </div>
         
-        <div class="ref-link">
-            <a href="https://radha.name" target="_blank" style="color: var(--neon-green); text-decoration: none; font-weight: bold;">
-                Radha.name
-            </a>
-            <div class="spanish-note">{% trans "Primarily in English" %}</div>
+        <!-- ISKCON Desire Tree - Different color -->
+        <div class="ref-link bg-success-subtle" style="border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <a href="https://iskcondesiretree.com" target="_blank" class="text-success" style="text-decoration: none; font-weight: bold; font-size: 1.2em;">
+                    ISKCON Desire Tree
+                </a>
+                <div style="color: #059669; font-size: 0.9em; margin-top: 10px;">
+                    {% trans "Primarily in English" %}
+                </div>
+            </div>
         </div>
         
-        <div class="ref-link">
-            <a href="https://vihe.org" target="_blank" style="color: var(--neon-green); text-decoration: none; font-weight: bold;">
-                VIHE.org
-            </a>
-            <div class="spanish-note">{% trans "Primarily in English" %}</div>
+        <!-- Radha.name - Different color -->
+        <div class="ref-link bg-info-subtle" style="border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <a href="https://radha.name" target="_blank" class="text-primary" style="text-decoration: none; font-weight: bold; font-size: 1.2em;">
+                    Radha.name
+                </a>
+                <div style="color: #1e40af; font-size: 0.9em; margin-top: 10px;">
+                    {% trans "Primarily in English" %}
+                </div>
+            </div>
+        </div>
+        
+        <!-- VIHE - Different color -->
+        <div class="ref-link bg-warning-subtle" style="border-radius: 15px; padding: 25px; text-align: center; transition: all 0.3s ease; height: 100%; display: flex; flex-direction: column; justify-content: space-between;">
+            <div>
+                <a href="https://vihe.org" target="_blank" class="text-warning" style="text-decoration: none; font-weight: bold; font-size: 1.2em;">
+                    VIHE.org
+                </a>
+                <div style="color: #d97706; font-size: 0.9em; margin-top: 10px;">
+                    {% trans "Primarily in English" %}
+                </div>
+            </div>
         </div>
     </div>
 </div>

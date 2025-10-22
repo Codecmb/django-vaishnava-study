@@ -1,5 +1,5 @@
 {% load i18n %}
-<nav class="navbar">
+<nav class="navbar bg-primary">
     <div style="max-width: 1200px; margin: 0 auto; display: flex; justify-content: space-between; align-items: center; height: 70px;">
         <div style="display: flex; align-items: center;">
             <a href="{% url 'vaishnava_study:index' %}" class="nav-link" style="font-size: 1.5em; font-weight: bold;">
@@ -31,6 +31,11 @@
                     </a>
                 </div>
             </div>
+
+            <!-- ISKCON Education Link -->
+            <a href="https://iskconeducation.org/" class="nav-link" target="_blank" rel="noopener">
+                ISKCON Education ↗
+            </a>
             
             <form action="{% url 'set_language' %}" method="post" style="display: inline;">
                 {% csrf_token %}
