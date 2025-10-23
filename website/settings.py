@@ -137,3 +137,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Add testserver for testing
 import os
 ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
+
+# Login/Logout settings
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'

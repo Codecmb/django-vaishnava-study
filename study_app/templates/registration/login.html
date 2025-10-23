@@ -1,0 +1,106 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Login" %} - {% trans "Vaishnava Study" %}</title>
+    <link rel="stylesheet" href="{% static 'study_app/css/main.css' %}">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .login-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        .form-group label {
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            color: #333;
+        }
+        .form-group input {
+            padding: 0.75rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .login-btn {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 4px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 1rem;
+        }
+        .login-btn:hover {
+            background: #0056b3;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+        .error-message {
+            color: #dc3545;
+            background: #f8d7da;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'study_app/includes/navbar.html' %}
+    
+    <main class="container">
+        <div class="login-container">
+            <h2 class="login-header">{% trans "Login to Vaishnava Study" %}</h2>
+            
+            {% if form.errors %}
+                <div class="error-message">
+                    {% trans "Your username and password didn't match. Please try again." %}
+                </div>
+            {% endif %}
+            
+            <form method="post" class="login-form">
+                {% csrf_token %}
+                
+                <div class="form-group">
+                    <label for="id_username">{% trans "Username" %}:</label>
+                    <input type="text" name="username" id="id_username" required autofocus>
+                </div>
+                
+                <div class="form-group">
+                    <label for="id_password">{% trans "Password" %}:</label>
+                    <input type="password" name="password" id="id_password" required>
+                </div>
+                
+                <input type="hidden" name="next" value="{{ next }}">
+                
+                <button type="submit" class="login-btn">{% trans "Login" %}</button>
+            </form>
+            
+            <div style="text-align: center; margin-top: 1rem;">
+                <small>{% trans "Don't have an account? Contact administrator." %}</small>
+            </div>
+        </div>
+    </main>
+</body>
+</html>

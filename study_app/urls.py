@@ -22,4 +22,7 @@ urlpatterns = [
     path('quiz/results/<int:attempt_id>/', views_quiz.quiz_results, name='quiz_results'),
     path('book/<int:book_id>/quiz/add-question/', views_quiz.add_quiz_question, name='add_quiz_question'),
     path('course/<int:course_id>/add-quiz-module/', views_quiz.add_quiz_module, name='add_quiz_module'),
+    
+    # Profile redirect
+    path('accounts/profile/', views.profile_redirect, name='profile_redirect'),
 ]

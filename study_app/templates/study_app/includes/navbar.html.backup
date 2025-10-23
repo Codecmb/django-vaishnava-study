@@ -51,14 +51,6 @@
                     {% endfor %}
                 </select>
             </form>
-
-            <!-- Login Button - Added here -->
-            {% if user.is_authenticated %}
-                <a href="{% url 'admin:index' %}" class="nav-link">{% trans "Admin" %}</a>
-                <a href="{% url 'logout' %}" class="nav-link">{% trans "Logout" %}</a>
-            {% else %}
-                <a href="{% url 'login' %}" class="nav-link">{% trans "Login" %}</a>
-            {% endif %}
         </div>
     </div>
 </nav>

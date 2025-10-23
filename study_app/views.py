@@ -151,3 +151,11 @@ def upload_success(request):
 # Test view for static files
 def test_static(request):
     return render(request, 'study_app/test_static.html')
+
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+
+@login_required
+def profile_redirect(request):
+    """Redirect from /accounts/profile/ to homepage"""
+    return redirect('study_app:index')
