@@ -1,0 +1,91 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz Results" %}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:index' %}">{% trans "Courses" %}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:course_detail' attempt.book.course.id %}">{{ attempt.book.course.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:book_detail' attempt.book.id %}">{{ attempt.book.title }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}">{% trans "Quizzes" %}</a></li>
+                    <li class="breadcrumb-item active">{% trans "Results" %}</li>
+                </ol>
+            </nav>
+            
+            <div class="card">
+                <div class="card-header {% if attempt.score == attempt.total_questions %}bg-success{% elif attempt.score >= attempt.total_questions|divisibleby:2 %}bg-warning{% else %}bg-info{% endif %} text-white">
+                    <h2 class="mb-0">{% trans "Quiz Results" %}</h2>
+                </div>
+                <div class="card-body">
+                    <!-- Score Summary -->
+                    <div class="text-center mb-4">
+                        <div class="display-4 {% if attempt.score == attempt.total_questions %}text-success{% elif attempt.score >= attempt.total_questions|divisibleby:2 %}text-warning{% else %}text-info{% endif %}">
+                            {{ attempt.score }}/{{ attempt.total_questions }}
+                        </div>
+                        <p class="lead">
+                            {{ attempt.score|floatformat:0 }}% {% trans "Correct" %}
+                        </p>
+                    </div>
+                    
+                    <!-- Philosophical Feedback -->
+                    <div class="alert {% if attempt.score == attempt.total_questions %}alert-success{% elif attempt.score >= attempt.total_questions|divisibleby:2 %}alert-warning{% else %}alert-info{% endif %}">
+                        <h4>{% trans "Philosophical Feedback" %}</h4>
+                        <p class="mb-0">{{ feedback }}</p>
+                    </div>
+                    
+                    <!-- Detailed Results -->
+                    <h4 class="mt-5">{% trans "Detailed Results" %}</h4>
+                    {% for answer in user_answers %}
+                    <div class="card mb-3 {% if answer.is_correct %}border-success{% else %}border-warning{% endif %}">
+                        <div class="card-header {% if answer.is_correct %}bg-success text-white{% else %}bg-warning text-dark{% endif %}">
+                            <strong>{% trans "Question" %} {{ forloop.counter }}</strong>
+                            {% if answer.question.verse_reference %}
+                            <span class="float-end">{% trans "Verse:" %} {{ answer.question.verse_reference }}</span>
+                            {% endif %}
+                        </div>
+                        <div class="card-body">
+                            <p><strong>{% trans "Question:" %}</strong> {{ answer.question.question_text }}</p>
+                            <p><strong>{% trans "Your Answer:" %}</strong> {{ answer.user_answer|default:"No answer provided" }}</p>
+                            
+                            {% if not answer.is_correct %}
+                            <div class="alert alert-light">
+                                <strong>{% trans "Suggested Understanding:" %}</strong><br>
+                                {% trans "Key points:" %} {{ answer.correct_answers|join:", " }}<br>
+                                <small class="text-muted">
+                                    <strong>{% trans "Srila Prabhupada:" %}</strong> {{ answer.question.prabhupada_commentary }}
+                                </small>
+                            </div>
+                            {% endif %}
+                            
+                            {% if answer.question.additional_guidance %}
+                            <div class="mt-2 p-2 bg-light rounded">
+                                <small><strong>{% trans "Additional Guidance:" %}</strong> {{ answer.question.additional_guidance }}</small>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    
+                    <!-- Action Buttons -->
+                    <div class="text-center mt-4">
+                        <a href="{% url 'study_app:take_quiz' attempt.book.id attempt.module.id %}" class="btn btn-primary">
+                            {% trans "Retry Quiz" %}
+                        </a>
+                        <a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}" class="btn btn-secondary">
+                            {% trans "Back to Quiz Dashboard" %}
+                        </a>
+                        <a href="{% url 'study_app:book_detail' attempt.book.id %}" class="btn btn-outline-info">
+                            {% trans "Back to Book" %}
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

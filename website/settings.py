@@ -133,3 +133,7 @@ STATICFILES_DIRS = [
 
 # For production, where collected static files will be stored
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+# Add testserver for testing
+import os
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']

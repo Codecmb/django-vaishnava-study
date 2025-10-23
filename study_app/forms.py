@@ -1,28 +1,48 @@
 from django import forms
-from .models import QAUpload, Book, StudyMaterial
+from .models import QAUpload, StudyMaterial, QuizQuestion, QuizModule
 
 class QAUploadForm(forms.ModelForm):
     class Meta:
         model = QAUpload
         fields = ['book', 'csv_file', 'notes']
-    
-    def __init__(self, *args, **kwargs):
-        super().__init__(*args, **kwargs)
-        self.fields['book'].queryset = Book.objects.all().order_by('course__order', 'order')
-        self.fields['csv_file'].help_text = 'Upload CSV file with columns: question_en,question_es,answer_en,answer_es,verse_reference,order'
 
 class StudyMaterialForm(forms.ModelForm):
     class Meta:
         model = StudyMaterial
         fields = ['book', 'title', 'material_type', 'language', 'description', 
                  'english_file', 'spanish_file', 'bilingual_file', 'verse_reference', 'order']
+
+class QuizQuestionForm(forms.ModelForm):
+    class Meta:
+        model = QuizQuestion
+        fields = ['book', 'module', 'chapter', 'question_text', 'correct_answers', 
+                 'prabhupada_commentary', 'additional_guidance', 'verse_reference', 'order']
         widgets = {
-            'description': forms.Textarea(attrs={'rows': 3}),
+            'correct_answers': forms.TextInput(attrs={
+                'placeholder': 'Enter comma-separated acceptable answers'
+            }),
+            'prabhupada_commentary': forms.Textarea(attrs={'rows': 4}),
+            'additional_guidance': forms.Textarea(attrs={'rows': 3}),
         }
-    
+
+class QuizModuleForm(forms.ModelForm):
+    class Meta:
+        model = QuizModule
+        fields = ['course', 'name', 'description', 'chapters_range', 'order']
+
+class QuizAnswerForm(forms.Form):
     def __init__(self, *args, **kwargs):
+        questions = kwargs.pop('questions')
         super().__init__(*args, **kwargs)
-        self.fields['book'].queryset = Book.objects.all().order_by('course__order', 'order')
-        self.fields['english_file'].help_text = 'Upload file for English version'
-        self.fields['spanish_file'].help_text = 'Upload file for Spanish version'
-        self.fields['bilingual_file'].help_text = 'Upload file containing both languages'
+        
+        for question in questions:
+            self.fields[f'question_{question.id}'] = forms.CharField(
+                label=question.question_text,
+                widget=forms.Textarea(attrs={
+                    'rows': 4,
+                    'placeholder': 'Share your understanding based on Srila Prabhupada\'s teachings...',
+                    'class': 'form-control quiz-answer'
+                }),
+                required=False,
+                help_text=f"Verse: {question.verse_reference}" if question.verse_reference else ""
+            )

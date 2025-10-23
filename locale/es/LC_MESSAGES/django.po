@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Vaishnava Study App\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-10-21 19:00+0000\n"
+"POT-Creation-Date: 2025-10-23 14:48+0000\n"
 "PO-Revision-Date: 2024-10-21 19:00+0000\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -11,107 +11,1855 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-msgid "Vaishnava Study App"
+#: study_app/apps.py:7 study_app/templates/study_app/includes/navbar.html:6
+#: study_app/templates/vaishnava_study/includes/navbar.html:6
+#, fuzzy
+#| msgid "Vaishnava Study App"
+msgid "Vaishnava Study"
 msgstr "Aplicación de Estudio Vaishnava"
 
-msgid "Home"
-msgstr "Inicio"
+#: study_app/models.py:7
+#: study_app/templates/vaishnava_study/includes/footer.html:12
+#: study_app/templates/vaishnava_study/includes/navbar.html:21
+msgid "Bhakti Shastri"
+msgstr ""
 
-msgid "Courses"
-msgstr "Cursos"
+#: study_app/models.py:8
+#: study_app/templates/vaishnava_study/includes/footer.html:13
+#: study_app/templates/vaishnava_study/includes/navbar.html:24
+msgid "Bhakti Vaibhava"
+msgstr ""
 
-msgid "All Courses"
-msgstr "Todos los Cursos"
+#: study_app/models.py:9
+#: study_app/templates/vaishnava_study/includes/footer.html:14
+#: study_app/templates/vaishnava_study/includes/navbar.html:27
+msgid "Bhakti Vedanta"
+msgstr ""
 
-msgid "Upload"
-msgstr "Subir"
+#: study_app/models.py:10
+#: study_app/templates/vaishnava_study/includes/footer.html:15
+#: study_app/templates/vaishnava_study/includes/navbar.html:30
+msgid "Bhakti Sarvabhauma"
+msgstr ""
 
-msgid "Upload Q&A"
-msgstr "Subir P&R"
-
-msgid "Upload Study Materials"
-msgstr "Subir Materiales de Estudio"
-
-msgid "Read in English"
-msgstr "Leer en Inglés"
-
-msgid "Read in Spanish"
-msgstr "Leer en Español"
-
-msgid "Q&A Section"
-msgstr "Sección de P&R"
-
-msgid "Back to Home"
-msgstr "Volver al Inicio"
-
-msgid "Back to Course"
-msgstr "Volver al Curso"
-
-msgid "Books in this Course"
-msgstr "Libros en este Curso"
-
-msgid "No books available for this course yet."
-msgstr "Aún no hay libros disponibles para este curso."
-
-msgid "Please check back later or contact the course coordinator."
-msgstr "Por favor, vuelva más tarde o contacte al coordinador del curso."
-
-msgid "About This Book"
-msgstr "Acerca de este Libro"
-
-msgid "This book is part of the"
-msgstr "Este libro es parte del"
-
-msgid "course. Use the links above to read the book online or access the Q&A section for study questions."
-msgstr "curso. Use los enlaces de arriba para leer el libro en línea o acceder a la sección de P&R para preguntas de estudio."
-
-msgid "Study Materials for"
-msgstr "Materiales de Estudio para"
-
-msgid "Upload Q&A CSV"
-msgstr "Subir CSV de P&R"
-
-msgid "English"
-msgstr "Inglés"
-
-msgid "Spanish"
-msgstr "Español"
-
-msgid "Both Languages"
-msgstr "Ambos Idiomas"
-
+#: study_app/models.py:41 study_app/templates/study_app/qa_section.html:87
 msgid "Questions & Answers"
 msgstr "Preguntas y Respuestas"
 
-msgid "No study materials available yet for this book."
-msgstr "Aún no hay materiales de estudio disponibles para este libro."
+#: study_app/models.py:42
+#, fuzzy
+#| msgid "Study Materials for"
+msgid "Study Notes"
+msgstr "Materiales de Estudio para"
 
-msgid "Use the upload buttons above to add study materials."
-msgstr "Use los botones de subir arriba para agregar materiales de estudio."
+#: study_app/models.py:43
+msgid "Chapter Summary"
+msgstr ""
 
-msgid "Delete this material"
+#: study_app/models.py:44 study_app/templates/study_app/take_quiz.html:23
+msgid "Quiz"
+msgstr ""
+
+#: study_app/models.py:45
+#, fuzzy
+#| msgid "Study Materials for"
+msgid "Other Material"
+msgstr "Materiales de Estudio para"
+
+#: study_app/models.py:49 study_app/templates/study_app/qa_section.html:61
+msgid "English"
+msgstr "Inglés"
+
+#: study_app/models.py:50 study_app/templates/study_app/qa_section.html:67
+msgid "Spanish"
+msgstr "Español"
+
+#: study_app/models.py:51 study_app/templates/study_app/qa_section.html:73
+msgid "Both Languages"
+msgstr "Ambos Idiomas"
+
+#: study_app/templates/study_app/add_quiz_question.html:4
+#: study_app/templates/study_app/add_quiz_question.html:22
+msgid "Add Quiz Question"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:12
+#: study_app/templates/study_app/includes/footer.html:10
+#: study_app/templates/study_app/includes/navbar.html:14
+#: study_app/templates/study_app/quiz_dashboard.html:12
+#: study_app/templates/study_app/quiz_results.html:12
+#: study_app/templates/study_app/take_quiz.html:13
+#: study_app/templates/vaishnava_study/includes/footer.html:11
+#: study_app/templates/vaishnava_study/includes/navbar.html:14
+msgid "Courses"
+msgstr "Cursos"
+
+#: study_app/templates/study_app/add_quiz_question.html:15
+#: study_app/templates/study_app/quiz_dashboard.html:15
+#: study_app/templates/study_app/quiz_results.html:15
+#: study_app/templates/study_app/take_quiz.html:16
+msgid "Quizzes"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:16
+#: study_app/templates/study_app/add_quiz_question.html:52
+#, fuzzy
+#| msgid "Q&A Section"
+msgid "Add Question"
+msgstr "Sección de P&R"
+
+#: study_app/templates/study_app/add_quiz_question.html:42
+msgid "Tips for creating good quiz questions:"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:44
+msgid "Focus on philosophical understanding rather than memorization"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:45
+msgid ""
+"Include multiple acceptable answers in the 'correct answers' field (comma-"
+"separated)"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:46
+msgid "Provide clear Srila Prabhupada commentary for guidance"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:47
+msgid "Reference specific verses when possible"
+msgstr ""
+
+#: study_app/templates/study_app/add_quiz_question.html:53
+#: study_app/templates/study_app/delete_study_material.html:47
+#: study_app/templates/study_app/take_quiz.html:66
+msgid "Cancel"
+msgstr ""
+
+#: study_app/templates/study_app/base.html:8
+#: study_app/templates/study_app/includes/footer.html:5
+#: study_app/templates/study_app/index.html:7
+#: study_app/templates/vaishnava_study/includes/footer.html:5
+#: study_app/templates/vaishnava_study/index.html:7
+msgid "Vaishnava Study App"
+msgstr "Aplicación de Estudio Vaishnava"
+
+#: study_app/templates/study_app/book_detail.html:16
+#: study_app/templates/study_app/qa_section.html:7
+#: study_app/templates/vaishnava_study/qa_section.html:7
+msgid "Back to Course"
+msgstr "Volver al Curso"
+
+#: study_app/templates/study_app/book_detail.html:34
+#: study_app/templates/study_app/course_detail.html:34
+#: study_app/templates/vaishnava_study/course_detail.html:34
+msgid "Read in English"
+msgstr "Leer en Inglés"
+
+#: study_app/templates/study_app/book_detail.html:38
+#: study_app/templates/study_app/course_detail.html:38
+#: study_app/templates/vaishnava_study/course_detail.html:38
+msgid "Read in Spanish"
+msgstr "Leer en Español"
+
+#: study_app/templates/study_app/book_detail.html:42
+#: study_app/templates/study_app/course_detail.html:42
+#: study_app/templates/vaishnava_study/course_detail.html:42
+msgid "Q&A Section"
+msgstr "Sección de P&R"
+
+#: study_app/templates/study_app/book_detail.html:46
+msgid "Take Quizzes"
+msgstr ""
+
+#: study_app/templates/study_app/course_detail.html:7
+#: study_app/templates/study_app/upload_success.html:28
+#: study_app/templates/vaishnava_study/course_detail.html:7
+msgid "Back to Home"
+msgstr "Volver al Inicio"
+
+#: study_app/templates/study_app/course_detail.html:25
+#: study_app/templates/vaishnava_study/course_detail.html:25
+msgid "Books in this Course"
+msgstr "Libros en este Curso"
+
+#: study_app/templates/study_app/course_detail.html:48
+#: study_app/templates/vaishnava_study/course_detail.html:48
+msgid "No books available for this course yet."
+msgstr "Aún no hay libros disponibles para este curso."
+
+#: study_app/templates/study_app/course_detail.html:49
+#: study_app/templates/vaishnava_study/course_detail.html:49
+#: study_app/templates/vaishnava_study/qa_section.html:42
+msgid "Please check back later or contact the course coordinator."
+msgstr "Por favor, vuelva más tarde o contacte al coordinador del curso."
+
+#: study_app/templates/study_app/delete_study_material.html:7
+#, fuzzy
+#| msgid "Delete this material"
+msgid "Delete Study Material"
 msgstr "Eliminar este material"
 
+#: study_app/templates/study_app/delete_study_material.html:16
+msgid "Are you sure you want to delete?"
+msgstr ""
+
+#: study_app/templates/study_app/delete_study_material.html:22
+msgid "Type:"
+msgstr ""
+
+#: study_app/templates/study_app/delete_study_material.html:25
+#, fuzzy
+#| msgid "Both Languages"
+msgid "Language:"
+msgstr "Ambos Idiomas"
+
+#: study_app/templates/study_app/delete_study_material.html:28
+msgid "Book:"
+msgstr ""
+
+#: study_app/templates/study_app/delete_study_material.html:32
+#: study_app/templates/study_app/quiz_results.html:48
+#: study_app/templates/study_app/take_quiz.html:41
+msgid "Verse:"
+msgstr ""
+
+#: study_app/templates/study_app/delete_study_material.html:38
+msgid "This action cannot be undone!"
+msgstr ""
+
+#: study_app/templates/study_app/delete_study_material.html:44
+msgid "Yes, Delete"
+msgstr ""
+
+#: study_app/templates/study_app/includes/footer.html:6
+#: study_app/templates/vaishnava_study/includes/footer.html:6
 msgid "Comprehensive spiritual education platform"
 msgstr "Plataforma integral de educación espiritual"
 
-msgid "Available Courses"
-msgstr "Cursos Disponibles"
-
-msgid "Explore Course"
-msgstr "Explorar Curso"
-
-msgid "No courses available yet."
-msgstr "Aún no hay cursos disponibles."
-
-msgid "Please check back later or contact the administrator."
-msgstr "Por favor, vuelva más tarde o contacte al administrador."
-
+#: study_app/templates/study_app/includes/footer.html:21
+#: study_app/templates/study_app/index.html:46
+#: study_app/templates/vaishnava_study/index.html:46
 msgid "Reference Websites"
 msgstr "Sitios Web de Referencia"
 
+#: study_app/templates/study_app/includes/footer.html:43
+#: study_app/templates/vaishnava_study/includes/footer.html:35
+msgid "© 2024 Vaishnava Study App. All rights reserved."
+msgstr "© 2024 Aplicación de Estudio Vaishnava. Todos los derechos reservados."
+
+#: study_app/templates/study_app/includes/navbar.html:11
+#: study_app/templates/vaishnava_study/includes/navbar.html:11
+msgid "Home"
+msgstr "Inicio"
+
+#: study_app/templates/study_app/includes/navbar.html:17
+#: study_app/templates/vaishnava_study/includes/navbar.html:17
+msgid "All Courses"
+msgstr "Todos los Cursos"
+
+#: study_app/templates/study_app/includes/navbar.html:29
+msgid "Upload"
+msgstr "Subir"
+
+#: study_app/templates/study_app/includes/navbar.html:32
+#: study_app/templates/study_app/upload_qa.html:39
+msgid "Upload Q&A"
+msgstr "Subir P&R"
+
+#: study_app/templates/study_app/includes/navbar.html:35
+#: study_app/templates/study_app/qa_section.html:20
+#: study_app/templates/study_app/upload_study_material.html:7
+#: study_app/templates/study_app/upload_success.html:24
+msgid "Upload Study Materials"
+msgstr "Subir Materiales de Estudio"
+
+#: study_app/templates/study_app/index.html:11
+#: study_app/templates/vaishnava_study/index.html:11
+msgid ""
+"Comprehensive study platform for ISKCON's Bhakti Shastri and advanced "
+"courses with multilingual support"
+msgstr ""
+
+#: study_app/templates/study_app/index.html:18
+#: study_app/templates/vaishnava_study/index.html:18
+msgid "Available Courses"
+msgstr "Cursos Disponibles"
+
+#: study_app/templates/study_app/index.html:32
+#: study_app/templates/vaishnava_study/index.html:32
+msgid "Explore Course"
+msgstr "Explorar Curso"
+
+#: study_app/templates/study_app/index.html:37
+#: study_app/templates/vaishnava_study/index.html:37
+msgid "No courses available yet."
+msgstr "Aún no hay cursos disponibles."
+
+#: study_app/templates/study_app/index.html:38
+#: study_app/templates/vaishnava_study/index.html:38
+msgid "Please check back later or contact the administrator."
+msgstr "Por favor, vuelva más tarde o contacte al administrador."
+
+#: study_app/templates/study_app/index.html:61
 msgid "All reference websites available in both English and Spanish"
 msgstr "Todos los sitios web de referencia disponibles en inglés y español"
 
-msgid "© 2024 Vaishnava Study App. All rights reserved."
-msgstr "© 2024 Aplicación de Estudio Vaishnava. Todos los derechos reservados."
+#: study_app/templates/study_app/qa_section.html:11
+msgid "Study Materials for"
+msgstr "Materiales de Estudio para"
+
+#: study_app/templates/study_app/qa_section.html:17
+msgid "Upload Q&A CSV"
+msgstr "Subir CSV de P&R"
+
+#: study_app/templates/study_app/qa_section.html:37
+msgid "Delete this material"
+msgstr "Eliminar este material"
+
+#: study_app/templates/study_app/qa_section.html:123
+msgid "No study materials available yet for this book."
+msgstr "Aún no hay materiales de estudio disponibles para este libro."
+
+#: study_app/templates/study_app/qa_section.html:124
+msgid "Use the upload buttons above to add study materials."
+msgstr "Use los botones de subir arriba para agregar materiales de estudio."
+
+#: study_app/templates/study_app/quiz_dashboard.html:4
+#: study_app/templates/study_app/quiz_dashboard.html:21
+msgid "Quiz Dashboard"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_dashboard.html:24
+msgid ""
+"Test your understanding of Srila Prabhupada's commentaries through these "
+"philosophical quizzes."
+msgstr ""
+
+#: study_app/templates/study_app/quiz_dashboard.html:34
+#, fuzzy
+#| msgid "Questions & Answers"
+msgid "Questions:"
+msgstr "Preguntas y Respuestas"
+
+#: study_app/templates/study_app/quiz_dashboard.html:40
+#: study_app/templates/study_app/take_quiz.html:5
+msgid "Take Quiz"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_dashboard.html:44
+#, fuzzy
+#| msgid "Questions & Answers"
+msgid "No Questions Yet"
+msgstr "Preguntas y Respuestas"
+
+#: study_app/templates/study_app/quiz_dashboard.html:53
+#, fuzzy
+#| msgid "No books available for this course yet."
+msgid "No quiz modules available for this course yet."
+msgstr "Aún no hay libros disponibles para este curso."
+
+#: study_app/templates/study_app/quiz_dashboard.html:61
+msgid "Admin Actions"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_dashboard.html:63
+msgid "Add Quiz Questions"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_dashboard.html:66
+msgid "Add New Module"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_dashboard.html:69
+msgid "Manage All Questions"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:4
+#: study_app/templates/study_app/quiz_results.html:22
+msgid "Quiz Results"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:16
+msgid "Results"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:31
+msgid "Correct"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:37
+msgid "Philosophical Feedback"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:42
+msgid "Detailed Results"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:46
+#: study_app/templates/study_app/take_quiz.html:39
+#, fuzzy
+#| msgid "Q&A Section"
+msgid "Question"
+msgstr "Sección de P&R"
+
+#: study_app/templates/study_app/quiz_results.html:52
+#, fuzzy
+#| msgid "Q&A Section"
+msgid "Question:"
+msgstr "Sección de P&R"
+
+#: study_app/templates/study_app/quiz_results.html:53
+msgid "Your Answer:"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:57
+msgid "Suggested Understanding:"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:58
+msgid "Key points:"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:60
+msgid "Srila Prabhupada:"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:67
+msgid "Additional Guidance:"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:77
+msgid "Retry Quiz"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:80
+msgid "Back to Quiz Dashboard"
+msgstr ""
+
+#: study_app/templates/study_app/quiz_results.html:83
+#, fuzzy
+#| msgid "Back to Home"
+msgid "Back to Book"
+msgstr "Volver al Inicio"
+
+#: study_app/templates/study_app/take_quiz.html:27
+msgid "Instructions"
+msgstr ""
+
+#: study_app/templates/study_app/take_quiz.html:29
+msgid ""
+"Answer each question based on your understanding of Srila Prabhupada's "
+"commentaries. There are no 'wrong' answers - this is to help you gauge your "
+"philosophical understanding."
+msgstr ""
+
+#: study_app/templates/study_app/take_quiz.html:52
+msgid "Srila Prabhupada's Commentary:"
+msgstr ""
+
+#: study_app/templates/study_app/take_quiz.html:63
+msgid "Submit Quiz"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:7
+#, fuzzy
+#| msgid "Questions & Answers"
+msgid "Upload Questions & Answers"
+msgstr "Preguntas y Respuestas"
+
+#: study_app/templates/study_app/upload_qa.html:16
+#: study_app/templates/study_app/upload_study_material.html:17
+msgid "Select Book"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:23
+msgid "CSV File"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:33
+msgid "Notes (Optional)"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:45
+msgid "CSV Format Instructions"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:47
+msgid "Your CSV file should have these columns in the first row:"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:50
+#, fuzzy
+#| msgid "Read in English"
+msgid "Question in English"
+msgstr "Leer en Inglés"
+
+#: study_app/templates/study_app/upload_qa.html:51
+#, fuzzy
+#| msgid "Read in Spanish"
+msgid "Question in Spanish"
+msgstr "Leer en Español"
+
+#: study_app/templates/study_app/upload_qa.html:52
+#, fuzzy
+#| msgid "Read in English"
+msgid "Answer in English"
+msgstr "Leer en Inglés"
+
+#: study_app/templates/study_app/upload_qa.html:53
+#, fuzzy
+#| msgid "Read in Spanish"
+msgid "Answer in Spanish"
+msgstr "Leer en Español"
+
+#: study_app/templates/study_app/upload_qa.html:54
+msgid "Verse reference (e.g., Bg 1.1)"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:55
+msgid "Display order number"
+msgstr ""
+
+#: study_app/templates/study_app/upload_qa.html:59
+msgid "Example CSV:"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:24
+msgid "Material Type"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:32
+msgid "Title"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:39
+#, fuzzy
+#| msgid "Both Languages"
+msgid "Language"
+msgstr "Ambos Idiomas"
+
+#: study_app/templates/study_app/upload_study_material.html:46
+msgid "Description (Optional)"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:54
+#, fuzzy
+#| msgid "English"
+msgid "English File"
+msgstr "Inglés"
+
+#: study_app/templates/study_app/upload_study_material.html:61
+#, fuzzy
+#| msgid "Spanish"
+msgid "Spanish File"
+msgstr "Español"
+
+#: study_app/templates/study_app/upload_study_material.html:68
+msgid "Bilingual File"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:77
+msgid "Verse Reference (Optional)"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:84
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:484
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:491
+msgid "Order"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:91
+#, fuzzy
+#| msgid "Upload Study Materials"
+msgid "Upload Study Material"
+msgstr "Subir Materiales de Estudio"
+
+#: study_app/templates/study_app/upload_study_material.html:97
+msgid "Supported File Types"
+msgstr ""
+
+#: study_app/templates/study_app/upload_study_material.html:108
+msgid ""
+"You can upload files in English, Spanish, or a bilingual file containing "
+"both languages."
+msgstr ""
+
+#: study_app/templates/study_app/upload_success.html:11
+msgid "Upload Successful!"
+msgstr ""
+
+#: study_app/templates/study_app/upload_success.html:15
+msgid ""
+"Your questions and answers have been successfully uploaded to the system."
+msgstr ""
+
+#: study_app/templates/study_app/upload_success.html:20
+#, fuzzy
+#| msgid "Upload Q&A"
+msgid "Upload More Q&A"
+msgstr "Subir P&R"
+
+#: study_app/templates/vaishnava_study/includes/footer.html:19
+msgid "Resources"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/includes/footer.html:26
+msgid "Support"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/includes/footer.html:27
+msgid "Help Center"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/includes/footer.html:28
+msgid "Contact Us"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/includes/footer.html:29
+msgid "Feedback"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/index.html:57
+msgid "Official ISKCON Education"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/index.html:69
+#: study_app/templates/vaishnava_study/index.html:81
+#, fuzzy
+#| msgid "All reference websites available in both English and Spanish"
+msgid "Available in English and Spanish"
+msgstr "Todos los sitios web de referencia disponibles en inglés y español"
+
+#: study_app/templates/vaishnava_study/index.html:93
+#: study_app/templates/vaishnava_study/index.html:105
+#: study_app/templates/vaishnava_study/index.html:117
+#, fuzzy
+#| msgid "Read in English"
+msgid "Primarily in English"
+msgstr "Leer en Inglés"
+
+#: study_app/templates/vaishnava_study/qa_section.html:11
+msgid "Q&A for"
+msgstr ""
+
+#: study_app/templates/vaishnava_study/qa_section.html:41
+#, fuzzy
+#| msgid "No study materials available yet for this book."
+msgid "No questions and answers available yet for this book."
+msgstr "Aún no hay materiales de estudio disponibles para este libro."
+
+#: venv/lib/python3.12/site-packages/django/contrib/messages/apps.py:15
+msgid "Messages"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/sitemaps/apps.py:8
+msgid "Site Maps"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/staticfiles/apps.py:9
+msgid "Static Files"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/contrib/syndication/apps.py:7
+msgid "Syndication"
+msgstr ""
+
+#. Translators: String used to replace omitted page numbers in elided page
+#. range generated by paginators, e.g. [1, 2, '…', 5, 6, 7, '…', 9, 10].
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:30
+msgid "…"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:50
+msgid "That page number is not an integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:52
+msgid "That page number is less than 1"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/paginator.py:54
+msgid "That page contains no results"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:22
+msgid "Enter a valid value."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:104
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:752
+msgid "Enter a valid URL."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:165
+msgid "Enter a valid integer."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:176
+msgid "Enter a valid email address."
+msgstr ""
+
+#. Translators: "letters" means latin letters: a-z and A-Z.
+#: venv/lib/python3.12/site-packages/django/core/validators.py:259
+msgid ""
+"Enter a valid “slug” consisting of letters, numbers, underscores or hyphens."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:267
+msgid ""
+"Enter a valid “slug” consisting of Unicode letters, numbers, underscores, or "
+"hyphens."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:281
+#: venv/lib/python3.12/site-packages/django/core/validators.py:289
+#: venv/lib/python3.12/site-packages/django/core/validators.py:318
+msgid "Enter a valid IPv4 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:298
+#: venv/lib/python3.12/site-packages/django/core/validators.py:319
+msgid "Enter a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:310
+#: venv/lib/python3.12/site-packages/django/core/validators.py:317
+msgid "Enter a valid IPv4 or IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:353
+msgid "Enter only digits separated by commas."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:359
+#, python-format
+msgid "Ensure this value is %(limit_value)s (it is %(show_value)s)."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:394
+#, python-format
+msgid "Ensure this value is less than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:403
+#, python-format
+msgid "Ensure this value is greater than or equal to %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:412
+#, python-format
+msgid "Ensure this value is a multiple of step size %(limit_value)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:422
+#, python-format
+msgid ""
+"Ensure this value has at least %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at least %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:440
+#, python-format
+msgid ""
+"Ensure this value has at most %(limit_value)d character (it has "
+"%(show_value)d)."
+msgid_plural ""
+"Ensure this value has at most %(limit_value)d characters (it has "
+"%(show_value)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:463
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:347
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:386
+msgid "Enter a number."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:465
+#, python-format
+msgid "Ensure that there are no more than %(max)s digit in total."
+msgid_plural "Ensure that there are no more than %(max)s digits in total."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:470
+#, python-format
+msgid "Ensure that there are no more than %(max)s decimal place."
+msgid_plural "Ensure that there are no more than %(max)s decimal places."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:475
+#, python-format
+msgid ""
+"Ensure that there are no more than %(max)s digit before the decimal point."
+msgid_plural ""
+"Ensure that there are no more than %(max)s digits before the decimal point."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:546
+#, python-format
+msgid ""
+"File extension “%(extension)s” is not allowed. Allowed extensions are: "
+"%(allowed_extensions)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/core/validators.py:607
+msgid "Null characters are not allowed."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/base.py:1423
+#: venv/lib/python3.12/site-packages/django/forms/models.py:893
+msgid "and"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/base.py:1425
+#, python-format
+msgid "%(model_name)s with this %(field_labels)s already exists."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/constraints.py:17
+#, python-format
+msgid "Constraint “%(name)s” is violated."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:128
+#, python-format
+msgid "Value %(value)r is not a valid choice."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:129
+msgid "This field cannot be null."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:130
+msgid "This field cannot be blank."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:131
+#, python-format
+msgid "%(model_name)s with this %(field_label)s already exists."
+msgstr ""
+
+#. Translators: The 'lookup_type' is one of 'date', 'year' or
+#. 'month'. Eg: "Title must be unique for pub_date year"
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:135
+#, python-format
+msgid ""
+"%(field_label)s must be unique for %(date_field_label)s %(lookup_type)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:173
+#, python-format
+msgid "Field of type: %(field_type)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1094
+#, python-format
+msgid "“%(value)s” value must be either True or False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1095
+#, python-format
+msgid "“%(value)s” value must be either True, False, or None."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1097
+msgid "Boolean (Either True or False)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1147
+#, python-format
+msgid "String (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1149
+msgid "String (unlimited)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1253
+msgid "Comma-separated integers"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1354
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid date format. It must be in YYYY-MM-DD "
+"format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1358
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1493
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD) but it is an invalid "
+"date."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1362
+msgid "Date (without time)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1489
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in YYYY-MM-DD HH:MM[:ss[."
+"uuuuuu]][TZ] format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1497
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (YYYY-MM-DD HH:MM[:ss[.uuuuuu]]"
+"[TZ]) but it is an invalid date/time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1502
+msgid "Date (with time)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1626
+#, python-format
+msgid "“%(value)s” value must be a decimal number."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1628
+msgid "Decimal number"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1789
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in [DD] [[HH:]MM:]ss[."
+"uuuuuu] format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1793
+msgid "Duration"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1845
+msgid "Email address"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1870
+msgid "File path"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1948
+#, python-format
+msgid "“%(value)s” value must be a float."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1950
+msgid "Floating point number"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1990
+#, python-format
+msgid "“%(value)s” value must be an integer."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:1992
+msgid "Integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2088
+msgid "Big (8 byte) integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2105
+msgid "Small integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2113
+msgid "IPv4 address"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2144
+msgid "IP address"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2237
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2238
+#, python-format
+msgid "“%(value)s” value must be either None, True or False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2240
+msgid "Boolean (Either True, False or None)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2291
+msgid "Positive big integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2306
+msgid "Positive integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2321
+msgid "Positive small integer"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2337
+#, python-format
+msgid "Slug (up to %(max_length)s)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2373
+msgid "Text"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2448
+#, python-format
+msgid ""
+"“%(value)s” value has an invalid format. It must be in HH:MM[:ss[.uuuuuu]] "
+"format."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2452
+#, python-format
+msgid ""
+"“%(value)s” value has the correct format (HH:MM[:ss[.uuuuuu]]) but it is an "
+"invalid time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2456
+msgid "Time"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2564
+msgid "URL"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2588
+msgid "Raw binary data"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2653
+#, python-format
+msgid "“%(value)s” is not a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/__init__.py:2655
+msgid "Universally unique identifier"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:232
+msgid "File"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/files.py:393
+msgid "Image"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:26
+msgid "A JSON object"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/json.py:28
+msgid "Value must be valid JSON."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:919
+#, python-format
+msgid "%(model)s instance with %(field)s %(value)r does not exist."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:921
+msgid "Foreign Key (type determined by related field)"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1212
+msgid "One-to-one relationship"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1269
+#, python-format
+msgid "%(from)s-%(to)s relationship"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1271
+#, python-format
+msgid "%(from)s-%(to)s relationships"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/db/models/fields/related.py:1319
+msgid "Many-to-many relationship"
+msgstr ""
+
+#. Translators: If found as last label character, these punctuation
+#. characters will prevent the default label_suffix to be appended to the label
+#: venv/lib/python3.12/site-packages/django/forms/boundfield.py:184
+msgid ":?.!"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:91
+msgid "This field is required."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:298
+msgid "Enter a whole number."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:467
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1241
+msgid "Enter a valid date."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:490
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1242
+msgid "Enter a valid time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:517
+msgid "Enter a valid date/time."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:551
+msgid "Enter a valid duration."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:552
+#, python-brace-format
+msgid "The number of days must be between {min_days} and {max_days}."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:621
+msgid "No file was submitted. Check the encoding type on the form."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:622
+msgid "No file was submitted."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:623
+msgid "The submitted file is empty."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:625
+#, python-format
+msgid "Ensure this filename has at most %(max)d character (it has %(length)d)."
+msgid_plural ""
+"Ensure this filename has at most %(max)d characters (it has %(length)d)."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:630
+msgid "Please either submit a file or check the clear checkbox, not both."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:694
+msgid ""
+"Upload a valid image. The file you uploaded was either not an image or a "
+"corrupted image."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:857
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:949
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1566
+#, python-format
+msgid "Select a valid choice. %(value)s is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:951
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1070
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1564
+msgid "Enter a list of values."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1071
+msgid "Enter a complete value."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1313
+msgid "Enter a valid UUID."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/fields.py:1343
+msgid "Enter a valid JSON."
+msgstr ""
+
+#. Translators: This is the default suffix added to form field labels
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:98
+msgid ":"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:244
+#: venv/lib/python3.12/site-packages/django/forms/forms.py:328
+#, python-format
+msgid "(Hidden field %(name)s) %(error)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:63
+#, python-format
+msgid ""
+"ManagementForm data is missing or has been tampered with. Missing fields: "
+"%(field_names)s. You may need to file a bug report if the issue persists."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:67
+#, python-format
+msgid "Please submit at most %(num)d form."
+msgid_plural "Please submit at most %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:72
+#, python-format
+msgid "Please submit at least %(num)d form."
+msgid_plural "Please submit at least %(num)d forms."
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/forms/formsets.py:499
+msgid "Delete"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:886
+#, python-format
+msgid "Please correct the duplicate data for %(field)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:891
+#, python-format
+msgid "Please correct the duplicate data for %(field)s, which must be unique."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:898
+#, python-format
+msgid ""
+"Please correct the duplicate data for %(field_name)s which must be unique "
+"for the %(lookup)s in %(date_field)s."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:907
+msgid "Please correct the duplicate values below."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1338
+msgid "The inline value did not match the parent instance."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1429
+msgid "Select a valid choice. That choice is not one of the available choices."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/models.py:1568
+#, python-format
+msgid "“%(pk)s” is not a valid value."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/utils.py:226
+#, python-format
+msgid ""
+"%(datetime)s couldn’t be interpreted in time zone %(current_timezone)s; it "
+"may be ambiguous or it may not exist."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:463
+msgid "Clear"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:464
+msgid "Currently"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:465
+msgid "Change"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:794
+msgid "Unknown"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:795
+msgid "Yes"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/forms/widgets.py:796
+msgid "No"
+msgstr ""
+
+#. Translators: Please do not add spaces around commas.
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:874
+msgid "yes,no,maybe"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:904
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:921
+#, python-format
+msgid "%(size)d byte"
+msgid_plural "%(size)d bytes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:923
+#, python-format
+msgid "%s KB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:925
+#, python-format
+msgid "%s MB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:927
+#, python-format
+msgid "%s GB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:929
+#, python-format
+msgid "%s TB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/template/defaultfilters.py:931
+#, python-format
+msgid "%s PB"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:73
+msgid "p.m."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:74
+msgid "a.m."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:79
+msgid "PM"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:80
+msgid "AM"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:152
+msgid "midnight"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dateformat.py:154
+msgid "noon"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:7
+msgid "Monday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:8
+msgid "Tuesday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:9
+msgid "Wednesday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:10
+msgid "Thursday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:11
+msgid "Friday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:12
+msgid "Saturday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:13
+msgid "Sunday"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:16
+msgid "Mon"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:17
+msgid "Tue"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:18
+msgid "Wed"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:19
+msgid "Thu"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:20
+msgid "Fri"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:21
+msgid "Sat"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:22
+msgid "Sun"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:25
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:26
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:27
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:28
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:29
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:30
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:31
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:32
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:33
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:34
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:35
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:36
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:39
+msgid "jan"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:40
+msgid "feb"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:41
+msgid "mar"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:42
+msgid "apr"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:43
+msgid "may"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:44
+msgid "jun"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:45
+msgid "jul"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:46
+msgid "aug"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:47
+msgid "sep"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:48
+msgid "oct"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:49
+msgid "nov"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:50
+msgid "dec"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:53
+msgctxt "abbrev. month"
+msgid "Jan."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:54
+msgctxt "abbrev. month"
+msgid "Feb."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:55
+msgctxt "abbrev. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:56
+msgctxt "abbrev. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:57
+msgctxt "abbrev. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:58
+msgctxt "abbrev. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:59
+msgctxt "abbrev. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:60
+msgctxt "abbrev. month"
+msgid "Aug."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:61
+msgctxt "abbrev. month"
+msgid "Sept."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:62
+msgctxt "abbrev. month"
+msgid "Oct."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:63
+msgctxt "abbrev. month"
+msgid "Nov."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:64
+msgctxt "abbrev. month"
+msgid "Dec."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:67
+msgctxt "alt. month"
+msgid "January"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:68
+msgctxt "alt. month"
+msgid "February"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:69
+msgctxt "alt. month"
+msgid "March"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:70
+msgctxt "alt. month"
+msgid "April"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:71
+msgctxt "alt. month"
+msgid "May"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:72
+msgctxt "alt. month"
+msgid "June"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:73
+msgctxt "alt. month"
+msgid "July"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:74
+msgctxt "alt. month"
+msgid "August"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:75
+msgctxt "alt. month"
+msgid "September"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:76
+msgctxt "alt. month"
+msgid "October"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:77
+msgctxt "alt. month"
+msgid "November"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/dates.py:78
+msgctxt "alt. month"
+msgid "December"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/ipv6.py:20
+msgid "This is not a valid IPv6 address."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/text.py:138
+#, python-format
+msgctxt "String to return when truncating text"
+msgid "%(truncated_text)s…"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/text.py:323
+msgid "or"
+msgstr ""
+
+#. Translators: This string is used as a separator between list elements
+#: venv/lib/python3.12/site-packages/django/utils/text.py:342
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:135
+msgid ", "
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:8
+#, python-format
+msgid "%(num)d year"
+msgid_plural "%(num)d years"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:9
+#, python-format
+msgid "%(num)d month"
+msgid_plural "%(num)d months"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:10
+#, python-format
+msgid "%(num)d week"
+msgid_plural "%(num)d weeks"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:11
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:12
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/utils/timesince.py:13
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] ""
+msgstr[1] ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:111
+msgid "Forbidden"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:112
+msgid "CSRF verification failed. Request aborted."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:116
+msgid ""
+"You are seeing this message because this HTTPS site requires a “Referer "
+"header” to be sent by your web browser, but none was sent. This header is "
+"required for security reasons, to ensure that your browser is not being "
+"hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:122
+msgid ""
+"If you have configured your browser to disable “Referer” headers, please re-"
+"enable them, at least for this site, or for HTTPS connections, or for “same-"
+"origin” requests."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:127
+msgid ""
+"If you are using the <meta name=\"referrer\" content=\"no-referrer\"> tag or "
+"including the “Referrer-Policy: no-referrer” header, please remove them. The "
+"CSRF protection requires the “Referer” header to do strict referer checking. "
+"If you’re concerned about privacy, use alternatives like <a "
+"rel=\"noreferrer\" …> for links to third-party sites."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:136
+msgid ""
+"You are seeing this message because this site requires a CSRF cookie when "
+"submitting forms. This cookie is required for security reasons, to ensure "
+"that your browser is not being hijacked by third parties."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:142
+msgid ""
+"If you have configured your browser to disable cookies, please re-enable "
+"them, at least for this site, or for “same-origin” requests."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/csrf.py:148
+msgid "More information is available with DEBUG=True."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:44
+msgid "No year specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:64
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:115
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:214
+msgid "Date out of range"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:94
+msgid "No month specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:147
+msgid "No day specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:194
+msgid "No week specified"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:349
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:380
+#, python-format
+msgid "No %(verbose_name_plural)s available"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:652
+#, python-format
+msgid ""
+"Future %(verbose_name_plural)s not available because %(class_name)s."
+"allow_future is False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/dates.py:692
+#, python-format
+msgid "Invalid date string “%(datestr)s” given format “%(format)s”"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/detail.py:56
+#, python-format
+msgid "No %(verbose_name)s found matching the query"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:70
+msgid "Page is not “last”, nor can it be converted to an int."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:77
+#, python-format
+msgid "Invalid page (%(page_number)s): %(message)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/generic/list.py:169
+#, python-format
+msgid "Empty list and “%(class_name)s.allow_empty” is False."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:38
+msgid "Directory indexes are not allowed here."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:40
+#, python-format
+msgid "“%(path)s” does not exist"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/static.py:79
+#, python-format
+msgid "Index of %(directory)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:7
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:220
+msgid "The install worked successfully! Congratulations!"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:206
+#, python-format
+msgid ""
+"View <a href=\"https://docs.djangoproject.com/en/%(version)s/releases/\" "
+"target=\"_blank\" rel=\"noopener\">release notes</a> for Django %(version)s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:221
+#, python-format
+msgid ""
+"You are seeing this page because <a href=\"https://docs.djangoproject.com/en/"
+"%(version)s/ref/settings/#debug\" target=\"_blank\" "
+"rel=\"noopener\">DEBUG=True</a> is in your settings file and you have not "
+"configured any URLs."
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:229
+msgid "Django Documentation"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:230
+msgid "Topics, references, &amp; how-to’s"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:238
+msgid "Tutorial: A Polling App"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:239
+msgid "Get started with Django"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:247
+msgid "Django Community"
+msgstr ""
+
+#: venv/lib/python3.12/site-packages/django/views/templates/default_urlconf.html:248
+msgid "Connect, get help, or contribute"
+msgstr ""
+
+#~ msgid "About This Book"
+#~ msgstr "Acerca de este Libro"
+
+#~ msgid "This book is part of the"
+#~ msgstr "Este libro es parte del"
+
+#~ msgid ""
+#~ "course. Use the links above to read the book online or access the Q&A "
+#~ "section for study questions."
+#~ msgstr ""
+#~ "curso. Use los enlaces de arriba para leer el libro en línea o acceder a "
+#~ "la sección de P&R para preguntas de estudio."

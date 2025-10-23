@@ -1,6 +1,5 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User  # Add this import
 
 class Course(models.Model):
     COURSE_LEVELS = [
@@ -98,7 +97,7 @@ class QAUpload(models.Model):
     notes = models.TextField(blank=True)
     
     def __str__(self):
-        return f"Upload for {self.book.title} – {self.uploaded_at}"
+        return f"Upload for {self.book.title} - {self.uploaded_at}"
 
 # Quiz System Models - Integrated with existing courses
 class QuizModule(models.Model):

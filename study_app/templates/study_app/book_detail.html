@@ -2,36 +2,73 @@
 {% load i18n %}
 
 {% block content %}
-<div style="padding: 20px;">
-    <a href="{% url 'study_app:course_detail' book.course.id %}" style="color: var(--neon-blue); text-decoration: none; margin-bottom: 20px; display: inline-block;">
+<div style="padding: 20px; max-width: 1200px; margin: 0 auto;">
+    <!-- Navigation -->
+    <a href="{% url 'study_app:course_detail' book.course.id %}" style="color: #0066cc; text-decoration: none; font-weight: bold; margin-bottom: 20px; display: inline-block;">
         ← {% trans "Back to Course" %}
     </a>
     
-    <h1 style="color: var(--neon-green); margin: 20px 0;">
-        {{ book.title }}
-    </h1>
-    
-    <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
-        <a href="{{ book.english_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
-            📖 {% trans "Read in English" %}
-        </a>
-        
-        <a href="{{ book.spanish_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));">
-            📖 {% trans "Read in Spanish" %}
-        </a>
-        
-        <a href="{% url 'study_app:qa_section' book.id %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));">
-            ❓ {% trans "Q&A Section" %}
-        </a>
+    <!-- Book Header -->
+    <div style="text-align: center; margin-bottom: 30px;">
+        <h1 style="color: #2c5f2d; font-size: 2.5em; margin-bottom: 10px;">{{ book.title }}</h1>
+        <p style="color: #666; font-size: 1.2em;">{{ book.course.get_level_display }} • {{ book.course.name }}</p>
     </div>
     
-    <div style="margin-top: 30px;">
-        <h2 style="color: var(--neon-pink); margin-bottom: 20px;">
-            {% trans "About This Book" %}
-        </h2>
-        <p style="color: var(--text-light); line-height: 1.6;">
-            {% trans "This book is part of the" %} {{ book.course.get_level_display }} {% trans "course. Use the links above to read the book online or access the Q&A section for study questions." %}
+    <!-- MAIN ACTION BUTTONS -->
+    <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 30px; border-radius: 15px; margin-bottom: 30px;">
+        <h2 style="color: white; text-align: center; margin-bottom: 25px;">{% trans "Choose Your Study Method" %}</h2>
+        
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <!-- Left Column: Reading Options -->
+            <div style="background: white; padding: 20px; border-radius: 10px;">
+                <h3 style="color: #2c5f2d; margin-top: 0;">📖 {% trans "Read the Book" %}</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="{{ book.english_url }}" target="_blank" 
+                       style="background: #007bff; color: white; padding: 15px; text-decoration: none; border-radius: 8px; text-align: center; font-weight: bold;">
+                        {% trans "Read in English" %}
+                    </a>
+                    <a href="{{ book.spanish_url }}" target="_blank" 
+                       style="background: #28a745; color: white; padding: 15px; text-decoration: none; border-radius: 8px; text-align: center; font-weight: bold;">
+                        {% trans "Read in Spanish" %}
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Right Column: Study Tools -->
+            <div style="background: white; padding: 20px; border-radius: 10px;">
+                <h3 style="color: #2c5f2d; margin-top: 0;">🎯 {% trans "Study Tools" %}</h3>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <a href="{% url 'study_app:qa_section' book.id %}" 
+                       style="background: #ffc107; color: black; padding: 15px; text-decoration: none; border-radius: 8px; text-align: center; font-weight: bold;">
+                        ❓ {% trans "Study Questions" %}
+                    </a>
+                    
+                    <!-- QUIZ BUTTON - PROMINENT -->
+                    <a href="{% url 'study_app:quiz_dashboard' book.id %}" 
+                       style="background: linear-gradient(45deg, #ff6b6b, #ee5a24); color: white; padding: 18px; text-decoration: none; border-radius: 8px; text-align: center; font-weight: bold; font-size: 1.1em; border: 3px solid #ffd700; box-shadow: 0 4px 15px rgba(255, 107, 107, 0.4);">
+                        🎯 {% trans "Philosophical Quizzes" %}
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Quiz Description -->
+    <div style="background: #fff3cd; border-left: 6px solid #ffc107; padding: 25px; border-radius: 10px; margin-bottom: 30px;">
+        <h3 style="color: #856404; margin-top: 0;">🎓 {% trans "About the Philosophical Quizzes" %}</h3>
+        <p style="color: #856404; line-height: 1.6; margin-bottom: 15px;">
+            {% trans "Test your understanding of Srila Prabhupada's commentaries through interactive quizzes. Answer questions based on your philosophical understanding and receive personalized guidance aligned with Krishna consciousness teachings." %}
         </p>
+        <ul style="color: #856404; margin-bottom: 15px;">
+            <li>{% trans "Based on Srila Prabhupada's original commentaries" %}</li>
+            <li>{% trans "Flexible answer system - no rigid 'right/wrong'" %}</li>
+            <li>{% trans "Philosophical feedback and guidance" %}</li>
+            <li>{% trans "Track your progress and understanding" %}</li>
+        </ul>
+        <a href="{% url 'study_app:quiz_dashboard' book.id %}" 
+           style="background: #dc3545; color: white; padding: 12px 25px; text-decoration: none; border-radius: 6px; display: inline-block; font-weight: bold;">
+            🚀 {% trans "Start Your First Quiz Now" %}
+        </a>
     </div>
 </div>
 {% endblock %}

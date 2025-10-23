@@ -1,0 +1,78 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Quiz Dashboard" %} - {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:index' %}">{% trans "Courses" %}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:course_detail' book.course.id %}">{{ book.course.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:book_detail' book.id %}">{{ book.title }}</a></li>
+                    <li class="breadcrumb-item active">{% trans "Quizzes" %}</li>
+                </ol>
+            </nav>
+            
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h2 class="mb-0">{% trans "Quiz Dashboard" %} - {{ book.title }}</h2>
+                </div>
+                <div class="card-body">
+                    <p class="lead">{% trans "Test your understanding of Srila Prabhupada's commentaries through these philosophical quizzes." %}</p>
+                    
+                    <div class="row mt-4">
+                        {% for module in modules %}
+                        <div class="col-md-6 mb-4">
+                            <div class="card h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">{{ module.name }}</h5>
+                                    <p class="card-text">{{ module.description|default:module.chapters_range }}</p>
+                                    <p class="text-muted">
+                                        {% trans "Questions:" %} {{ module.questions.count }}
+                                    </p>
+                                </div>
+                                <div class="card-footer">
+                                    {% if module.questions.count > 0 %}
+                                        <a href="{% url 'study_app:take_quiz' book.id module.id %}" class="btn btn-success">
+                                            {% trans "Take Quiz" %}
+                                        </a>
+                                    {% else %}
+                                        <button class="btn btn-secondary" disabled>
+                                            {% trans "No Questions Yet" %}
+                                        </button>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                        {% empty %}
+                        <div class="col-12">
+                            <div class="alert alert-info">
+                                {% trans "No quiz modules available for this course yet." %}
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    
+                    {% if user.is_staff %}
+                    <div class="mt-4 p-3 border rounded bg-light">
+                        <h5>{% trans "Admin Actions" %}</h5>
+                        <a href="{% url 'study_app:add_quiz_question' book.id %}" class="btn btn-outline-primary">
+                            {% trans "Add Quiz Questions" %}
+                        </a>
+                        <a href="{% url 'study_app:add_quiz_module' book.course.id %}" class="btn btn-outline-secondary">
+                            {% trans "Add New Module" %}
+                        </a>
+                        <a href="{% url 'admin:study_app_quizquestion_changelist' %}" class="btn btn-outline-info">
+                            {% trans "Manage All Questions" %}
+                        </a>
+                    </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
