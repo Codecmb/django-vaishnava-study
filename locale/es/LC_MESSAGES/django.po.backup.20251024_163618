@@ -1,4 +1,3 @@
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: Vaishnava Study App\n"
@@ -111,9 +110,7 @@ msgstr "Aplicación de Estudio Vaishnava"
 
 #: study_app/templates/registration/login.html:78
 msgid "Your username and password didn't match. Please try again."
-msgstr ""
-"Tu nombre de usuario y contraseña no coinciden. Por favor, inténtalo de "
-"nuevo."
+msgstr "Tu nombre de usuario y contraseña no coinciden. Por favor, inténtalo de nuevo."
 
 #: study_app/templates/registration/login.html:86
 msgid "Username"
@@ -222,11 +219,13 @@ msgid "Read in Spanish"
 msgstr "Leer en Español"
 
 #: study_app/templates/study_app/book_detail.html:39
+#, fuzzy
 #| msgid "Study Materials for"
 msgid "Study Tools"
 msgstr "Herramientas de Estudio"
 
 #: study_app/templates/study_app/book_detail.html:43
+#, fuzzy
 #| msgid "Q&A Section"
 msgid "Study Questions"
 msgstr "Preguntas de Estudio"
@@ -260,9 +259,10 @@ msgid "Start Your First Quiz Now"
 msgstr "Comienza Tu Primer Examen Ahora"
 
 #: study_app/templates/study_app/course_detail.html:7
+#, fuzzy
 #| msgid "Back to Course"
 msgid "Back to Courses"
-msgstr "Volver a los Cursos"
+msgstr "Regresar al Curso"
 
 #: study_app/templates/study_app/course_detail.html:13
 #: study_app/templates/vaishnava_study/course_detail.html:25
@@ -270,16 +270,19 @@ msgid "Books in this Course"
 msgstr "Libros en este Curso"
 
 #: study_app/templates/study_app/course_detail.html:23
+#, fuzzy
 #| msgid "About This Book"
 msgid "Study This Book"
-msgstr "Estudiar Este Libro"
+msgstr "Estudiar este Libro"
 
 #: study_app/templates/study_app/course_detail.html:28
+#, fuzzy
 #| msgid "Read in English"
 msgid "Read Online (English)"
 msgstr "Leer en Línea (Inglés)"
 
 #: study_app/templates/study_app/course_detail.html:29
+#, fuzzy
 #| msgid "Read in Spanish"
 msgid "Read Online (Spanish)"
 msgstr "Leer en Línea (Español)"
@@ -341,8 +344,7 @@ msgstr "Sitios Web de Referencia"
 #: study_app/templates/study_app/includes/footer.html:43
 #: study_app/templates/vaishnava_study/includes/footer.html:35
 msgid "© 2024 Vaishnava Study App. All rights reserved."
-msgstr ""
-"© 2024 Aplicación de Estudio Vaishnava. Todos los derechos reservados."
+msgstr "© 2024 Aplicación de Estudio Vaishnava. Todos los derechos reservados."
 
 #: study_app/templates/study_app/includes/navbar.html:11
 #: study_app/templates/vaishnava_study/includes/navbar.html:11
@@ -383,9 +385,7 @@ msgstr "Cerrar Sesión"
 msgid ""
 "Comprehensive study platform for ISKCON's Bhakti Shastri and advanced "
 "courses with multilingual support"
-msgstr ""
-"Plataforma integral de estudio para Bhakti Shastri de ISKCON y cursos "
-"avanzados con soporte multilingüe."
+msgstr "Plataforma integral de estudio para Bhakti Shastri de ISKCON y cursos avanzados con soporte multilingüe."
 
 #: study_app/templates/study_app/index.html:18
 #: study_app/templates/vaishnava_study/index.html:18
@@ -681,9 +681,7 @@ msgstr "Tipos de Archivo Soportados"
 msgid ""
 "You can upload files in English, Spanish, or a bilingual file containing "
 "both languages."
-msgstr ""
-"Puedes subir archivos en inglés, español o un archivo bilingüe que contenga "
-"ambos idiomas."
+msgstr "Puedes subir archivos en inglés, español o un archivo bilingüe que contenga ambos idiomas."
 
 #: study_app/templates/study_app/upload_success.html:11
 msgid "Upload Successful!"
@@ -692,8 +690,7 @@ msgstr "¡Subida Exitosa!"
 #: study_app/templates/study_app/upload_success.html:15
 msgid ""
 "Your questions and answers have been successfully uploaded to the system."
-msgstr ""
-"Sus preguntas y respuestas se han cargado correctamente en el sistema."
+msgstr "Sus preguntas y respuestas se han cargado correctamente en el sistema."
 
 #: study_app/templates/study_app/upload_success.html:20
 #, fuzzy
@@ -763,19 +760,3 @@ msgstr "P&R para"
 #| msgid "No study materials available yet for this book."
 msgid "No questions and answers available yet for this book."
 msgstr "Aún no hay materiales de estudio disponibles para este libro."
-
-#: Added manually
-msgid "Read Online"
-msgstr "Leer en Línea"
-
-#: Added manually
-msgid ""
-"Comprehensive study of the fundamental texts of Gaudiya Vaishnavism "
-"including Bhagavad-gita and essential scriptures."
-msgstr ""
-"Estudio completo de los textos fundamentales del Gaudiya Vaishnavismo "
-"incluyendo el Bhagavad-gita y las escrituras esenciales."
-
-#: Added manually
-msgid "Study Materials"
-msgstr "Materiales de Estudio"
