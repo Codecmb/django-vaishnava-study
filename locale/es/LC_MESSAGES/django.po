@@ -773,9 +773,23 @@ msgid ""
 "Comprehensive study of the fundamental texts of Gaudiya Vaishnavism "
 "including Bhagavad-gita and essential scriptures."
 msgstr ""
-"Estudio completo de los textos fundamentales del Gaudiya Vaishnavismo "
-"incluyendo el Bhagavad-gita y las escrituras esenciales."
+"Estudio exhaustivo de los textos fundamentales del vaisnavismo gaudiya, "
+"incluyendo el Bhagavad-gita y las escrituras esenciales.Estudio completo de "
+"los textos fundamentales del Gaudiya Vaishnavismo incluyendo el Bhagavad-"
+"gita y las escrituras esenciales."
 
 #: Added manually
 msgid "Study Materials"
 msgstr "Materiales de Estudio"
+
+#: study_app/models.py:1
+msgid "Bhagavad-gita As It Is"
+msgstr "Bhagavad-gita Tal Como Es"
+
+#: study_app/models.py:1
+msgid "Nectar of Devotion"
+msgstr "Néctar de la Devoción"
+
+#: study_app/models.py:1
+msgid "Nectar of Instruction"
+msgstr "Néctar de la Instrucción"
