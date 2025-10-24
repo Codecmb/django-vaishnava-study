@@ -19,3 +19,12 @@
     {% include 'study_app/includes/footer.html' %}
     
     <script src="{% static 'study_app/js/main.js' %}"></script>
+</body>
+</html>
+
+<!-- FLOATING LANGUAGE SWITCHER -->
+<div style="position: fixed; top: 10px; right: 10px; background: #333; padding: 10px; border-radius: 5px; z-index: 10000; border: 2px solid red;">
+    <strong style="color: white;">LANGUAGE:</strong>
+    <a href="/en/" style="color: white; margin: 0 10px; font-weight: bold; text-decoration: none;">EN</a>
+    <a href="/es/" style="color: white; margin: 0 10px; font-weight: bold; text-decoration: none;">ES</a>
+</div>

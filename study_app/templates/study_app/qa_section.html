@@ -13,7 +13,7 @@
 
     <!-- Upload Buttons -->
     <div style="display: flex; gap: 15px; flex-wrap: wrap; margin: 20px 0;">
-        <a href="{% url 'study_app:upload_qa' %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
+        <a href="{% url 'study_app:upload_qa' %}" class="book-link" style="background: #d32f2f;">
             📝 {% trans "Upload Q&A CSV" %}
         </a>
         <a href="{% url 'study_app:upload_study_material' %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-pink), var(--neon-purple));">
@@ -30,7 +30,7 @@
         
         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
             {% for material in materials %}
-            <div style="background: rgba(255, 255, 255, 0.1); border: 1px solid var(--neon-blue); border-radius: 10px; padding: 20px; transition: all 0.3s ease; position: relative;">
+            <div style="background: #d32f2f; border-radius: 10px; padding: 20px; transition: all 0.3s ease; position: relative;">
                 <!-- Delete Button -->
                 <a href="{% url 'study_app:delete_study_material' material.id %}" 
                    style="position: absolute; top: 10px; right: 10px; color: var(--neon-pink); text-decoration: none; font-size: 1.2em;"

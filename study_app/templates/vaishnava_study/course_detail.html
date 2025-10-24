@@ -26,11 +26,11 @@
     </h2>
     
     {% for book in books %}
-    <div style="background: rgba(255, 255, 255, 0.1); padding: 20px; border-radius: 10px; margin: 15px 0; border-left: 4px solid var(--neon-blue);">
+    <div style="background: #d32f2f;">
         <h3 style="color: var(--neon-blue); margin-bottom: 15px;">{{ book.title }}</h3>
         
         <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-            <a href="{{ book.english_url }}" target="_blank" class="book-link" style="background: linear-gradient(45deg, var(--neon-blue), var(--neon-green));">
+            <a href="{{ book.english_url }}" target="_blank" class="book-link" style="background: #d32f2f;">
                 📖 {% trans "Read in English" %}
             </a>
             
@@ -38,7 +38,7 @@
                 📖 {% trans "Read in Spanish" %}
             </a>
             
-            <a href="{% url 'vaishnava_study:qa_section' book.id %}" class="book-link" style="background: linear-gradient(45deg, var(--neon-green), var(--neon-blue));">
+            <a href="{% url 'vaishnava_study:qa_section' book.id %}" class="book-link" style="background: #d32f2f;">
                 ❓ {% trans "Q&A Section" %}
             </a>
         </div>
