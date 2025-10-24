@@ -358,36 +358,3 @@ footer {
         width: 100%;
     }
 }
-
-/* Navbar Explore Button Styles */
-.explore-btn {
-    background: linear-gradient(135deg, #e74c3c, #c0392b);
-    color: white;
-    border: none;
-    padding: 0.7rem 1.5rem;
-    border-radius: 25px;
-    cursor: pointer;
-    font-weight: bold;
-    transition: all 0.3s ease;
-    box-shadow: 0 4px 8px rgba(231, 76, 60, 0.3);
-    margin-left: 1rem;
-}
-
-.explore-btn:hover {
-    background: linear-gradient(135deg, #c0392b, #a93226);
-    transform: translateY(-2px);
-    box-shadow: 0 6px 12px rgba(231, 76, 60, 0.4);
-}
-
-.explore-btn:active {
-    transform: translateY(0);
-}
-
-/* Mobile responsive */
-@media (max-width: 768px) {
-    .explore-btn {
-        margin-left: 0;
-        margin-top: 0.5rem;
-        width: 100%;
-    }
-}

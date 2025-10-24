@@ -1,0 +1,64 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block content %}
+<div style="text-align: center; padding: 40px 20px;">
+    <h1 style="color: var(--neon-blue); text-shadow: 0 0 20px var(--neon-blue); margin-bottom: 20px;">
+        {% trans "Vaishnava Study App" %}
+    </h1>
+    
+    <p style="font-size: 1.2em; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
+        {% trans "Comprehensive study platform for ISKCON's Bhakti Shastri and advanced courses with multilingual support" %}
+    </p>
+</div>
+
+<!-- Courses Section -->
+<div style="margin: 40px 0;" id="courses">
+    <h2 style="color: var(--neon-green); text-align: center; margin-bottom: 30px;">
+        {% trans "Available Courses" %}
+    </h2>
+    
+    {% for course in courses %}
+    <div class="course-card">
+        <h3 style="color: var(--neon-pink); margin-bottom: 15px;">{{ course.get_level_display }}</h3>
+        <p>
+            {% if request.LANGUAGE_CODE == 'es' %}
+                {{ course.description_es }}
+            {% else %}
+                {{ course.description_en }}
+            {% endif %}
+        </p>
+        <a href="{% url 'study_app:course_detail' course.id %}" class="book-link">
+            {% trans "Explore Course" %}
+        </a>
+    </div>
+    {% empty %}
+    <div style="text-align: center; padding: 40px; color: var(--neon-pink);">
+        <h3>{% trans "No courses available yet." %}</h3>
+        <p>{% trans "Please check back later or contact the administrator." %}</p>
+    </div>
+    {% endfor %}
+</div>
+
+<!-- Reference Websites -->
+<div style="margin: 60px 0;">
+    <h2 style="color: var(--neon-blue); text-align: center; margin-bottom: 30px;">
+        {% trans "Reference Websites" %}
+    </h2>
+    
+    <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap; margin-bottom: 20px;">
+        <div style="text-align: center;">
+            <a href="https://vedabase.io" target="_blank" class="ref-link">Vedabase.io</a>
+            <div style="color: var(--neon-pink); font-size: 0.8em; margin-top: 5px;">Español disponible</div>
+        </div>
+        <a href="https://prabhupadabooks.com" target="_blank" class="ref-link">PrabhupadaBooks.com</a>
+        <a href="https://iskcondesiretree.com" target="_blank" class="ref-link">ISKCON Desire Tree</a>
+        <a href="https://radha.name" target="_blank" class="ref-link">Radha.name</a>
+        <a href="https://bhaktivedantavediclibrary.org/" target="_blank" class="ref-link">Bhaktivedanta Vedic Library</a>
+        <a href="https://vihe.org/" target="_blank" class="ref-link">VIHE.org</a>
+    </div>
+    <p style="text-align: center; color: var(--neon-pink); margin-top: 10px;">
+        {% trans "All reference websites available in both English and Spanish" %}
+    </p>
+</div>
+{% endblock %}
