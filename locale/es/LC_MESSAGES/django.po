@@ -172,6 +172,8 @@ msgid ""
 "Include multiple acceptable answers in the 'correct answers' field (comma-"
 "separated)"
 msgstr ""
+"Incluya múltiples respuestas aceptables en el campo 'respuestas correctas' "
+"(coma-"
 
 #: study_app/templates/study_app/add_quiz_question.html:46
 msgid "Provide clear Srila Prabhupada commentary for guidance"
@@ -456,7 +458,7 @@ msgstr "Preguntas y Respuestas"
 #, fuzzy
 #| msgid "No books available for this course yet."
 msgid "No quiz modules available for this course yet."
-msgstr "Aún no hay libros disponibles para este curso."
+msgstr "Aún no hay módulos de cuestionario disponibles para este curso."
 
 #: study_app/templates/study_app/quiz_dashboard.html:61
 msgid "Admin Actions"
@@ -552,6 +554,8 @@ msgid ""
 "commentaries. There are no 'wrong' answers - this is to help you gauge your "
 "philosophical understanding."
 msgstr ""
+"Comentarios. No hay respuestas incorrectas. Esto es para ayudarte a evaluar "
+"tu comprensión filosófica."
 
 #: study_app/templates/study_app/take_quiz.html:52
 msgid "Srila Prabhupada's Commentary:"
@@ -720,7 +724,7 @@ msgstr "Recursos"
 
 #: study_app/templates/vaishnava_study/includes/footer.html:26
 msgid "Support"
-msgstr "Soporte"
+msgstr "Apoyo"
 
 #: study_app/templates/vaishnava_study/includes/footer.html:27
 msgid "Help Center"
