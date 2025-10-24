@@ -206,10 +206,9 @@ msgid "Choose Your Study Method"
 msgstr "Elige Tu Método de Estudio"
 
 #: study_app/templates/study_app/book_detail.html:24
-#, fuzzy
 #| msgid "Back to Home"
 msgid "Read the Book"
-msgstr "Volver al Inicio"
+msgstr "Leer el Libro"
 
 #: study_app/templates/study_app/book_detail.html:28
 #: study_app/templates/vaishnava_study/course_detail.html:34
@@ -793,3 +792,19 @@ msgstr "Néctar de la Devoción"
 #: study_app/models.py:1
 msgid "Nectar of Instruction"
 msgstr "Néctar de la Instrucción"
+
+#: study_app/templates/study_app/:1
+msgid "Choose your study mode"
+msgstr "Elige tu modo de estudio"
+
+#: study_app/templates/study_app/:1
+msgid "Study Mode"
+msgstr "Modo de Estudio"
+
+#: study_app/templates/study_app/:1
+msgid "Start Quiz"
+msgstr "Comenzar Quiz"
+
+#: study_app/templates/study_app/:1
+msgid "Begin Reading"
+msgstr "Comenzar Lectura"
