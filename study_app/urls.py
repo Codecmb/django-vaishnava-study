@@ -26,3 +26,10 @@ urlpatterns = [
     # Profile redirect
     path('accounts/profile/', views.profile_redirect, name='profile_redirect'),
 ]
+
+# Add professional quiz URL pattern
+path('book/<int:book_id>/quiz/<int:module_id>/take-professional/', 
+     views.take_quiz_professional, 
+     name='take_quiz_professional'),
+# Professional quiz URL
+path('book/<int:book_id>/quiz/<int:module_id>/take-professional/', views.take_quiz_professional, name='take_quiz_professional'),

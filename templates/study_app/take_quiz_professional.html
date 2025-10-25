@@ -1,0 +1,182 @@
+{% extends "base.html" %}
+{% load i18n static %}
+
+{% block title %}{% trans "Take Quiz" %} - {{ module.name }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Progress Header -->
+    <div class="row mb-4">
+        <div class="col-md-12">
+            <div class="d-flex justify-content-between align-items-center">
+                <h1>{{ module.name }} - Quiz</h1>
+                <div class="progress" style="width: 200px; height: 25px;">
+                    <div class="progress-bar" role="progressbar" 
+                         style="width: {{ progress_percentage }}%;" 
+                         aria-valuenow="{{ progress_percentage }}" 
+                         aria-valuemin="0" aria-valuemax="100">
+                        {{ progress_percentage }}%
+                    </div>
+                </div>
+            </div>
+            <p class="text-muted">Page {{ current_page }} of {{ total_pages }}</p>
+        </div>
+    </div>
+
+    <form id="quizForm" method="post">
+        {% csrf_token %}
+        
+        {% for question in page_questions %}
+        <div class="card mb-4 question-card" data-question-id="{{ question.id }}">
+            <div class="card-header bg-light">
+                <h5 class="mb-0">Question {{ forloop.counter|add:start_index }}</h5>
+            </div>
+            <div class="card-body">
+                <!-- Question Text -->
+                <div class="mb-3">
+                    <p class="fw-bold fs-5">{{ question.question_text }}</p>
+                    {% if question.verse_reference %}
+                        <small class="text-muted">Reference: {{ question.verse_reference }}</small>
+                    {% endif %}
+                </div>
+
+                <!-- Multiple Choice Options -->
+                <div class="mb-3">
+                    {% with options=question.multiple_choice_options_list %}
+                    {% for option in options %}
+                    <div class="form-check mb-2">
+                        <input class="form-check-input" type="radio" 
+                               name="question_{{ question.id }}" 
+                               value="{{ option }}"
+                               id="q{{ question.id }}_opt{{ forloop.counter }}"
+                               required>
+                        <label class="form-check-label fs-6" for="q{{ question.id }}_opt{{ forloop.counter }}">
+                            <strong>{{ forloop.counter|stringformat:"c"|upper }}.</strong> {{ option }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                    {% endwith %}
+                </div>
+
+                <!-- Hints Section -->
+                <div class="hint-section mt-3" style="display: none;">
+                    <div class="alert alert-info">
+                        <h6>💡 Hint</h6>
+                        <p class="mb-0">{{ question.additional_guidance|default:"Study the verse carefully and consider Srila Prabhupada's commentary." }}</p>
+                    </div>
+                </div>
+
+                <!-- Hint Button -->
+                <button type="button" class="btn btn-outline-info btn-sm hint-btn">
+                    [Get Hints]
+                </button>
+            </div>
+        </div>
+        {% empty %}
+        <div class="alert alert-info">
+            <h5>{% trans "No questions available" %}</h5>
+            <p>{% trans "This quiz module doesn't have any questions yet." %}</p>
+        </div>
+        {% endfor %}
+
+        <!-- Navigation Buttons -->
+        <div class="row mt-4">
+            <div class="col-md-12 d-flex justify-content-between">
+                {% if has_previous %}
+                <button type="button" class="btn btn-secondary" onclick="goToPage({{ previous_page }})">
+                    ← Previous
+                </button>
+                {% else %}
+                <div></div>
+                {% endif %}
+
+                {% if has_next %}
+                <button type="button" class="btn btn-primary" onclick="goToPage({{ next_page }})">
+                    Next →
+                </button>
+                {% else %}
+                <button type="submit" class="btn btn-success">
+                    🚀 Submit Quiz
+                </button>
+                {% endif %}
+            </div>
+        </div>
+
+        <!-- Hidden fields for pagination -->
+        <input type="hidden" name="current_page" value="{{ current_page }}">
+        <input type="hidden" name="total_pages" value="{{ total_pages }}">
+    </form>
+</div>
+
+<style>
+.question-card {
+    border-left: 4px solid #007bff;
+}
+
+.form-check-input {
+    transform: scale(1.2);
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 1.1rem;
+    cursor: pointer;
+}
+
+.hint-btn {
+    font-size: 0.9rem;
+    padding: 2px 8px;
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Hint functionality
+    document.querySelectorAll('.hint-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const hintSection = this.previousElementSibling;
+            if (hintSection.style.display === 'none') {
+                hintSection.style.display = 'block';
+                this.textContent = '[Hide Hints]';
+            } else {
+                hintSection.style.display = 'none';
+                this.textContent = '[Get Hints]';
+            }
+        });
+    });
+
+    // Save progress to localStorage
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+        radio.addEventListener('change', function() {
+            const questionId = this.name.replace('question_', '');
+            const answer = this.value;
+            saveProgress(questionId, answer);
+        });
+    });
+
+    // Load saved progress
+    loadProgress();
+});
+
+function saveProgress(questionId, answer) {
+    const progress = JSON.parse(localStorage.getItem('quizProgress') || '{}');
+    progress[questionId] = answer;
+    localStorage.setItem('quizProgress', JSON.stringify(progress));
+}
+
+function loadProgress() {
+    const progress = JSON.parse(localStorage.getItem('quizProgress') || '{}');
+    Object.keys(progress).forEach(questionId => {
+        const answer = progress[questionId];
+        const radio = document.querySelector(`input[name="question_${questionId}"][value="${answer}"]`);
+        if (radio) radio.checked = true;
+    });
+}
+
+function goToPage(page) {
+    const form = document.getElementById('quizForm');
+    form.action = "?page=" + page;
+    form.submit();
+}
+</script>
+{% endblock %}

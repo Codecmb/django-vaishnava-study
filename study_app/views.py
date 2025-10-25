@@ -164,3 +164,55 @@ def profile_redirect(request):
 def enhance_quiz_dashboard():
     """Helper function to enhance quiz dashboard data"""
     pass
+
+@login_required
+def take_quiz_professional(request, book_id, module_id):
+    """Professional quiz interface with pagination and multiple choice"""
+    from django.core.paginator import Paginator
+    import json
+    
+    book = get_object_or_404(Book, id=book_id)
+    module = get_object_or_404(QuizModule, id=module_id)
+    questions = module.questions.all().order_by('order')
+    
+    # Prepare questions with multiple choice options
+    for question in questions:
+        if question.multiple_choice_options:
+            try:
+                question.multiple_choice_options_list = json.loads(question.multiple_choice_options)
+            except:
+                # If no multiple choice options, generate some
+                question.multiple_choice_options_list = [
+                    "The eternal nature of spiritual reality",
+                    "A temporary material manifestation", 
+                    "A product of the material energy",
+                    "A form of illusion (maya)"
+                ]
+        else:
+            question.multiple_choice_options_list = [
+                "The eternal nature of spiritual reality",
+                "A temporary material manifestation",
+                "A product of the material energy", 
+                "A form of illusion (maya)"
+            ]
+    
+    # Pagination - 5 questions per page
+    paginator = Paginator(questions, 5)
+    page_number = request.GET.get('page', 1)
+    page_obj = paginator.get_page(page_number)
+    
+    context = {
+        'book': book,
+        'module': module,
+        'page_questions': page_obj,
+        'current_page': page_obj.number,
+        'total_pages': paginator.num_pages,
+        'has_previous': page_obj.has_previous(),
+        'has_next': page_obj.has_next(),
+        'previous_page': page_obj.previous_page_number() if page_obj.has_previous() else 1,
+        'next_page': page_obj.next_page_number() if page_obj.has_next() else paginator.num_pages,
+        'progress_percentage': int((page_obj.number - 1) / paginator.num_pages * 100),
+        'start_index': (page_obj.number - 1) * 5 + 1,
+    }
+    
+    return render(request, 'study_app/take_quiz_professional.html', context)
