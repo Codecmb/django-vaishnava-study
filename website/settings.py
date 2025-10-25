@@ -37,7 +37,7 @@ ROOT_URLCONF = 'website.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -141,3 +141,7 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 # Login/Logout settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# Debug template loading
+print("TEMPLATE DIRS:", [os.path.join(BASE_DIR, 'templates')])
+print("BASE_DIR:", BASE_DIR)
