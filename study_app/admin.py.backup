@@ -58,6 +58,7 @@ class QuizAttemptAdmin(admin.ModelAdmin):
     ordering = ['-completed_at']
 
 # Bulk Operations Added by Fix Script
+@admin.register(QuizModule)
 class QuizModuleAdmin(admin.ModelAdmin):
     list_display = ['title', 'created_at']
     actions = ['duplicate_quiz', 'export_questions']
@@ -81,6 +82,7 @@ class QuizModuleAdmin(admin.ModelAdmin):
                 writer.writerow([quiz.title, question.verse, question.question_text])
         return response
 
+@admin.register(QuizQuestion)
 class QuizQuestionAdmin(admin.ModelAdmin):
     list_display = ['question_text', 'verse', 'quiz_module']
     list_filter = ['quiz_module', 'verse']

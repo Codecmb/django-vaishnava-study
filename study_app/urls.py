@@ -33,3 +33,10 @@ path('book/<int:book_id>/quiz/<int:module_id>/take-professional/',
      name='take_quiz_professional'),
 # Professional quiz URL
 path('book/<int:book_id>/quiz/<int:module_id>/take-professional/', views.take_quiz_professional, name='take_quiz_professional'),
+
+# Bulk question entry
+path('bulk-questions/', views.bulk_questions, name='bulk_question_entry'),
+
+# Bulk questions URLs
+path('book/<int:book_id>/bulk-questions/', views.bulk_questions, name='bulk_questions'),
+path('book/<int:book_id>/process-bulk-questions/', views.process_bulk_questions, name='process_bulk_questions'),

@@ -129,8 +129,8 @@ class QuizQuestion(models.Model):
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
     
-    def get_correct_answers_list(self):
-        return [answer.strip().lower() for answer in self.correct_answers.split(',')]
+    class Meta:
+        unique_together = [('module', 'verse_reference', 'question_text')]
     
     def check_answer(self, user_answer):
         user_answer_clean = user_answer.strip().lower()
