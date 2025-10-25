@@ -159,3 +159,8 @@ from django.contrib.auth.decorators import login_required
 def profile_redirect(request):
     """Redirect from /accounts/profile/ to homepage"""
     return redirect('study_app:index')
+
+# Add this function to enhance the quiz dashboard if needed
+def enhance_quiz_dashboard():
+    """Helper function to enhance quiz dashboard data"""
+    pass
