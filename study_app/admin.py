@@ -38,35 +38,13 @@ class QuizModuleAdmin(admin.ModelAdmin):
     list_display = ['course', 'name', 'chapters_range', 'order']
     list_filter = ['course']
     ordering = ['course', 'order']
-
-@admin.register(QuizQuestion)
-class QuizQuestionAdmin(admin.ModelAdmin):
-    list_display = ['book', 'module', 'chapter', 'question_text_short', 'verse_reference']
-    list_filter = ['book', 'module', 'chapter']
-    search_fields = ['question_text', 'prabhupada_commentary', 'verse_reference']
-    ordering = ['module', 'chapter', 'order']
-    
-    def question_text_short(self, obj):
-        return obj.question_text[:75] + "..." if len(obj.question_text) > 75 else obj.question_text
-    question_text_short.short_description = 'Question'
-
-@admin.register(QuizAttempt)
-class QuizAttemptAdmin(admin.ModelAdmin):
-    list_display = ['user', 'book', 'module', 'score', 'total_questions', 'completed_at']
-    list_filter = ['book', 'module', 'completed_at']
-    readonly_fields = ['completed_at']
-    ordering = ['-completed_at']
-
-# Bulk Operations Added by Fix Script
-class QuizModuleAdmin(admin.ModelAdmin):
-    list_display = ['title', 'created_at']
     actions = ['duplicate_quiz', 'export_questions']
     
     def duplicate_quiz(self, request, queryset):
         """Duplicate selected quizzes"""
         for quiz in queryset:
             quiz.pk = None
-            quiz.title += " (Copy)"
+            quiz.name += " (Copy)"
             quiz.save()
         self.message_user(request, f"Duplicated {queryset.count()} quizzes")
     
@@ -75,26 +53,42 @@ class QuizModuleAdmin(admin.ModelAdmin):
         response = HttpResponse(content_type='text/csv')
         response['Content-Disposition'] = 'attachment; filename="quiz_questions.csv"'
         writer = csv.writer(response)
-        writer.writerow(['Quiz', 'Verse', 'Question'])
-        for quiz in queryset:
-            for question in quiz.quizquestion_set.all():
-                writer.writerow([quiz.title, question.verse, question.question_text])
+        writer.writerow(['Module', 'Verse Reference', 'Question'])
+        for module in queryset:
+            for question in module.quizquestion_set.all():
+                writer.writerow([module.name, question.verse_reference, question.question_text])
         return response
 
+@admin.register(QuizQuestion)
 class QuizQuestionAdmin(admin.ModelAdmin):
-    list_display = ['question_text', 'verse', 'quiz_module']
-    list_filter = ['quiz_module', 'verse']
+    list_display = ['book', 'module', 'chapter', 'question_text_short', 'verse_reference']
+    list_filter = ['book', 'module', 'chapter']
+    search_fields = ['question_text', 'prabhupada_commentary', 'verse_reference']
+    ordering = ['module', 'chapter', 'order']
     actions = ['delete_duplicates']
+    
+    def question_text_short(self, obj):
+        return obj.question_text[:75] + "..." if len(obj.question_text) > 75 else obj.question_text
+    question_text_short.short_description = 'Question'
     
     def delete_duplicates(self, request, queryset):
         """Delete duplicate questions"""
         seen = set()
         deleted = 0
         for question in queryset.order_by('id'):
-            key = (question.quiz_module_id, question.verse, question.question_text)
+            key = (question.module_id, question.verse_reference, question.question_text)
             if key in seen:
                 question.delete()
                 deleted += 1
             else:
                 seen.add(key)
-        self.message_user(request, f"Deleted {deleted} duplicates")
+        self.message_user(request, f"Deleted {deleted} duplicate questions")
+
+@admin.register(QuizAttempt)
+class QuizAttemptAdmin(admin.ModelAdmin):
+    list_display = ['user', 'book', 'module', 'score', 'total_questions', 'completed_at']
+    list_filter = ['book', 'module', 'completed_at']
+    readonly_fields = ['completed_at']
+    ordering = ['-completed_at']
+
+# Debug - remove after testing
