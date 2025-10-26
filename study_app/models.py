@@ -15,6 +15,13 @@ class Course(models.Model):
     description_en = models.TextField()
     description_es = models.TextField()
     order = models.IntegerField(default=0)
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['order']
@@ -29,6 +36,13 @@ class Book(models.Model):
     spanish_url = models.URLField()
     cover_image = models.ImageField(upload_to='book_covers/', blank=True, null=True)
     order = models.IntegerField(default=0)
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['order']
@@ -68,6 +82,13 @@ class StudyMaterial(models.Model):
     verse_reference = models.CharField(max_length=50, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['order', 'created_at']
@@ -83,6 +104,13 @@ class QuestionAnswer(models.Model):
     answer_es = models.TextField()
     verse_reference = models.CharField(max_length=50)
     order = models.IntegerField(default=0)
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['order']
@@ -108,6 +136,13 @@ class QuizModule(models.Model):
     description = models.TextField(blank=True)
     chapters_range = models.CharField(max_length=100, help_text="e.g., 'Chapters 1-6' or 'Chapters 7-12'")
     order = models.IntegerField(default=0)
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['course', 'order']
@@ -121,9 +156,20 @@ class QuizQuestion(models.Model):
     module = models.ForeignKey(QuizModule, on_delete=models.CASCADE, related_name='questions')
     chapter = models.CharField(max_length=10, help_text="e.g., 'Chapter 1' or 'Chapter 2'")
     question_text = models.TextField()
+<<<<<<< Updated upstream
     correct_answers = models.TextField(blank=True, null=True, help_text="Auto-populated: The correct answer will be stored here after students attempt the question")
     multiple_choice_options = models.TextField(blank=True, null=True, help_text="JSON array of multiple choice options")
     prabhupada_commentary = models.TextField(blank=True, null=True, help_text="Auto-populated when students answer questions")
+=======
+    multiple_choice_options = models.TextField(
+        blank=True, 
+        null=True,
+        help_text="Pipe-separated options: 'Correct Answer|Wrong 1|Wrong 2|Wrong 3'"
+    )
+    
+    correct_answers = models.TextField(help_text="Comma-separated list of acceptable answers based on Prabhupada's commentaries")
+    prabhupada_commentary = models.TextField(help_text="Relevant commentary from Srila Prabhupada")
+>>>>>>> Stashed changes
     additional_guidance = models.TextField(blank=True, help_text="Additional philosophical guidance")
     verse_reference = models.CharField(max_length=50, blank=True)
     order = models.IntegerField(default=0)
@@ -141,6 +187,13 @@ class QuizQuestion(models.Model):
             if correct and (correct in user_answer_clean or user_answer_clean in correct):
                 return True
         return False
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['module', 'chapter', 'order']
@@ -185,6 +238,13 @@ class QuizAttempt(models.Model):
             return "Good effort! There's always more to learn in Krishna consciousness. Keep reading and chanting."
         else:
             return "Thank you for attempting! Remember, in Krishna consciousness there are no failures, only opportunities to learn. Please read Srila Prabhupada's commentaries more carefully."
+    def get_multiple_choice_list(self):
+        """Convert pipe-separated options to list"""
+        if self.multiple_choice_options:
+            return [opt.strip() for opt in self.multiple_choice_options.split('|')]
+        return []
+    
+
     
     class Meta:
         ordering = ['-completed_at']

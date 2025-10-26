@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('study_app', '0003_qaupload'),
+        ('study_app', '0001_initial'),
     ]
 
     operations = [

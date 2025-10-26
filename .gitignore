@@ -1,15 +1,26 @@
 # Django
 *.pyc
-*__pycache__/
-db.sqlite3
-media/
-staticfiles/
-
-# Environment
-.env
-.venv
-venv/
+__pycache__/
+*.pyo
+*.pyd
+.Python
 env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Database
+*.sqlite3
+*.db
+
+# Static files
+/staticfiles/
+/media/
+
+# OS
+.DS_Store
+Thumbs.db
 
 # IDE
 .vscode/
@@ -17,14 +28,8 @@ env/
 *.swp
 *.swo
 
-# OS
-.DS_Store
-Thumbs.db
-
-# Logs
-*.log
-
-# Temporary files
-tmp/
-temp/
-.env
+# Temporary scripts
+fix_*.py
+*_conflict.py
+*_stash.sh
+*_helper.sh

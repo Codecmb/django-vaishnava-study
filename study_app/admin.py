@@ -1,26 +1,53 @@
 from django.contrib import admin
+<<<<<<< Updated upstream
 import csv
 from django.http import HttpResponse
 from .models import Course, Book, StudyMaterial, QuestionAnswer, QAUpload, QuizModule, QuizQuestion, QuizAttempt
+=======
+from .models import QuizQuestion, QuizModule, Book, Course, QuestionAnswer, StudyMaterial
+>>>>>>> Stashed changes
 
-@admin.register(Course)
-class CourseAdmin(admin.ModelAdmin):
-    list_display = ['name', 'level', 'order']
-    list_filter = ['level']
-    ordering = ['order']
+class QuizQuestionAdmin(admin.ModelAdmin):
+    list_display = ['id', 'question_text', 'book', 'module', 'chapter', 'order']
+    list_filter = ['book', 'module', 'chapter']
+    search_fields = ['question_text', 'correct_answers', 'verse_reference']
+    list_editable = ['chapter', 'order']
+    list_per_page = 50
+    
+    fieldsets = [
+        ('Basic Info', {
+            'fields': ['book', 'module', 'chapter', 'order']
+        }),
+        ('Question Content', {
+            'fields': [
+                'question_text',
+                'multiple_choice_options',
+                'correct_answers',
+                'prabhupada_commentary',
+                'additional_guidance', 
+                'verse_reference'
+            ]
+        }),
+    ]
 
-@admin.register(Book)
+class QuizModuleAdmin(admin.ModelAdmin):
+    list_display = ['name', 'course', 'chapters_range', 'order']
+    list_filter = ['course']
+    list_editable = ['order']
+    search_fields = ['name', 'chapters_range']
+
 class BookAdmin(admin.ModelAdmin):
     list_display = ['title', 'course', 'order']
     list_filter = ['course']
-    ordering = ['course', 'order']
+    list_editable = ['order']
+    search_fields = ['title']
 
-@admin.register(StudyMaterial)
-class StudyMaterialAdmin(admin.ModelAdmin):
-    list_display = ['title', 'book', 'material_type', 'language', 'order']
-    list_filter = ['material_type', 'language', 'book']
-    ordering = ['book', 'order']
+class CourseAdmin(admin.ModelAdmin):
+    list_display = ['name', 'level', 'order']
+    list_editable = ['order']
+    list_filter = ['level']
 
+<<<<<<< Updated upstream
 @admin.register(QuestionAnswer)
 class QuestionAnswerAdmin(admin.ModelAdmin):
     list_display = ['book', 'verse_reference', 'order']
@@ -92,3 +119,11 @@ class QuizAttemptAdmin(admin.ModelAdmin):
     ordering = ['-completed_at']
 
 # Debug - remove after testing
+=======
+admin.site.register(QuizQuestion, QuizQuestionAdmin)
+admin.site.register(QuizModule, QuizModuleAdmin)
+admin.site.register(Book, BookAdmin)
+admin.site.register(Course, CourseAdmin)
+admin.site.register(QuestionAnswer)
+admin.site.register(StudyMaterial)
+>>>>>>> Stashed changes
