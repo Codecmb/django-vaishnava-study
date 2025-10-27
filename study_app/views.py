@@ -283,3 +283,71 @@ def validate_answer_with_ai(request, question_id):
         except Exception as e:
             return JsonResponse({'error': str(e)}, status=400)
     return JsonResponse({'error': 'Method not allowed'}, status=405)
+
+def bulk_upload_questions(request, book_id, module_id):
+    """Bulk upload questions with automatic choice generation"""
+    from django.shortcuts import get_object_or_404, redirect
+    from django.contrib import messages
+    from .models import Book, QuizModule, QuizQuestion
+    
+    book = get_object_or_404(Book, id=book_id)
+    module = get_object_or_404(QuizModule, id=module_id)
+    
+    if request.method == 'POST':
+        if 'questions_text' in request.POST:
+            questions_text = request.POST['questions_text']
+            questions_list = [q.strip() for q in questions_text.split('\n') if q.strip()]
+            
+            created_count = 0
+            for question_text in questions_list:
+                question = QuizQuestion(
+                    book=book,
+                    module=module,
+                    question_text=question_text,
+                    chapter=request.POST.get('chapter', 'Chapter 1')
+                )
+                question.save()  # This will trigger the signal to generate choices
+                created_count += 1
+            
+            messages.success(request, f'Successfully created {created_count} questions with auto-generated multiple choice options!')
+            return redirect('study_app:quiz_dashboard', book_id=book_id)
+    
+    context = {
+        'book': book,
+        'module': module,
+    }
+    return render(request, 'study_app/bulk_upload_questions.html', context)
+
+def bulk_upload_questions(request, book_id, module_id):
+    """Bulk upload questions with automatic choice generation"""
+    from django.shortcuts import get_object_or_404, redirect
+    from django.contrib import messages
+    from .models import Book, QuizModule, QuizQuestion
+    
+    book = get_object_or_404(Book, id=book_id)
+    module = get_object_or_404(QuizModule, id=module_id)
+    
+    if request.method == 'POST':
+        if 'questions_text' in request.POST:
+            questions_text = request.POST['questions_text']
+            questions_list = [q.strip() for q in questions_text.split('\n') if q.strip()]
+            
+            created_count = 0
+            for question_text in questions_list:
+                question = QuizQuestion(
+                    book=book,
+                    module=module,
+                    question_text=question_text,
+                    chapter=request.POST.get('chapter', 'Chapter 1')
+                )
+                question.save()  # This will trigger the signal to generate choices
+                created_count += 1
+            
+            messages.success(request, f'Successfully created {created_count} questions with auto-generated multiple choice options!')
+            return redirect('study_app:quiz_dashboard', book_id=book_id)
+    
+    context = {
+        'book': book,
+        'module': module,
+    }
+    return render(request, 'study_app/bulk_upload_questions.html', context)

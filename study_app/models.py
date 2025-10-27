@@ -134,26 +134,19 @@ class QuizQuestion(models.Model):
     verse_reference = models.CharField(max_length=50, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
-    
-    def get_correct_answers_list(self):
-        return [answer.strip().lower() for answer in self.correct_answers.split(',')]
-    
-    def check_answer(self, user_answer):
-        user_answer_clean = user_answer.strip().lower()
-        correct_answers = self.get_correct_answers_list()
-        
-        # Flexible matching for philosophical understanding
-        for correct in correct_answers:
-            if correct and (correct in user_answer_clean or user_answer_clean in correct):
-                return True
-        return False
-    
-    class Meta:
-        ordering = ['module', 'chapter', 'order']
-    
+
+    def get_choices_list(self):
+        """Return multiple choice options as a Python list"""
+        import json
+        if self.multiple_choice_options:
+            try:
+                return json.loads(self.multiple_choice_options)
+            except:
+                return []
+        return []
+
     def __str__(self):
         return f"{self.book.title} - {self.chapter}: {self.question_text[:50]}..."
-
 class QuizAttempt(models.Model):
     """Track user quiz attempts"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
@@ -197,3 +190,13 @@ class QuizAttempt(models.Model):
     
     def __str__(self):
         return f"Quiz Attempt - {self.book.title} - {self.module.name} - Score: {self.score}/{self.total_questions}"
+
+    def get_choices_list(self):
+        """Return multiple choice options as a Python list"""
+        import json
+        if self.multiple_choice_options:
+            try:
+                return json.loads(self.multiple_choice_options)
+            except:
+                return []
+        return []
