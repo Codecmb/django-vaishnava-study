@@ -21,6 +21,7 @@ urlpatterns = [
     path('book/<int:book_id>/quiz/module/<int:module_id>/', views_quiz.take_quiz, name='take_quiz'),
     path('quiz/results/<int:attempt_id>/', views_quiz.quiz_results, name='quiz_results'),
     path('book/<int:book_id>/quiz/add-question/', views_quiz.add_quiz_question, name='add_quiz_question'),
+    path('book/<int:book_id>/quiz/bulk-upload/<int:module_id>/', views.bulk_upload_questions, name='bulk_upload_questions'),
     path('book/<int:book_id>/bulk-questions/', views.bulk_questions, name='bulk_questions'),
     path('course/<int:course_id>/add-quiz-module/', views_quiz.add_quiz_module, name='add_quiz_module'),
     

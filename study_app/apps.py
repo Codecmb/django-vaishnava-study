@@ -1,7 +1,8 @@
 from django.apps import AppConfig
-from django.utils.translation import gettext_lazy as _
 
 class StudyAppConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
     name = 'study_app'
-    verbose_name = _('Vaishnava Study')
+    
+    def ready(self):
+        import study_app.signals
