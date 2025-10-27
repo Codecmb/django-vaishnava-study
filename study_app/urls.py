@@ -26,4 +26,5 @@ urlpatterns = [
     
     # Profile redirect
     path('accounts/profile/', views.profile_redirect, name='profile_redirect'),
+    path('question/<int:question_id>/validate/', views.validate_answer_with_ai, name='validate_answer'),
 ]

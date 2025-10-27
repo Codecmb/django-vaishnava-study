@@ -68,6 +68,12 @@ class StudyMaterial(models.Model):
     verse_reference = models.CharField(max_length=50, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    # AI Validation Fields
+    ai_feedback = models.TextField(blank=True, null=True)
+    ai_score = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
+    is_siddhanta_aligned = models.BooleanField(default=False)
+    feedback_timestamp = models.DateTimeField(blank=True, null=True)
+    
     
     class Meta:
         ordering = ['order', 'created_at']
