@@ -1,6 +1,7 @@
+
 from django.db import models
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User  # Add this import
 
 class Course(models.Model):
     COURSE_LEVELS = [
@@ -57,17 +58,23 @@ class StudyMaterial(models.Model):
     language = models.CharField(max_length=10, choices=LANGUAGES)
     description = models.TextField(blank=True)
     
+    # File fields for different languages
     english_file = models.FileField(upload_to='study_materials/english/', blank=True, null=True)
     spanish_file = models.FileField(upload_to='study_materials/spanish/', blank=True, null=True)
     bilingual_file = models.FileField(upload_to='study_materials/bilingual/', blank=True, null=True)
-    questions_json = models.JSONField(blank=True, null=True)
+    
+    # For simple Q&A that don't need files
+    questions_json = models.JSONField(blank=True, null=True)  # Store Q&A as JSON
+    
     verse_reference = models.CharField(max_length=50, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
+    # AI Validation Fields
     ai_feedback = models.TextField(blank=True, null=True)
     ai_score = models.DecimalField(max_digits=5, decimal_places=2, blank=True, null=True)
     is_siddhanta_aligned = models.BooleanField(default=False)
     feedback_timestamp = models.DateTimeField(blank=True, null=True)
+    
     
     class Meta:
         ordering = ['order', 'created_at']
@@ -100,7 +107,9 @@ class QAUpload(models.Model):
     def __str__(self):
         return f"Upload for {self.book.title} – {self.uploaded_at}"
 
+# Quiz System Models - Integrated with existing courses
 class QuizModule(models.Model):
+    """Modules for each course (e.g., Bhakti Shastri Modules 1-3)"""
     course = models.ForeignKey(Course, on_delete=models.CASCADE, related_name='quiz_modules')
     name = models.CharField(max_length=100)
     description = models.TextField(blank=True)
@@ -114,19 +123,21 @@ class QuizModule(models.Model):
         return f"{self.course.name} - {self.name}"
 
 class QuizQuestion(models.Model):
+    """Quiz questions tied to specific books and modules"""
     book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='quiz_questions')
     module = models.ForeignKey(QuizModule, on_delete=models.CASCADE, related_name='questions')
     chapter = models.CharField(max_length=10, help_text="e.g., 'Chapter 1' or 'Chapter 2'")
     question_text = models.TextField()
-    correct_answers = models.TextField(blank=True, null=True)
-    multiple_choice_options = models.TextField(blank=True, null=True)
-    prabhupada_commentary = models.TextField(blank=True, null=True)
-    additional_guidance = models.TextField(blank=True)
+    correct_answers = models.TextField(blank=True, null=True, help_text="Auto-populated: The correct answer will be stored here after students attempt the question")
+    multiple_choice_options = models.TextField(blank=True, null=True, help_text="JSON array of multiple choice options")
+    prabhupada_commentary = models.TextField(blank=True, null=True, help_text="Auto-populated when students answer questions")
+    additional_guidance = models.TextField(blank=True, help_text="Additional philosophical guidance")
     verse_reference = models.CharField(max_length=50, blank=True)
     order = models.IntegerField(default=0)
     created_at = models.DateTimeField(auto_now_add=True)
 
     def get_choices_list(self):
+        """Return multiple choice options as a Python list"""
         import json
         if self.multiple_choice_options:
             try:
@@ -137,12 +148,13 @@ class QuizQuestion(models.Model):
 
     def __str__(self):
         return f"{self.book.title} - {self.chapter}: {self.question_text[:50]}..."
-
     def check_answer(self, user_answer):
+        """Check if user answer is correct"""
         import json
         if not user_answer or not self.correct_answers:
             return False
         
+        # For multiple choice answers (numeric values)
         if user_answer.isdigit():
             try:
                 choices = json.loads(self.multiple_choice_options)
@@ -151,51 +163,63 @@ class QuizQuestion(models.Model):
             except:
                 return False
         
+        # For written answers (text comparison)
         user_answer_clean = user_answer.strip().lower()
         correct_answers_clean = self.correct_answers.strip().lower()
+        
+        # Simple contains check for written answers
         return user_answer_clean in correct_answers_clean or correct_answers_clean in user_answer_clean
-
-    def get_correct_answers_list(self):
-        """
-        Return a list of correct answers for display in results.
-        Handles both multiple choice and text answers.
-        """
-        import json
-        if not self.correct_answers:
-            return []
-        
-        # For multiple choice questions, return the correct choice text
-        if self.multiple_choice_options:
-            try:
-                choices = json.loads(self.multiple_choice_options)
-                # If correct_answers is an index, return the corresponding choice
-                if self.correct_answers.isdigit():
-                    index = int(self.correct_answers)
-                    if 0 <= index < len(choices):
-                        return [choices[index]]
-                # If correct_answers matches a choice text, return it
-                for choice in choices:
-                    if choice.strip().lower() == self.correct_answers.strip().lower():
-                        return [choice]
-            except:
-                pass
-        
-        # For text answers, return the correct answer as a list
-        return [self.correct_answers.strip()]
-
-class QuizAttempt(models.Model):
+    """Track user quiz attempts"""
     user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
     book = models.ForeignKey(Book, on_delete=models.CASCADE)
     module = models.ForeignKey(QuizModule, on_delete=models.CASCADE)
-    answers = models.JSONField(default=dict)
+    answers = models.JSONField(default=dict)  # Stores {question_id: user_answer}
     score = models.IntegerField(default=0)
     total_questions = models.IntegerField(default=0)
     completed_at = models.DateTimeField(auto_now_add=True)
-    
-    def __str__(self):
-        return f"Quiz Attempt - {self.book.title} - {self.module.name} - Score: {self.score}/{self.total_questions}"
-    
+  
     def calculate_score(self):
+        correct_count = 0
+        for question_id, user_answer in self.answers.items():
+            try:
+                question = QuizQuestion.objects.get(id=question_id)
+                if question.check_answer(user_answer):
+                    correct_count += 1
+            except QuizQuestion.DoesNotExist:
+                continue
+        
+        self.score = correct_count
+        self.total_questions = len(self.answers)
+        self.save()
+        return correct_count
+    
+    def get_feedback(self):
+        """Provide philosophical feedback based on score"""
+        percentage = (self.score / self.total_questions) * 100 if self.total_questions > 0 else 0
+        
+        if percentage >= 90:
+            return "Excellent! Your understanding is very much in line with Srila Prabhupada's teachings. Hare Krishna!"
+        elif percentage >= 70:
+            return "Very good! You have a good grasp of the philosophy. Continue studying Srila Prabhupada's books."
+        elif percentage >= 50:
+            return "Good effort! There's always more to learn in Krishna consciousness. Keep reading and chanting."
+        else:
+            return "Thank you for attempting! Remember, in Krishna consciousness there are no failures, only opportunities to learn. Please read Srila Prabhupada's commentaries more carefully."
+    
+    
+class QuizAttempt(models.Model):
+    """Track user quiz attempts"""
+    user = models.ForeignKey(User, on_delete=models.CASCADE, null=True, blank=True)
+    book = models.ForeignKey(Book, on_delete=models.CASCADE)
+    module = models.ForeignKey(QuizModule, on_delete=models.CASCADE)
+    answers = models.JSONField(default=dict)  # Stores {question_id: user_answer}
+    score = models.IntegerField(default=0)
+    total_questions = models.IntegerField(default=0)
+    completed_at = models.DateTimeField(auto_now_add=True)
+    def __str__(self):
+            return f"Quiz Attempt - {self.book.title} - {self.module.name} - Score: {self.score}/{self.total_questions}"
+    def calculate_score(self):
+        """Calculate score for this attempt"""
         score = 0
         for question_id, user_answer in self.answers.items():
             try:
@@ -208,16 +232,19 @@ class QuizAttempt(models.Model):
         self.total_questions = len(self.answers)
         self.save()
     
-    def get_feedback(self):
-        percentage = (self.score / self.total_questions) * 100 if self.total_questions > 0 else 0
-        if percentage >= 90:
-            return "Excellent! Your understanding is very much in line with Srila Prabhupada's teachings. Hare Krishna!"
-        elif percentage >= 70:
-            return "Very good! You have a good grasp of the philosophy. Continue studying Srila Prabhupada's books."
-        elif percentage >= 50:
-            return "Good effort! There's always more to learn in Krishna consciousness. Keep reading and chanting."
-        else:
-            return "Thank you for your effort! Krishna consciousness is a gradual process. Keep studying Prabhupada's teachings."
-    
-    class Meta:
+    def __str__(self):
+        return f"{self.user.username if self.user else 'Anonymous'} - {self.book.title} - Score: {self.score}/{self.total_questions}"
+class Meta:
         ordering = ['-completed_at']
+    
+     def __str__(self):
+        return f"Quiz Attempt - {self.book.title} - {self.module.name} - Score: {self.score}/{self.total_questions}"
+    def get_choices_list(self):
+        """Return multiple choice options as a Python list"""
+        import json
+        if self.multiple_choice_options:
+            try:
+                return json.loads(self.multiple_choice_options)
+            except:
+                return []
+        return []
