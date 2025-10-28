@@ -44,27 +44,25 @@
                     <div class="card mb-3 {% if answer.is_correct %}border-success{% else %}border-warning{% endif %}">
                         <div class="card-header {% if answer.is_correct %}bg-success text-white{% else %}bg-warning text-dark{% endif %}">
                             <strong>{% trans "Question" %} {{ forloop.counter }}</strong>
-                            {% if answer.question.verse_reference %}
-                            <span class="float-end">{% trans "Verse:" %} {{ answer.question.verse_reference }}</span>
+                            {% if answer.verse_reference %}
+                            <span class="float-end">{% trans "Verse:" %} {{ answer.verse_reference }}</span>
                             {% endif %}
                         </div>
                         <div class="card-body">
                             <p><strong>{% trans "Question:" %}</strong> {{ answer.question.question_text }}</p>
                             <p><strong>{% trans "Your Answer:" %}</strong> {{ answer.user_answer|default:"No answer provided" }}</p>
                             
-                            {% if not answer.is_correct %}
                             <div class="alert alert-light">
                                 <strong>{% trans "Suggested Understanding:" %}</strong><br>
                                 {% trans "Key points:" %} {{ answer.correct_answers|join:", " }}<br>
                                 <small class="text-muted">
-                                    <strong>{% trans "Srila Prabhupada:" %}</strong> {{ answer.question.prabhupada_commentary }}
+                                    <strong>{% trans "Srila Prabhupada:" %}</strong> {{ answer.prabhupada_commentary }}
                                 </small>
                             </div>
-                            {% endif %}
                             
-                            {% if answer.question.additional_guidance %}
+                            {% if answer.additional_guidance %}
                             <div class="mt-2 p-2 bg-light rounded">
-                                <small><strong>{% trans "Additional Guidance:" %}</strong> {{ answer.question.additional_guidance }}</small>
+                                <small><strong>{% trans "Additional Guidance:" %}</strong> {{ answer.additional_guidance }}</small>
                             </div>
                             {% endif %}
                         </div>

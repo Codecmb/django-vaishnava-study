@@ -141,3 +141,13 @@ ALLOWED_HOSTS = ['localhost', '127.0.0.1', 'testserver']
 # Login/Logout settings
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+# AI Service Configuration
+# Uncomment and set your API keys for AI integration
+
+# AI_API_KEY = 'your-api-key-here'
+# AI_MODEL = 'gpt-3.5-turbo'
+# AI_BASE_URL = None  # For custom endpoints
+
+# For now, using fallback mode which provides philosophical guidance
+# based on Srila Prabhupada's teachings without external API calls
