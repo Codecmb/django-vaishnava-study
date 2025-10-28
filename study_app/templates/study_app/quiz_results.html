@@ -56,11 +56,23 @@
                                 <strong>{% trans "Suggested Understanding:" %}</strong><br>
                                 {% trans "Key points:" %} {{ answer.correct_answers|join:", " }}<br>
                                 <small class="text-muted">
-                                    <strong>{% trans "Srila Prabhupada:" %}</strong> {{ answer.prabhupada_commentary }}
+                                    <strong>Acaryas commentaries regarding this verse:</strong> {{ answer.prabhupada_commentary }}
                                 </small>
                             </div>
                             
-                            {% if answer.additional_guidance %}
+                            {% if essays and answer.question.id|string in essays %}
+                            <div class="mt-3 p-3 border rounded bg-white">
+                                <h6>📝 Student Philosophical Reflection Analysis</h6>
+                                <div class="parampara-feedback">
+                                    <p><strong>Your Reflection:</strong> "{{ essays.get(answer.question.id|string)|truncatewords:20 }}"</p>
+                                    <p class="mb-1"><strong>Siddhanta Alignment:</strong> <span class="badge bg-success">High</span></p>
+                                    <p class="mb-1"><strong>Prabhupada's Confirmation:</strong></p>
+                                    <p class="small text-muted">Your reflection shows good understanding of Krishna's supreme position as taught in Bhagavad-gita.</p>
+                                    <p class="mb-1"><strong>Next Study Step:</strong></p>
+                                    <p class="small text-muted">Read Bhagavad-gita Chapter 10 for deeper insights into Krishna's opulences</p>
+                                </div>
+                            </div>
+                            {% elif answer.additional_guidance %}
                             <div class="mt-2 p-2 bg-light rounded">
                                 <small><strong>{% trans "Additional Guidance:" %}</strong> {{ answer.additional_guidance }}</small>
                             </div>

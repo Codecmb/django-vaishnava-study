@@ -79,8 +79,14 @@ def quiz_results(request, attempt_id):
     
     # Get user answers with correctness and AI feedback
     user_answers = []
+    essays = {}
     for question in questions:
         user_answer_raw = attempt.answers.get(str(question.id), '')
+        # Check for essay answers
+        essay_key = f'essay_{question.id}'
+        essay_answer = request.POST.get(essay_key, '') if request.method == 'POST' else ''
+        if essay_answer:
+            essays[str(question.id)] = essay_answer
         
         # Convert choice index to display text
         user_answer_display = user_answer_raw
@@ -117,6 +123,7 @@ def quiz_results(request, attempt_id):
     context = {
         'attempt': attempt,
         'user_answers': user_answers,
+        'essays': essays,
         'feedback': attempt.get_feedback(),
     }
     return render(request, 'study_app/quiz_results.html', context)
