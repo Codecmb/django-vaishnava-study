@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
 from .models import Book, QuizModule, QuizQuestion, QuizAttempt
 from .forms import QuizAnswerForm
-from study_app.ai_service import get_ai_feedback
+from study_app.ai_service_enhanced import get_enhanced_ai_feedback as get_ai_feedback
 
 @login_required
 def quiz_dashboard(request, book_id):
