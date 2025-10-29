@@ -1,0 +1,47 @@
+{% load i18n %}
+<footer style="background: rgba(10, 10, 10, 0.95); border-top: 2px solid var(--neon-purple); padding: 30px 20px; margin-top: 50px;">
+    <div style="max-width: 1200px; margin: 0 auto; text-align: center;">
+        <div style="color: var(--neon-blue); margin-bottom: 20px;">
+            <h3 style="margin-bottom: 10px;">{% trans "Vaishnava Study App" %}</h3>
+            <p>{% trans "Comprehensive spiritual education platform" %}</p>
+        </div>
+        
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: var(--neon-green); margin-bottom: 15px;">{% trans "Courses" %}</h4>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+                {% for course in all_courses %}
+                <a href="{% url 'study_app:course_detail' course.id %}" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-blue); border-radius: 5px; transition: all 0.3s ease;">
+                    {{ course.get_level_display }}
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div style="margin-bottom: 20px;">
+            <h4 style="color: var(--neon-green); margin-bottom: 15px;">{% trans "Reference Websites" %}</h4>
+            <div style="display: flex; justify-content: center; flex-wrap: wrap; gap: 15px;">
+                <a href="https://vedabase.io" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    Vedabase.io
+                </a>
+                <a href="https://prabhupadabooks.com" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    PrabhupadaBooks.com
+                </a>
+                <a href="https://iskcondesiretree.com" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    ISKCON Desire Tree
+                </a>
+                <a href="https://bhaktivedantavediclibrary.org/" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    Bhaktivedanta Vedic Library
+                </a>
+                <a href="https://vihe.org/" target="_blank" style="color: var(--text-light); text-decoration: none; padding: 8px 15px; border: 1px solid var(--neon-green); border-radius: 5px; transition: all 0.3s ease;">
+                    VIHE.org
+                </a>
+            </div>
+        </div>
+        
+        <div style="border-top: 1px solid var(--neon-purple); padding-top: 20px;">
+            <p style="color: var(--neon-pink); margin: 0;">
+                {% trans "© 2024 Vaishnava Study App. All rights reserved." %}
+            </p>
+        </div>
+    </div>
+</footer>

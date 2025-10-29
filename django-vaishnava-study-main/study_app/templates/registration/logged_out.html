@@ -1,0 +1,42 @@
+{% load i18n %}
+{% load static %}
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% trans "Logged Out" %} - {% trans "Vaishnava Study" %}</title>
+    <link rel="stylesheet" href="{% static 'study_app/css/main.css' %}">
+    <style>
+        .logout-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 2rem;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .success-message {
+            color: #28a745;
+            background: #d4edda;
+            padding: 0.75rem;
+            border-radius: 4px;
+            margin-bottom: 1rem;
+        }
+    </style>
+</head>
+<body>
+    {% include 'study_app/includes/navbar.html' %}
+    
+    <main class="container">
+        <div class="logout-container">
+            <div class="success-message">
+                {% trans "You have been successfully logged out." %}
+            </div>
+            <p><a href="{% url 'login' %}">{% trans "Click here to login again." %}</a></p>
+            <p><a href="{% url 'study_app:index' %}">{% trans "Return to homepage" %}</a></p>
+        </div>
+    </main>
+</body>
+</html>
