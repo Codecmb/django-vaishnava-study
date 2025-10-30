@@ -221,3 +221,13 @@ class QuizAttempt(models.Model):
     
     class Meta:
         ordering = ['-completed_at']
+
+class BookPDF(models.Model):
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='pdfs')
+    pdf_file = models.FileField(upload_to='book_pdfs/')
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    text_extracted = models.BooleanField(default=False)
+    extracted_text = models.TextField(blank=True)
+    
+    def __str__(self):
+        return f"PDF for {self.book.title}"

@@ -183,13 +183,6 @@ function getCookie(name) {
                                             placeholder="Student explain your understanding of this verse..."
                                         ></textarea>
                                     </div> 
-                                    <div class="written-answer-box">
-                                        <label>Write Your Understanding:</label>
-                                        <textarea 
-                                            id="written_answer_{{ question.id }}" 
-                                            placeholder="Feedback from Acaryas commentaries."
-                                        ></textarea>
-                                    </div>
                                     
                                     
                                     </div>

@@ -126,3 +126,15 @@ class QuizAttemptAdmin(admin.ModelAdmin):
     list_filter = ['module', 'completed_at']
     readonly_fields = ['completed_at', 'score', 'total_questions']
     ordering = ['-completed_at']
+from .models import BookPDF
+from .pdf_utils import extract_pdf_text
+
+@admin.register(BookPDF)
+class BookPDFAdmin(admin.ModelAdmin):
+    list_display = ['book', 'uploaded_at', 'text_extracted']
+    list_filter = ['book', 'text_extracted']
+    
+    def save_model(self, request, obj, form, change):
+        super().save_model(request, obj, form, change)
+        if obj.pdf_file and not obj.text_extracted:
+            extract_pdf_text(obj)

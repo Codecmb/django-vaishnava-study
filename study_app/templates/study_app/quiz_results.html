@@ -1,101 +1,71 @@
-{% extends 'study_app/base.html' %}
+{% extends "study_app/base.html" %}
 {% load i18n %}
-
-{% block title %}{% trans "Quiz Results" %}{% endblock %}
+{% load dictionary_filters %}
 
 {% block content %}
-<div class="container mt-4">
-    <div class="row">
-        <div class="col-md-12">
-            <nav aria-label="breadcrumb">
-                <ol class="breadcrumb">
-                    <li class="breadcrumb-item"><a href="{% url 'study_app:index' %}">{% trans "Courses" %}</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'study_app:course_detail' attempt.book.course.id %}">{{ attempt.book.course.name }}</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'study_app:book_detail' attempt.book.id %}">{{ attempt.book.title }}</a></li>
-                    <li class="breadcrumb-item"><a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}">{% trans "Quizzes" %}</a></li>
-                    <li class="breadcrumb-item active">{% trans "Results" %}</li>
-                </ol>
-            </nav>
-            
-            <div class="card">
-                <div class="card-header {% if attempt.score == attempt.total_questions %}bg-success{% elif attempt.score >= attempt.total_questions|divisibleby:2 %}bg-warning{% else %}bg-info{% endif %} text-white">
-                    <h2 class="mb-0">{% trans "Quiz Results" %}</h2>
-                </div>
-                <div class="card-body">
-                    <!-- Score Summary -->
-                    <div class="text-center mb-4">
-                        <div class="display-4 {% if attempt.score == attempt.total_questions %}text-success{% elif attempt.score >= attempt.total_questions|divisibleby:2 %}text-warning{% else %}text-info{% endif %}">
-                            {{ attempt.score }}/{{ attempt.total_questions }}
-                        </div>
-                        <p class="lead">
-                            {{ attempt.score|floatformat:0 }}% {% trans "Correct" %}
-                        </p>
-                    </div>
-                    
-                    <!-- Philosophical Feedback -->
-                    <div class="alert {% if attempt.score == attempt.total_questions %}alert-success{% elif attempt.score >= attempt.total_questions|divisibleby:2 %}alert-warning{% else %}alert-info{% endif %}">
-                        <h4>{% trans "Philosophical Feedback" %}</h4>
-                        <p class="mb-0">{{ feedback }}</p>
-                    </div>
-                    
-                    <!-- Detailed Results -->
-                    <h4 class="mt-5">{% trans "Detailed Results" %}</h4>
-                    {% for answer in user_answers %}
-                    <div class="card mb-3 {% if answer.is_correct %}border-success{% else %}border-warning{% endif %}">
-                        <div class="card-header {% if answer.is_correct %}bg-success text-white{% else %}bg-warning text-dark{% endif %}">
-                            <strong>{% trans "Question" %} {{ forloop.counter }}</strong>
-                            {% if answer.verse_reference %}
-                            <span class="float-end">{% trans "Verse:" %} {{ answer.verse_reference }}</span>
-                            {% endif %}
-                        </div>
-                        <div class="card-body">
-                            <p><strong>{% trans "Question:" %}</strong> {{ answer.question.question_text }}</p>
-                            <p><strong>{% trans "Your Answer:" %}</strong> {{ answer.user_answer|default:"No answer provided" }}</p>
-                            
-                            <div class="alert alert-light">
-                                <strong>{% trans "Suggested Understanding:" %}</strong><br>
-                                {% trans "Key points:" %} {{ answer.correct_answers|join:", " }}<br>
-                                <small class="text-muted">
-                                    <strong>Acaryas commentaries regarding this verse:</strong> {{ answer.prabhupada_commentary }}
-                                </small>
-                            </div>
-                            
-                            {% if essays and answer.question.id in essays %}
-                            <div class="mt-3 p-3 border rounded bg-white">
-                                <h6>📝 Student Philosophical Reflection Analysis</h6>
-                                <div class="parampara-feedback">
-                                    <p><strong>Your Reflection:</strong> "{{ essays.get(answer.question.id)|truncatewords:20 }}"</p>
-                                    <p class="mb-1"><strong>Siddhanta Alignment:</strong> <span class="badge bg-success">High</span></p>
-                                    <p class="mb-1"><strong>Prabhupada's Confirmation:</strong></p>
-                                    <p class="small text-muted">Your reflection shows good understanding of Krishna's supreme position as taught in Bhagavad-gita.</p>
-                                    <p class="mb-1"><strong>Next Study Step:</strong></p>
-                                    <p class="small text-muted">Read Bhagavad-gita Chapter 10 for deeper insights into Krishna's opulences</p>
-                                </div>
-                            </div>
-                            {% elif answer.additional_guidance %}
-                            <div class="mt-2 p-2 bg-light rounded">
-                                <small><strong>{% trans "Additional Guidance:" %}</strong> {{ answer.additional_guidance }}</small>
-                            </div>
-                            {% endif %}
-                        </div>
-                    </div>
-                    {% endfor %}
-                    
-                    <!-- Action Buttons -->
-                    <div class="text-center mt-4">
-                        <a href="{% url 'study_app:take_quiz' attempt.book.id attempt.module.id %}" class="btn btn-primary">
-                            {% trans "Retry Quiz" %}
-                        </a>
-                        <a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}" class="btn btn-secondary">
-                            {% trans "Back to Quiz Dashboard" %}
-                        </a>
-                        <a href="{% url 'study_app:book_detail' attempt.book.id %}" class="btn btn-outline-info">
-                            {% trans "Back to Book" %}
-                        </a>
-                    </div>
-                </div>
-            </div>
+<div class="container">
+    <h2>Quiz Results</h2>
+    
+    <div class="score-summary">
+        <h3>Your Score: {{ attempt.score }}/{{ user_answers|length }}</h3>
+        <p>Completed: {{ attempt.completed_at|date:"M d, Y H:i" }}</p>
+    </div>
+
+    {% for answer in user_answers %}
+    <div class="question-result" style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
+        <h4>Question {{ forloop.counter }}</h4>
+        <p><strong>{{ answer.question.question_text }}</strong></p>
+        
+        <div class="answer-comparison">
+            <p><strong>Your Answer:</strong> {{ answer.user_answer }}</p>
+            {% if answer.correct_answers %}
+            <p><strong>Expected Understanding:</strong> {{ answer.correct_answers|join:", " }}</p>
+            {% endif %}
         </div>
+
+        <div class="result-indicator">
+            {% if answer.is_correct %}
+            <span style="color: green; font-weight: bold;">✅ Correct</span>
+            {% else %}
+            <span style="color: red; font-weight: bold;">❌ Needs Review</span>
+            {% endif %}
+        </div>
+
+        {% if answer.prabhupada_commentary %}
+        <div class="prabhupada-commentary" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 5px;">
+            <h5>📖 Prabhupada's Commentary:</h5>
+            <p>{{ answer.prabhupada_commentary }}</p>
+        </div>
+        {% endif %}
+
+        {% if answer.additional_guidance %}
+        <div class="additional-guidance" style="margin-top: 15px; padding: 15px; background: #e8f4fd; border-radius: 5px;">
+            <h5>💡 Guidance:</h5>
+            <p>{{ answer.additional_guidance }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Safe essay reflection handling with custom filter -->
+        {% with essay_key=answer.question.id|stringformat:"s" %}
+            {% if essays %}
+                {% with student_essay=essays|get_item:essay_key %}
+                    {% if student_essay %}
+                    <div class="student-reflection" style="margin-top: 15px; padding: 15px; background: #f0f8f0; border-radius: 5px;">
+                        <h5>🧠 Your Reflection:</h5>
+                        <p>"{{ student_essay|truncatewords:30 }}"</p>
+                    </div>
+                    {% endif %}
+                {% endwith %}
+            {% endif %}
+        {% endwith %}
+    </div>
+    <hr>
+    {% endfor %}
+
+    <div class="navigation" style="margin-top: 30px;">
+        <a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}" class="btn btn-primary">
+            Back to Quiz Dashboard
+        </a>
     </div>
 </div>
 {% endblock %}
