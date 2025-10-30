@@ -1,0 +1,13 @@
+{% extends "admin/change_form.html" %}
+{% load i18n admin_urls %}
+
+{% block object-tools %}
+<div class="object-tools">
+    {% block object-tools-items %}
+    <a href="../bulk-paste-questions/" class="btn btn-high btn-success" style="background: #70bf2b; color: white; padding: 8px 12px; text-decoration: none; border-radius: 4px; margin-right: 10px;">
+        📤 Bulk Upload Questions
+    </a>
+    {{ block.super }}
+    {% endblock %}
+</div>
+{% endblock %}

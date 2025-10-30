@@ -42,13 +42,16 @@ class QuizModuleAdmin(admin.ModelAdmin):
 
 @admin.register(QuizQuestion)
 class QuizQuestionAdmin(admin.ModelAdmin):
+    # KEEP the change_list_template for the change list page
     change_list_template = "admin/study_app/quizquestion_change_list.html"
+    # ADD custom template for add form
+    add_form_template = "admin/study_app/quizquestion_add_form.html"
+    
     list_display = ['book', 'module', 'chapter', 'question_text_short', 'verse_reference']
     list_filter = ['book', 'module', 'chapter']
     search_fields = ['question_text', 'prabhupada_commentary', 'verse_reference']
     ordering = ['module', 'chapter', 'order']
     
-    # ONLY KEEP THE BULK FUNCTIONALITY
     def get_urls(self):
         urls = super().get_urls()
         custom_urls = [
@@ -72,46 +75,54 @@ class QuizQuestionAdmin(admin.ModelAdmin):
                     questions_list = []
                     for line in questions_text.splitlines():
                         line = line.strip()
-                        if line and not line.isspace():  # Only non-empty, non-whitespace lines
+                        if line:  # Only non-empty lines
                             questions_list.append(line)
                     
-                    print(f"DEBUG: Split into {len(questions_list)} questions from bulk text")
-                    
-                    last_question = QuizQuestion.objects.filter(module=module).order_by('-order').first()
-                    next_order = last_question.order + 1 if last_question else 1
-                    
                     created_count = 0
-                    for i, question_text in enumerate(questions_list):
-                        QuizQuestion.objects.create(
-                            book=book,
-                            module=module,
-                            chapter=chapter,
-                            question_text=question_text,
-                            order=next_order + i
-                        )
-                        created_count += 1
+                    for i, question_text in enumerate(questions_list, start=1):
+                        # Skip if question already exists
+                        if not QuizQuestion.objects.filter(
+                            book=book, 
+                            module=module, 
+                            question_text=question_text
+                        ).exists():
+                            
+                            QuizQuestion.objects.create(
+                                book=book,
+                                module=module,
+                                chapter=chapter,
+                                question_text=question_text,
+                                order=i
+                            )
+                            created_count += 1
                     
-                    messages.success(request, f'Created {created_count} questions!')
+                    if created_count > 0:
+                        messages.success(request, f'Successfully created {created_count} new questions!')
+                    else:
+                        messages.warning(request, 'No new questions created. They may already exist.')
+                        
                     return redirect('admin:study_app_quizquestion_changelist')
                     
-                except Exception as e:
-                    messages.error(request, f'Error: {str(e)}')
+                except (Book.DoesNotExist, QuizModule.DoesNotExist):
+                    messages.error(request, 'Invalid book or module selected.')
         
+        # GET request - show the form
         books = Book.objects.all()
         modules = QuizModule.objects.all()
-        
-        return render(request, 'admin/study_app/bulk_paste_form.html', {
+        context = {
             'books': books,
             'modules': modules,
-        })
+            'title': 'Bulk Upload Questions'
+        }
+        return render(request, 'admin/study_app/bulk_paste_form.html', context)
     
     def question_text_short(self, obj):
-        return obj.question_text[:75] + "..." if len(obj.question_text) > 75 else obj.question_text
-    question_text_short.short_description = 'Question'
+        return obj.question_text[:100] + '...' if len(obj.question_text) > 100 else obj.question_text
+    question_text_short.short_description = 'Question Text'
 
 @admin.register(QuizAttempt)
 class QuizAttemptAdmin(admin.ModelAdmin):
-    list_display = ['user', 'book', 'module', 'score', 'total_questions', 'completed_at']
-    list_filter = ['book', 'module', 'completed_at']
-    readonly_fields = ['completed_at']
+    list_display = ['user', 'module', 'score', 'completed_at']
+    list_filter = ['module', 'completed_at']
+    readonly_fields = ['completed_at', 'score', 'total_questions']
     ordering = ['-completed_at']
