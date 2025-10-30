@@ -2,9 +2,11 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.utils.translation import gettext as _
-from .models import Book, QuizModule, QuizQuestion, QuizAttempt
+from .models import Book, QuizModule, QuizQuestion, QuizAttempt, BookPDF
 from .forms import QuizAnswerForm
 from study_app.ai_service_enhanced import get_enhanced_ai_feedback as get_ai_feedback
+from .intelligent_answer_generator import IntelligentAnswerGenerator
+from .answer_evaluator import AnswerEvaluator
 
 @login_required
 def quiz_dashboard(request, book_id):
@@ -72,61 +74,67 @@ def take_quiz(request, book_id, module_id):
     }
     return render(request, 'study_app/take_quiz.html', context)
 
+
 def quiz_results(request, attempt_id):
-    """Show quiz results with feedback"""
+    """Display quiz results with intelligent feedback"""
     attempt = get_object_or_404(QuizAttempt, id=attempt_id)
-    questions = QuizQuestion.objects.filter(module=attempt.module, book=attempt.book)
     
-    # Get user answers with correctness and AI feedback
-    user_answers = []
-    essays = {}
-    for question in questions:
-        user_answer_raw = attempt.answers.get(str(question.id), '')
-        # Check for essay answers
-        essay_key = f'essay_{question.id}'
-        essay_answer = request.POST.get(essay_key, '') if request.method == 'POST' else ''
-        if essay_answer:
-            essays[str(question.id)] = essay_answer
-        
-        # Convert choice index to display text
-        user_answer_display = user_answer_raw
-        if user_answer_raw.isdigit():
-            try:
-                choices = question.get_choices_list()
-                choice_index = int(user_answer_raw)
-                if 0 <= choice_index < len(choices):
-                    user_answer_display = choices[choice_index]
-            except:
-                pass
-        
-        is_correct = question.check_answer(user_answer_raw)
-        correct_answers_list = question.get_correct_answers_list()
-        
-        # Generate AI feedback
-        ai_feedback = get_ai_feedback(
-            question_text=question.question_text,
-            user_answer=user_answer_display,
-            correct_answers=', '.join(correct_answers_list) if correct_answers_list else question.correct_answers,
-            verse_reference=question.verse_reference
-        )
-        
-        user_answers.append({
-            'question': question,
-            'user_answer': user_answer_display,
-            'is_correct': is_correct,
-            'correct_answers': correct_answers_list,
-            'prabhupada_commentary': ai_feedback['prabhupada_commentary'],
-            'additional_guidance': ai_feedback['additional_guidance'],
-            'verse_reference': question.verse_reference,
-        })
+    # Generate evaluation results from answers
+    evaluation_results = []
+    answers = attempt.answers if attempt.answers else {}
+    evaluator = AnswerEvaluator()
+    
+    for qid, user_answer in answers.items():
+        try:
+            question = QuizQuestion.objects.get(id=int(qid))
+            is_correct, feedback = evaluator.evaluate_answer(int(qid), user_answer)
+            
+            # Get relevant commentary
+            book_pdf = BookPDF.objects.filter(book=question.book).first()
+            if book_pdf:
+                generator = IntelligentAnswerGenerator(book_pdf)
+                commentary = generator.find_relevant_commentary(question.question_text, question.chapter)
+            else:
+                commentary = "Study the scriptures carefully under proper guidance."
+            
+            # Generate guidance
+            if book_pdf:
+                guidance = generator.generate_personalized_guidance(
+                    question.question_text, user_answer, is_correct
+                )
+            else:
+                guidance = "Regular study and chanting will deepen spiritual realizations!"
+            
+            evaluation_results.append({
+                'question_id': qid,
+                'question_text': question.question_text,
+                'user_answer': user_answer,
+                'is_correct': is_correct,
+                'feedback': feedback,
+                'commentary': commentary,
+                'guidance': guidance,
+                'score': 1 if is_correct else 0
+            })
+        except Exception as e:
+            print(f"Error evaluating question {qid}: {e}")
+            # Add fallback result
+            evaluation_results.append({
+                'question_id': qid,
+                'question_text': f"Question {qid}",
+                'user_answer': user_answer,
+                'is_correct': len(user_answer.strip()) > 0,
+                'feedback': "Answer submitted",
+                'commentary': "Focus on regular study of Bhagavad-gita",
+                'guidance': "Continue your spiritual journey with determination",
+                'score': 1 if len(user_answer.strip()) > 0 else 0
+            })
     
     context = {
         'attempt': attempt,
-        'user_answers': user_answers,
-        'essays': essays,
-        'feedback': attempt.get_feedback(),
+        'results': evaluation_results,
     }
     return render(request, 'study_app/quiz_results.html', context)
+
 
 @login_required
 def add_quiz_question(request, book_id):

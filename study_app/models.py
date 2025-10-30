@@ -231,3 +231,6 @@ class BookPDF(models.Model):
     
     def __str__(self):
         return f"PDF for {self.book.title}"
+
+# Add evaluation_results field to QuizAttempt if it doesn't exist
+# If this causes issues, we'll create a proper migration
