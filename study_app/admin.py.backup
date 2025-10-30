@@ -42,7 +42,6 @@ class QuizModuleAdmin(admin.ModelAdmin):
 
 @admin.register(QuizQuestion)
 class QuizQuestionAdmin(admin.ModelAdmin):
-    change_list_template = "admin/study_app/quizquestion_change_list.html"
     list_display = ['book', 'module', 'chapter', 'question_text_short', 'verse_reference']
     list_filter = ['book', 'module', 'chapter']
     search_fields = ['question_text', 'prabhupada_commentary', 'verse_reference']
@@ -68,14 +67,7 @@ class QuizQuestionAdmin(admin.ModelAdmin):
                     book = Book.objects.get(id=book_id)
                     module = QuizModule.objects.get(id=module_id)
                     
-                    # BETTER SPLITTING: Handle various line endings and empty lines
-                    questions_list = []
-                    for line in questions_text.splitlines():
-                        line = line.strip()
-                        if line and not line.isspace():  # Only non-empty, non-whitespace lines
-                            questions_list.append(line)
-                    
-                    print(f"DEBUG: Split into {len(questions_list)} questions from bulk text")
+                    questions_list = [q.strip() for q in questions_text.split('\n') if q.strip()]
                     
                     last_question = QuizQuestion.objects.filter(module=module).order_by('-order').first()
                     next_order = last_question.order + 1 if last_question else 1

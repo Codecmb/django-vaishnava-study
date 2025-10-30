@@ -351,3 +351,36 @@ def bulk_upload_questions(request, book_id, module_id):
         'module': module,
     }
     return render(request, 'study_app/bulk_upload_questions.html', context)
+
+def bulk_upload_questions(request, book_id):
+    """Frontend bulk upload questions page"""
+    book = get_object_or_404(Book, id=book_id)
+    
+    context = {
+        'book': book,
+    }
+    return render(request, 'study_app/bulk_upload_questions.html', context)
+
+def bulk_upload_questions(request, book_id):
+    """Frontend bulk upload questions page"""
+    from .models import Book
+    from django.shortcuts import get_object_or_404, render
+    
+    book = get_object_or_404(Book, id=book_id)
+    
+    context = {
+        'book': book,
+    }
+    return render(request, 'study_app/bulk_upload_questions.html', context)
+
+def bulk_upload_questions(request, book_id):
+    """Frontend bulk upload questions page"""
+    from .models import Book
+    from django.shortcuts import get_object_or_404, render
+    
+    book = get_object_or_404(Book, id=book_id)
+    
+    context = {
+        'book': book,
+    }
+    return render(request, 'study_app/bulk_upload_questions.html', context)
