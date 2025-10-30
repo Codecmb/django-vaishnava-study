@@ -1,71 +1,87 @@
-{% extends "study_app/base.html" %}
-{% load i18n %}
-{% load dictionary_filters %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Quiz Results - {{ attempt.book.title }}{% endblock %}
 
 {% block content %}
-<div class="container">
-    <h2>Quiz Results</h2>
-    
-    <div class="score-summary">
-        <h3>Your Score: {{ attempt.score }}/{{ user_answers|length }}</h3>
-        <p>Completed: {{ attempt.completed_at|date:"M d, Y H:i" }}</p>
-    </div>
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Quiz Results</h2>
+            <div class="card mb-4">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{{ attempt.book.title }} - {{ attempt.module.name }}</h4>
+                </div>
+                <div class="card-body">
+                    <div class="row text-center">
+                        <div class="col-md-4">
+                            <h3>{{ total_score }}/{{ total_questions }}</h3>
+                            <p class="text-muted">Score</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>{{ percentage|floatformat:1 }}%</h3>
+                            <p class="text-muted">Percentage</p>
+                        </div>
+                        <div class="col-md-4">
+                            <h3>{% if passed %}PASSED ✅{% else %}NEEDS IMPROVEMENT 🔄{% endif %}</h3>
+                            <p class="text-muted">Status</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    {% for answer in user_answers %}
-    <div class="question-result" style="margin: 20px 0; padding: 20px; border: 1px solid #ddd; border-radius: 8px;">
-        <h4>Question {{ forloop.counter }}</h4>
-        <p><strong>{{ answer.question.question_text }}</strong></p>
-        
-        <div class="answer-comparison">
-            <p><strong>Your Answer:</strong> {{ answer.user_answer }}</p>
-            {% if answer.correct_answers %}
-            <p><strong>Expected Understanding:</strong> {{ answer.correct_answers|join:", " }}</p>
-            {% endif %}
-        </div>
-
-        <div class="result-indicator">
-            {% if answer.is_correct %}
-            <span style="color: green; font-weight: bold;">✅ Correct</span>
-            {% else %}
-            <span style="color: red; font-weight: bold;">❌ Needs Review</span>
-            {% endif %}
-        </div>
-
-        {% if answer.prabhupada_commentary %}
-        <div class="prabhupada-commentary" style="margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 5px;">
-            <h5>📖 Prabhupada's Commentary:</h5>
-            <p>{{ answer.prabhupada_commentary }}</p>
-        </div>
-        {% endif %}
-
-        {% if answer.additional_guidance %}
-        <div class="additional-guidance" style="margin-top: 15px; padding: 15px; background: #e8f4fd; border-radius: 5px;">
-            <h5>💡 Guidance:</h5>
-            <p>{{ answer.additional_guidance }}</p>
-        </div>
-        {% endif %}
-
-        <!-- Safe essay reflection handling with custom filter -->
-        {% with essay_key=answer.question.id|stringformat:"s" %}
-            {% if essays %}
-                {% with student_essay=essays|get_item:essay_key %}
-                    {% if student_essay %}
-                    <div class="student-reflection" style="margin-top: 15px; padding: 15px; background: #f0f8f0; border-radius: 5px;">
-                        <h5>🧠 Your Reflection:</h5>
-                        <p>"{{ student_essay|truncatewords:30 }}"</p>
+            <h3>Detailed Analysis</h3>
+            {% for result in results %}
+            <div class="card mb-3 {% if result.is_correct %}border-success{% else %}border-warning{% endif %}">
+                <div class="card-header {% if result.is_correct %}bg-success text-white{% else %}bg-warning{% endif %}">
+                    <strong>Question {{ forloop.counter }}</strong> 
+                    <span class="float-end">
+                        {% if result.is_correct %}✅ Correct (+{{ result.score }}){% else %}❌ Needs Review (0){% endif %}
+                    </span>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">{{ result.question_text }}</h5>
+                    
+                    <div class="mb-3">
+                        <strong>Your Answer:</strong>
+                        <p class="alert {% if result.is_correct %}alert-success{% else %}alert-warning{% endif %}">
+                            {{ result.user_answer }}
+                        </p>
+                    </div>
+                    
+                    {% if not result.is_correct %}
+                    <div class="mb-3">
+                        <strong>Expected Answer:</strong>
+                        <p class="alert alert-info">{{ result.correct_answer }}</p>
                     </div>
                     {% endif %}
-                {% endwith %}
-            {% endif %}
-        {% endwith %}
-    </div>
-    <hr>
-    {% endfor %}
-
-    <div class="navigation" style="margin-top: 30px;">
-        <a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}" class="btn btn-primary">
-            Back to Quiz Dashboard
-        </a>
+                    
+                    <div class="mb-3">
+                        <strong>Feedback:</strong>
+                        <p>{{ result.feedback }}</p>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <strong>From Prabhupada's Commentary:</strong>
+                        <div class="alert alert-secondary">
+                            {{ result.commentary|linebreaks }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            
+            <div class="mt-4">
+                <a href="{% url 'study_app:quiz_dashboard' book_id=attempt.book.id %}" class="btn btn-primary">
+                    Back to Quiz Dashboard
+                </a>
+                {% if not passed %}
+                <a href="{% url 'study_app:take_quiz' book_id=attempt.book.id module_id=attempt.module.id %}" class="btn btn-warning">
+                    Try Again
+                </a>
+                {% endif %}
+            </div>
+        </div>
     </div>
 </div>
 {% endblock %}

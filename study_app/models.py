@@ -234,3 +234,25 @@ class BookPDF(models.Model):
 
 # Add evaluation_results field to QuizAttempt if it doesn't exist
 # If this causes issues, we'll create a proper migration
+
+# Add this method to the QuizAttempt class if it doesn't exist
+def calculate_score(self):
+    """Calculate score using book-based evaluation"""
+    from .book_based_evaluator import book_evaluator
+    score = 0
+    for question_id, user_answer in self.answers.items():
+        try:
+            question = QuizQuestion.objects.get(id=question_id)
+            is_correct, feedback, commentary = book_evaluator.evaluate_answer(
+                question=question.question_text,
+                user_answer=user_answer
+            )
+            if is_correct:
+                score += 1
+        except QuizQuestion.DoesNotExist:
+            continue
+    
+    self.score = score
+    self.total_questions = len(self.answers)
+    self.save()
+    return score
