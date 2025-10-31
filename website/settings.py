@@ -151,3 +151,10 @@ LOGOUT_REDIRECT_URL = '/'
 
 # For now, using fallback mode which provides philosophical guidance
 # based on Srila Prabhupada's teachings without external API calls
+
+# Silence PyPDF2 warnings
+import logging
+logging.getLogger('PyPDF2').setLevel(logging.CRITICAL)
+logging.getLogger('pypdf').setLevel(logging.CRITICAL)
+
+
