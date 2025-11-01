@@ -1,0 +1,48 @@
+{% extends "admin/base_site.html" %}
+
+{% block content %}
+<h1>Bulk Paste Questions</h1>
+
+<form method="post">
+    {% csrf_token %}
+    
+    <div style="margin: 20px 0;">
+        <label><strong>Book:</strong></label>
+        <select name="book" required style="display: block; padding: 8px; width: 400px; margin-top: 5px;">
+            <option value="">-- Select Book --</option>
+            {% for book in books %}
+            <option value="{{ book.id }}">{{ book.title }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div style="margin: 20px 0;">
+        <label><strong>Module:</strong></label>
+        <select name="module" required style="display: block; padding: 8px; width: 400px; margin-top: 5px;">
+            <option value="">-- Select Module --</option>
+            {% for module in modules %}
+            <option value="{{ module.id }}">{{ module.course.name }} - {{ module.name }}</option>
+            {% endfor %}
+        </select>
+    </div>
+    
+    <div style="margin: 20px 0;">
+        <label><strong>Chapter:</strong></label>
+        <input type="text" name="chapter" value="Chapter 1" style="padding: 8px; width: 400px; margin-top: 5px;">
+    </div>
+    
+    <div style="margin: 20px 0;">
+        <label><strong>Questions (one per line):</strong></label>
+        <textarea name="questions_text" rows="15" style="width: 100%; padding: 10px; margin-top: 5px;" placeholder="Paste questions here, one question per line..."></textarea>
+    </div>
+    
+    <div style="margin: 20px 0;">
+        <button type="submit" style="padding: 10px 20px; background: #4CAF50; color: white; border: none; border-radius: 4px;">
+            Create Questions
+        </button>
+        <a href="../../" style="padding: 10px 20px; background: #757575; color: white; text-decoration: none; border-radius: 4px; margin-left: 10px;">
+            Cancel
+        </a>
+    </div>
+</form>
+{% endblock %}

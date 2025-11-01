@@ -1,0 +1,61 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+
+{% block title %}{% trans "Bulk Upload Questions" %} - {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-8 offset-md-2">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">{% trans "Bulk Upload Questions" %}</h4>
+                </div>
+                <div class="card-body">
+                    <p class="text-muted">
+                        {% trans "Enter one question per line. Multiple choice options will be automatically generated based on question content." %}
+                    </p>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="chapter" class="form-label">{% trans "Chapter" %}</label>
+                            <input type="text" class="form-control" id="chapter" name="chapter" value="Chapter 1" required>
+                        </div>
+                        
+                        <div class="mb-3">
+                            <label for="questions_text" class="form-label">{% trans "Questions (one per line)" %}</label>
+                            <textarea class="form-control" id="questions_text" name="questions_text" rows="15" 
+                                      placeholder="1. Who is Krsna?&#10;2. What is the aim of Krsna Consciousness?&#10;3. How do we develop love for God?" required></textarea>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button type="submit" class="btn btn-success btn-lg">
+                                {% trans "Upload Questions & Generate Choices" %}
+                            </button>
+                            <a href="{% url 'study_app:quiz_dashboard' book.id %}" class="btn btn-secondary">
+                                {% trans "Cancel" %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="card mt-4">
+                <div class="card-header bg-info text-white">
+                    <h5 class="mb-0">{% trans "How it works" %}</h5>
+                </div>
+                <div class="card-body">
+                    <ul>
+                        <li>{% trans "Enter questions in any format (numbered or unnumbered)" %}</li>
+                        <li>{% trans "Multiple choice options are automatically generated" %}</li>
+                        <li>{% trans "Correct answers are based on Srila Prabhupada's teachings" %}</li>
+                        <li>{% trans "Distractors are plausible but incorrect options" %}</li>
+                        <li>{% trans "Options are randomly shuffled for each question" %}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
