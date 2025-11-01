@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Quiz Dashboard - {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Quiz Dashboard - {{ book.title }}</h2>
+    
+    <div class="row">
+        <div class="col-md-8">
+            <h4>Available Modules</h4>
+            {% if modules %}
+            <div class="row">
+                {% for module in modules %}
+                <div class="col-md-6 mb-3">
+                    <div class="card quiz-card">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ module.name }}</h5>
+                            <p class="card-text">{{ module.description }}</p>
+                            <p class="card-text"><small class="text-muted">{{ module.chapters_range }}</small></p>
+                            <a href="{% url 'study_app:take_quiz' book_id=book.id module_id=module.id %}" class="btn btn-primary">
+                                Take Quiz
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <div class="alert alert-info">
+                No quiz modules available for this book yet.
+            </div>
+            {% endif %}
+        </div>
+        
+        <div class="col-md-4">
+            <h4>Recent Attempts</h4>
+            {% if recent_attempts %}
+            <div class="list-group">
+                {% for attempt in recent_attempts %}
+                <div class="list-group-item">
+                    <h6 class="mb-1">{{ attempt.module.name }}</h6>
+                    <small>Score: {{ attempt.score }}/{{ attempt.total_questions }}</small>
+                    <br>
+                    <small class="text-muted">{{ attempt.completed_at|date:"M d, Y" }}</small>
+                </div>
+                {% endfor %}
+            </div>
+            {% else %}
+            <p class="text-muted">No recent quiz attempts.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

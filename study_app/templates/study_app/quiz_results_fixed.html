@@ -1,0 +1,56 @@
+{% extends "study_app/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container">
+    <h2>Quiz Results</h2>
+    
+    <div class="score-summary">
+        <h3>Your Score: {{ attempt.score }}/{{ user_answers|length }}</h3>
+        <p>Completed: {{ attempt.completed_at|date:"M d, Y H:i" }}</p>
+    </div>
+
+    {% for answer in user_answers %}
+    <div class="question-result">
+        <h4>Question {{ forloop.counter }}</h4>
+        <p><strong>{{ answer.question.question_text }}</strong></p>
+        
+        <div class="answer-comparison">
+            <p><strong>Your Answer:</strong> {{ answer.user_answer }}</p>
+            {% if answer.correct_answers %}
+            <p><strong>Expected Understanding:</strong> {{ answer.correct_answers|join:", " }}</p>
+            {% endif %}
+        </div>
+
+        {% if answer.prabhupada_commentary %}
+        <div class="prabhupada-commentary">
+            <h5>📖 Prabhupada's Commentary:</h5>
+            <p>{{ answer.prabhupada_commentary }}</p>
+        </div>
+        {% endif %}
+
+        {% if answer.additional_guidance %}
+        <div class="additional-guidance">
+            <h5>💡 Guidance:</h5>
+            <p>{{ answer.additional_guidance }}</p>
+        </div>
+        {% endif %}
+
+        <!-- Safe essay reflection handling -->
+        {% if essays and answer.question.id|stringformat:"s" in essays %}
+        <div class="student-reflection">
+            <h5>🧠 Your Reflection:</h5>
+            <p>"{{ essays[answer.question.id|stringformat:"s"]|truncatewords:30 }}"</p>
+        </div>
+        {% endif %}
+    </div>
+    <hr>
+    {% endfor %}
+
+    <div class="navigation">
+        <a href="{% url 'study_app:quiz_dashboard' attempt.book.id %}" class="btn btn-primary">
+            Back to Quiz Dashboard
+        </a>
+    </div>
+</div>
+{% endblock %}

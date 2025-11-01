@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="{{ request.LANGUAGE_CODE }}">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Vaishnava Study App{% endblock %}</title>
+    {% load static %}
+    <link href="{% static 'study_app/css/main.css' %}" rel="stylesheet">
+    <link href="{% static 'study_app/css/color-override.css' %}" rel="stylesheet">
+    {% block extra_css %}{% endblock %}
+</head>
+<body>
+    {% include 'vaishnava_study/includes/navbar.html' %}
+    
+    <main class="container">
+        {% block content %}
+        {% endblock %}
+    </main>
+    
+    {% include 'vaishnava_study/includes/footer.html' %}
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const dropdown = document.querySelector('.dropdown');
+            if (dropdown) {
+                const dropdownLink = dropdown.querySelector('.nav-link');
+                const dropdownMenu = dropdown.querySelector('.dropdown-menu');
+                
+                dropdownLink.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const isVisible = dropdownMenu.style.display === 'block';
+                    dropdownMenu.style.display = isVisible ? 'none' : 'block';
+                });
+                
+                document.addEventListener('click', function(e) {
+                    if (!dropdown.contains(e.target)) {
+                        dropdownMenu.style.display = 'none';
+                    }
+                });
+            }
+        });
+    </script>
+    {% block extra_js %}{% endblock %}
+</body>
+</html>

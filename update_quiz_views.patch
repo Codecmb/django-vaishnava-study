@@ -1,0 +1,89 @@
+--- study_app/views.py.backup
++++ study_app/views.py
+@@ -1,6 +1,8 @@
+ from django.shortcuts import render, get_object_or_404
+ from django.http import JsonResponse
+ from django.views.decorators.csrf import csrf_exempt
++from .intelligent_answer_generator import IntelligentAnswerGenerator
++from .answer_evaluator import AnswerEvaluator
+ import json
+ 
+ def take_quiz(request, book_id, module_id=None):
+@@ -15,6 +17,7 @@
+         'questions': questions,
+     })
+ 
++@csrf_exempt
+ def submit_quiz(request):
+     if request.method == 'POST':
+         try:
+@@ -22,27 +25,46 @@
+             book_id = data.get('book_id')
+             answers = data.get('answers', {})
+             
++            evaluator = AnswerEvaluator()
+             results = []
+             total_score = 0
+             
+             for question_id, user_answer in answers.items():
+-                question = QuizQuestion.objects.get(id=question_id)
+-                # For now, we'll just check if answer is not empty
+-                # In a real implementation, you'd compare with correct answers
+-                is_correct = bool(user_answer.strip())
+-                score = 1 if is_correct else 0
+-                total_score += score
+-                
+-                results.append({
+-                    'question_id': question_id,
+-                    'question_text': question.question_text,
+-                    'user_answer': user_answer,
+-                    'is_correct': is_correct,
+-                    'feedback': 'Good attempt!' if is_correct else 'Needs review',
+-                    'commentary': getattr(question, 'prabhupada_commentary', 'Study the scriptures carefully.'),
+-                    'guidance': 'Regular study will strengthen understanding.',
+-                    'score': score
+-                })
++                try:
++                    question = QuizQuestion.objects.get(id=question_id)
++                    
++                    # Evaluate written answer intelligently
++                    is_correct, answer_feedback = evaluator.evaluate_answer(
++                        int(question_id), user_answer
++                    )
++                    
++                    # Get relevant Prabhupada commentary
++                    from .models import BookPDF
++                    book_pdf = BookPDF.objects.filter(book=question.book).first()
++                    if book_pdf:
++                        generator = IntelligentAnswerGenerator(book_pdf)
++                        commentary = generator.find_relevant_commentary(
++                            question.question_text, question.chapter
++                        )
++                    else:
++                        commentary = "Study Bhagavad-gita As It Is carefully under proper guidance."
++                    
++                    # Generate personalized guidance
++                    guidance = generator.generate_personalized_guidance(
++                        question.question_text, user_answer, is_correct
++                    )
++                    
++                    score = 1 if is_correct else 0
++                    total_score += score
++                    
++                    results.append({
++                        'question_id': question_id,
++                        'question_text': question.question_text,
++                        'user_answer': user_answer,
++                        'is_correct': is_correct,
++                        'feedback': answer_feedback,
++                        'commentary': commentary,
++                        'guidance': guidance,
++                        'score': score
++                    })
++                    
++                except Exception as e:
++                    print(f"Error evaluating question {question_id}: {e}")
++                    continue
+             
+             if request.user.is_authenticated:
+                 from .models import QuizAttempt

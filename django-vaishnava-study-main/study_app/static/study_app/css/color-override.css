@@ -1,0 +1,100 @@
+/* Color Override with Bootstrap-like Classes */
+
+/* Primary Colors */
+.bg-primary {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%) !important;
+}
+
+.bg-primary-subtle {
+    background: #f0f9ff !important;
+}
+
+/* Body and background */
+body {
+    background: #f8fafc !important;
+}
+
+.bg-body {
+    background: #f8fafc !important;
+}
+
+/* Navbar */
+.navbar {
+    background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%) !important;
+    border-bottom: 3px solid #d97706 !important;
+}
+
+.nav-link {
+    color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.nav-link:hover {
+    color: white !important;
+    background-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Cards and boxes with distinct colors */
+.course-card,
+.bg-card {
+    background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%) !important;
+    border: 1px solid #e2e8f0 !important;
+    border-left: 4px solid #d97706 !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Reference boxes with different colors */
+.ref-link,
+.bg-ref {
+    background: linear-gradient(135deg, #ffffff 0%, #f0fdf4 100%) !important;
+    border: 1px solid #bbf7d0 !important;
+    border-left: 4px solid #10b981 !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05) !important;
+}
+
+/* Alternative box colors for variety */
+.bg-success-subtle {
+    background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%) !important;
+    border: 1px solid #bbf7d0 !important;
+}
+
+.bg-info-subtle {
+    background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%) !important;
+    border: 1px solid #7dd3fc !important;
+}
+
+.bg-warning-subtle {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%) !important;
+    border: 1px solid #fcd34d !important;
+}
+
+/* Buttons */
+.book-link,
+.btn-primary {
+    background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%) !important;
+    color: white !important;
+    border: none !important;
+}
+
+.language-switcher {
+    background: #d97706 !important;
+    color: white !important;
+}
+
+/* Text colors */
+.text-primary { color: #1e40af !important; }
+.text-success { color: #059669 !important; }
+.text-warning { color: #d97706 !important; }
+
+/* External link indicator */
+.nav-link[target="_blank"]::after {
+    content: " ↗";
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+/* Hover effects */
+.course-card:hover,
+.ref-link:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1) !important;
+}

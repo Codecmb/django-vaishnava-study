@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Take Quiz - {{ book.title }}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Take Quiz: {{ module.name }}</h2>
+    <p class="lead">{{ book.title }} - {{ module.chapters_range }}</p>
+    
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for question in questions %}
+        <div class="card mb-4">
+            <div class="card-header">
+                <strong>Question {{ forloop.counter }}</strong>
+                {% if question.chapter %}
+                <span class="float-end text-muted">{{ question.chapter }}</span>
+                {% endif %}
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">{{ question.question_text }}</h5>
+                
+                <!-- Multiple Choice Options (if available) -->
+                {% if question.multiple_choice_options %}
+                <div class="form-group mb-3">
+                    <label class="form-label"><strong>Select an option:</strong></label>
+                    {% for choice in question.get_choices_list %}
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" 
+                               name="question_{{ question.id }}" 
+                               id="question_{{ question.id }}_{{ forloop.counter }}" 
+                               value="{{ choice }}">
+                        <label class="form-check-label" for="question_{{ question.id }}_{{ forloop.counter }}">
+                            {{ choice }}
+                        </label>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                <!-- STUDENT INPUT TEXT BOX - THIS IS CRITICAL -->
+                <div class="form-group">
+                    <label class="form-label"><strong>Your Detailed Answer:</strong></label>
+                    <textarea class="form-control" name="question_{{ question.id }}" 
+                              rows="4" placeholder="Write your understanding here based on Srila Prabhupada's teachings..."></textarea>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+        
+        <div class="mt-4">
+            <button type="submit" class="btn btn-success btn-lg">Submit Quiz</button>
+            <a href="{% url 'study_app:quiz_dashboard' book_id=book.id %}" class="btn btn-secondary">Cancel</a>
+        </div>
+    </form>
+</div>
+{% endblock %}

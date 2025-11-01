@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Static Files Test</title>
+    <link rel="stylesheet" href="{% static 'study_app/css/main.css' %}?v=2.0">
+</head>
+<body style="padding: 20px; background: #1a1a2e; color: white;">
+    <h1>Static Files Test Page</h1>
+    
+    <div class="card">
+        <h2 class="text-gold">CSS Test</h2>
+        <p>If this card has styling (background, border, shadow), then CSS is working.</p>
+        <button class="book-link">Test Button</button>
+    </div>
+    
+    <div class="material-card mt-20">
+        <h3 class="text-primary">Material Card Test</h3>
+        <p>This should have different styling than the regular card.</p>
+        <span class="tag">Tag Test</span>
+        <span class="tag tag-green">Green Tag</span>
+    </div>
+    
+    <script src="{% static 'study_app/js/main.js' %}?v=2.0"></script>
+    <script>
+        console.log("JavaScript loaded successfully!");
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log("DOM loaded - JS is working!");
+        });
+    </script>
+</body>
+</html>

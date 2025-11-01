@@ -1,0 +1,429 @@
+{% extends 'study_app/base.html' %}
+{% load i18n %}
+{% load quiz_extras %}\n
+
+{% block title %}{% trans "Take Quiz" %} - {{ module.name }}
+
+<script>
+// This will be called when we implement the feedback system
+function populateFeedback(questionId, mcScore, writtenScore, feedbackText, commentary) {
+    const feedbackBox = document.getElementById('system_feedback_' + questionId);
+    const commentaryBox = document.getElementById('commentary_' + questionId);
+    
+    // Populate feedback box
+    feedbackBox.value = `Multiple Choice: ${mcScore}/100\nWritten Answer: ${writtenScore}/100\n\n${feedbackText}`;
+    
+    // Populate commentary
+    if (commentary) {
+        commentaryBox.innerHTML = commentary;
+    }
+}
+
+// For demo purposes - this would be called after form submission
+// In production, this would be populated from server response
+document.addEventListener('DOMContentLoaded', function() {
+    // This is where the feedback would be populated after quiz submission
+    console.log('Feedback system ready - will populate after submission');
+});
+</script>
+<script>
+function validateAnswer(questionId) {
+    const answerInput = document.getElementById('written_answer_' + questionId);
+    const answerText = answerInput.value.trim();
+    
+    if (!answerText) {
+        alert('Please write your answer before validating.');
+        return;
+    }
+    
+    const feedbackDiv = document.getElementById('feedback-' + questionId);
+    const commentaryDiv = document.getElementById('commentary-' + questionId);
+    
+    feedbackDiv.innerHTML = '<div class="loading">Analyzing your answer...</div>';
+    commentaryDiv.innerHTML = '<div class="loading">Loading commentary...</div>';
+    
+    fetch('/question/' + questionId + '/validate/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            answer: answerText
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            feedbackDiv.innerHTML = '<div class="ai-feedback not-aligned">Error: ' + data.error + '</div>';
+            return;
+        }
+        
+        const alignedClass = data.is_aligned ? 'aligned' : 'not-aligned';
+        feedbackDiv.innerHTML = `
+            <div class="ai-feedback ${alignedClass}">
+                <strong>AI Analysis</strong><br>
+                Score: ${data.score}/100<br>
+                ${data.feedback}<br>
+                Aligned: ${data.is_aligned ? 'Yes' : 'No'}
+            </div>
+        `;
+        
+        if (data.prabhupada_commentary) {
+            commentaryDiv.innerHTML = data.prabhupada_commentary;
+        }
+    })
+    .catch(error => {
+        feedbackDiv.innerHTML = '<div class="ai-feedback not-aligned">Network error</div>';
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+\n{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:index' %}">{% trans "Courses" %}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:course_detail' book.course.id %}">{{ book.course.name }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:book_detail' book.id %}">{{ book.title }}</a></li>
+                    <li class="breadcrumb-item"><a href="{% url 'study_app:quiz_dashboard' book.id %}">{% trans "Quizzes" %}</a></li>
+                    <li class="breadcrumb-item active">{{ module.name }}</li>
+                </ol>
+            </nav>
+            
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h2 class="mb-0">{{ module.name }} - {% trans "Quiz" %}</h2>
+                </div>
+                <div class="card-body">
+                    <div class="alert alert-info">
+                        <h5>{% trans "Instructions" %}</h5>
+                        <div class="alert alert-info">
+        <h5>Quiz Instructions</h5>
+        <p class="mb-0">{% trans "Answer each question based on your understanding of Srila Prabhupada's commentaries. There are no 'wrong' answers - this is to help you gauge your philosophical understanding." %}</p>
+        <p class="mb-0 mt-2"><strong>New:</strong> Use the AI features to enhance your learning!</p>
+    </div>
+                    </div>
+                    
+                    <form method="post" id="quiz-form">
+                        {% csrf_token %}
+<div class="choice-options">
+    {% for choice in question.get_choices_list %}
+    <div class="form-check">
+        <input class="form-check-input" type="radio" 
+               name="question_{{ question.id }}" 
+               id="choice_{{ forloop.counter }}_{{ question.id }}"
+               value="{{ forloop.counter0 }}">
+        <label class="form-check-label" for="choice_{{ forloop.counter }}_{{ question.id }}">
+            {{ choice }}
+        </label>
+    </div>
+    {% empty %}
+    <div class="alert alert-info">
+        <small>No multiple choice options available.</small>
+    </div>
+    {% endfor %}
+</div>                        
+                        {% for question in questions %}
+                        <div class="card mb-4 question-card">
+                            <div class="card-header">
+                                <h5 class="mb-0">{% trans "Question" %} {{ forloop.counter }}</h5>
+                                {% if question.verse_reference %}
+                                <small class="text-muted">{% trans "Verse:" %} {{ question.verse_reference }}</small>
+                                {% endif %}
+                            </div>
+                            <div class="card-body">
+                                <p class="question-text lead">{{ question.question_text }}</p>
+                                
+                                <div class="multiple-choice-section">
+                                    <h6>Select Your Answer:</h6>
+                                    <div class="choice-options">
+                                        {% for choice in question.get_choices_list %}
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="radio" 
+                                                   name="question_{{ question.id }}" 
+                                                   id="choice_{{ forloop.counter }}_{{ question.id }}"
+                                                   value="{{ forloop.counter0 }}">
+                                            <label class="form-check-label" for="choice_{{ forloop.counter }}_{{ question.id }}">
+                                                {{ choice }}
+                                            </label>
+                                        </div>
+                                        {% empty %}
+                                        <div class="alert alert-info">
+                                            <small>No multiple choice options available.</small>
+                                        </div>
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                                
+                                <div class="ai-section">
+                                    <h6>AI Learning Features</h6>
+                                 <div class="written-answer-box">
+                                        <label>Write Your Understanding:</label>
+                                        <textarea 
+                                            id="written_answer_{{ question.id }}" 
+                                            placeholder="Student explain your understanding of this verse..."
+                                        ></textarea>
+                                    </div> 
+                                    
+                                    
+                                    </div>
+                                    
+                                    <div class="commentary-box">
+                                        <h6>Srila Prabhupada's Commentary</h6>
+                                        <div id="commentary-{{ question.id }}">
+                                            {% if question.prabhupada_commentary %}
+                                                {{ question.prabhupada_commentary|linebreaks }}
+                                            {% else %}
+                                                <em>Srila Prabhupada Commentary regarding this verse</em>
+                                            {% endif %}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        {% endfor %}
+                        
+                        <div class="text-center mt-4">
+                            <button type="submit" class="btn btn-primary btn-lg">
+                                {% trans "Submit Quiz" %}
+                            </button>
+                            <a href="{% url 'study_app:quiz_dashboard' book.id %}" class="btn btn-secondary btn-lg">
+                                {% trans "Cancel" %}
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.question-card {
+    border-left: 4px solid #007bff;
+}
+.question-text {
+    color: #2c3e50;
+    font-weight: 500;
+}
+
+/* Integrated Quiz Styles */
+.multiple-choice-section {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0;
+    border-left: 5px solid #007bff;
+}
+
+.ai-section {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 25px;
+    border-radius: 10px;
+    margin: 25px 0;
+    color: white;
+}
+
+.written-answer-box {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+}
+
+
+.choice-options {
+    margin: 15px 0;
+}
+
+.form-check {
+    padding: 10px 15px;
+    margin: 8px 0;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #e9ecef;
+    transition: all 0.3s ease;
+}
+
+.form-check:hover {
+    background: #f8f9fa;
+    border-color: #007bff;
+}
+
+.form-check-input {
+    margin-top: 0.3em;
+}
+
+.form-check-label {
+    margin-left: 10px;
+    font-weight: 500;
+    color: #495057;
+}
+
+.written-answer-box textarea {
+    width: 100%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 12px;
+    resize: vertical;
+    min-height: auto;
+}
+
+.validation-area {
+    text-align: center;
+    margin: 20px 0;
+}
+
+.btn-validate {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.commentary-box {
+    background: #fff3cd;
+    border: 3px solid #ffeaa7;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    color: #333;
+}
+
+.ai-feedback {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    border-left: 5px solid #17a2b8;
+}
+
+.ai-feedback.aligned {
+    border-left-color: #28a745;
+    background: #d4edda;
+}
+
+.ai-feedback.not-aligned {
+    border-left-color: #dc3545;
+    background: #f8d7da;
+}
+
+.loading {
+    background: #74b9ff;
+    color: white;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    margin: 10px 0;
+}
+</style>
+
+<script>
+function validateAnswer(questionId) {
+    const answerInput = document.getElementById('written_answer_' + questionId);
+    const answerText = answerInput.value.trim();
+    
+    if (!answerText) {
+        alert('Please write your answer before validating.');
+        return;
+    }
+    
+    const feedbackDiv = document.getElementById('feedback-' + questionId);
+    const commentaryDiv = document.getElementById('commentary-' + questionId);
+    
+    feedbackDiv.innerHTML = '<div class="loading">Analyzing your answer...</div>';
+    commentaryDiv.innerHTML = '<div class="loading">Loading commentary...</div>';
+    
+    fetch('/question/' + questionId + '/validate/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': getCookie('csrftoken')
+        },
+        body: JSON.stringify({
+            answer: answerText
+        })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            feedbackDiv.innerHTML = '<div class="ai-feedback not-aligned">Error: ' + data.error + '</div>';
+            return;
+        }
+        
+        const alignedClass = data.is_aligned ? 'aligned' : 'not-aligned';
+        feedbackDiv.innerHTML = `
+            <div class="ai-feedback ${alignedClass}">
+                <strong>AI Analysis</strong><br>
+                Score: ${data.score}/100<br>
+                ${data.feedback}<br>
+                Aligned: ${data.is_aligned ? 'Yes' : 'No'}
+            </div>
+        `;
+        
+        if (data.prabhupada_commentary) {
+            commentaryDiv.innerHTML = data.prabhupada_commentary;
+        }
+    })
+    .catch(error => {
+        feedbackDiv.innerHTML = '<div class="ai-feedback not-aligned">Network error</div>';
+    });
+}
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+</script>
+\n{% endblock %}
+
+<script>
+function toggleEssay(questionId) {
+    const essaySection = document.getElementById(`essay_section_${questionId}`);
+    const essayButton = event.target;
+    
+    if (essaySection.style.display === 'none') {
+        essaySection.style.display = 'block';
+        essayButton.textContent = '− Hide Reflection';
+        essayButton.classList.remove('btn-outline-secondary');
+        essayButton.classList.add('btn-outline-primary');
+    } else {
+        essaySection.style.display = 'none';
+        essayButton.textContent = '+ Add Philosophical Reflection';
+        essayButton.classList.remove('btn-outline-primary');
+        essayButton.classList.add('btn-outline-secondary');
+    }
+}
+</script>

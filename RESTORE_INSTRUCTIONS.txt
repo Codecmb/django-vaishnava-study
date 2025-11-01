@@ -1,0 +1,25 @@
+RESTORATION INSTRUCTIONS
+========================
+
+To restore this Django application:
+
+1. Copy to your preferred location:
+   cp -r [this_folder] ~/your/preferred/location/
+
+2. Set up virtual environment:
+   cd [project_folder]
+   python3 -m venv venv
+   source venv/bin/activate
+   pip install -r requirements.txt
+
+3. Restore database (if you have a db backup):
+   cp db-backup-*.sqlite3 db.sqlite3
+
+4. Run migrations (if needed):
+   python manage.py migrate
+
+5. Start the server:
+   python manage.py runserver
+
+Backup created: $(date)
+Branch: working-app-oct29

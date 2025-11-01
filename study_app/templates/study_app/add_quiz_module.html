@@ -1,0 +1,31 @@
+{% extends "study_app/base.html" %}
+{% load i18n %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>{% trans "Add Quiz Module" %}</h2>
+    
+    <form method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="id_name" class="form-label">{% trans "Module Name" %}</label>
+            <input type="text" name="name" class="form-control" id="id_name" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_description" class="form-label">{% trans "Description" %}</label>
+            <textarea name="description" class="form-control" id="id_description" rows="3"></textarea>
+        </div>
+        <div class="mb-3">
+            <label for="id_chapters_range" class="form-label">{% trans "Chapters Range" %}</label>
+            <input type="text" name="chapters_range" class="form-control" id="id_chapters_range" 
+                   placeholder="e.g., 'Chapters 1-6' or 'Chapters 7-12'" required>
+        </div>
+        <div class="mb-3">
+            <label for="id_order" class="form-label">{% trans "Order" %}</label>
+            <input type="number" name="order" class="form-control" id="id_order" value="0">
+        </div>
+        <button type="submit" class="btn btn-primary">{% trans "Add Module" %}</button>
+        <a href="{% url 'study_app:course_detail' course.id %}" class="btn btn-secondary">{% trans "Cancel" %}</a>
+    </form>
+</div>
+{% endblock %}
